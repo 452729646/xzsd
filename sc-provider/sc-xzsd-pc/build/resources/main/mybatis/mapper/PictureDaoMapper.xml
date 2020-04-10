@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.picture.dao.PictureDao">
+
+    <!--统计序号数量-->
+    <select id="countSortNo" parameterType="com.xzsd.pc.picture.entity.PictureInfo" resultType="int">
+        select count(sort_no)
+        from t_sys_picture
+        where is_deleted = 0
+        and sort_no = #{sortNo}
+        <if test="bannerCode != null and bannerCode != ''">
+            and banner_code != #{bannerCode}
+        </if>
+    </select>
+
+
+    <!--新增轮播图-->
+    <insert id="savePicture" parameterType="com.xzsd.pc.picture.entity.PictureInfo">
+        insert into t_sys_picture
+        (image_url,
+         banner_code,
+         sort_no,
+         start_time,
+         end_time,
+
+        sku_no,
+
+
+         picture_state,
+         is_deleted,
+         create_time,
+         create_user,
+         update_time,
+         update_user,
+         version)
+        values
+           (#{imageUrl},
+            #{bannerCode},
+            #{sortNo},
+            #{startTime},
+            #{endTime},
+
+            #{skuNo},
+
+
+            #{pictureState},
+            #{isDeleted},
+            now(),
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            0)
+    </insert>
+
+    <!--删除轮播图-->
+    <update id='deletePicture' parameterType="com.xzsd.pc.picture.entity.PictureInfo">
+        update t_sys_picture
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_user = #{userCode},
+        version = version + 1
+        where banner_code in
+        <foreach item='item' index='index' collection="listBannerCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--轮播图列表信息-->
+    <select id="listPictureByPage" parameterType="com.xzsd.pc.picture.entity.PictureInfo" resultType="com.xzsd.pc.picture.entity.PictureInfo">
+        select
+        a.sort_no sortNo,
+        a.image_url imageUrl,
+        a.picture_state pictureState,
+        a.start_time startTime,
+        a.end_time endTime,
+
+        a.is_deleted,
+        a.create_time,
+        a.create_user,
+        a.update_time,
+        a.update_user,
+        a.version
+        from t_sys_picture a
+        where a.is_deleted = 0
+        <if test="pictureState != null and pictureState != ''">
+            and a.picture_state = #{pictureState}
+        </if>
+
+
+        order by create_time desc
+    </select>
+
+
+    <!--启用轮播图-->
+    <update id='pictureUpper' parameterType="com.xzsd.pc.picture.entity.PictureInfo">
+        update t_sys_picture a
+        set
+        a.picture_state = 1,
+        a.update_time = now(),
+        a.update_user = #{userCode},
+        a.version = a.version + 1
+        where banner_code in
+        <foreach item='item' index='index' collection="listBannerCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and a.version = #{version}
+        and picture_state = 0
+    </update>
+
+    <!--下架商品-->
+    <update id='pictureLower' parameterType="com.xzsd.pc.picture.entity.PictureInfo">
+        update t_sys_picture a
+        set
+        a.picture_state = 0,
+        a.update_time = now(),
+        a.update_user = #{userCode},
+        a.version = a.version + 1
+        where banner_code in
+        <foreach item='item' index='index' collection="listBannerCode2" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and a.version = #{version}
+        and picture_state = 1
+    </update>
+
+</mapper>

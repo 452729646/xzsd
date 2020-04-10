@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.goods.dao.GoodsDao">
+
+    <!--统计书号数量-->
+    <select id="countBookNumber" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="int">
+        select count(book_number)
+        from t_sys_goods
+        where is_deleted = 0
+        and book_number = #{bookNumber}
+        <if test="skuNo != null and skuNo != ''">
+            and sku_no != #{skuNo}
+        </if>
+    </select>
+
+    <!--新增商品-->
+    <insert id="saveGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        insert into t_sys_goods
+        (sku_no,
+         sku_name,
+         book_number,
+         cate_code,
+         adv_words,
+         detail,
+         business_name,
+         author,
+         stock,
+         cost_price,
+         selling_price,
+         picture_url,
+         sale_cnt,
+         sku_state,
+         is_deleted,
+         create_time,
+         create_user,
+         update_time,
+         update_user,
+         version)
+        values
+           (#{skuNo},
+            #{skuName},
+            #{bookNumber},
+            #{cateCode},
+            #{advWords},
+            #{detail},
+            #{businessName},
+            #{author},
+            #{stock},
+            #{costPrice},
+            #{sellingPrice},
+            #{pictureUrl},
+            #{saleCnt},
+            #{skuState},
+            #{isDeleted},
+            now(),
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            0)
+    </insert>
+
+    <!--删除商品-->
+    <update id='deleteGoods' parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_sys_goods
+        set
+            is_deleted = 1,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+        where sku_no in
+        <foreach item='item' index='index' collection="listSkuNo" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改商品信息-->
+    <update id="updateGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_sys_goods
+        set
+            sku_name    = #{skuName},
+            book_number    = #{bookNumber},
+            cate_code      = #{cateCode},
+            adv_words          = #{advWords},
+            detail        = #{detail},
+            business_name    = #{businessName},
+            author  = #{author},
+            stock       = #{stock},
+            cost_price = #{costPrice},
+            selling_price = #{sellingPrice},
+            picture_url =#{pictureUrl},
+            update_time = now(),
+            update_user   = #{lastModifiedBy},
+            version      = version + 1
+        where sku_no = #{skuNo}
+          and version = #{version}
+    </update>
+
+    <!--商品列表信息-->
+    <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
+        select
+        a.sku_name skuName,
+        a.selling_price sellingPrice,
+        a.cost_price costPrice,
+        a.sale_cnt saleCnt,
+        a.cate_code cateCode,
+        a.adv_words advWords,
+        a.detail,
+        a.sku_state skuState,
+        a.business_name businessName,
+        a.author author,
+        a.stock,
+        a.book_number,
+        a.is_deleted,
+        a.create_time,
+        a.create_user,
+        a.update_time,
+        a.update_user,
+        a.version
+        from t_sys_goods a
+        where a.is_deleted = 0
+        <if test="skuName != null and skuName != ''">
+            and a.sku_name like concat('%', #{skuName}, '%')
+        </if>
+        <if test="advWords != null and advWords != ''">
+            and a.adv_words like concat('%', #{advWords}, '%')
+        </if>
+        <if test="businessName != null and businessName != ''">
+            and a.business_name like concat('%', #{businessName}, '%')
+        </if>
+        <if test="author != null and author != ''">
+            and a.author like concat('%', #{author}, '%')
+        </if>
+        <if test="skuState != null and skuState != ''">
+            and a.sku_state like concat('%', #{skuState}, '%')
+        </if>
+
+        order by create_time ASC
+    </select>
+
+
+    <!--上架商品-->
+    <update id='goodsUpper' parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_sys_goods a
+        set
+        a.sku_state = 1,
+        a.update_time = now(),
+        a.update_user = #{userCode},
+        a.version = a.version + 1
+        where sku_no in
+        <foreach item='item' index='index' collection="listSkuNo2" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and a.version = #{version}
+        and sku_state = 0
+    </update>
+
+    <!--下架商品-->
+    <update id='goodsLower' parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_sys_goods a
+        set
+        a.sku_state = 0,
+        a.update_time = now(),
+        a.update_user = #{userCode},
+        a.version = a.version + 1
+        where sku_no in
+        <foreach item='item' index='index' collection="listSkuNo3" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and a.version = #{version}
+        and sku_state = 1
+    </update>
+
+    <!--新增商品的activeMq历史记录-->
+    <insert id="addGoodsActiveMq" parameterType="String">
+        insert into t_sys_goodsactivemq
+        (
+            content,
+            create_time
+        )
+        values
+           (#{message},
+            now()
+            )
+    </insert>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.store.dao.StoreDao">
+
+    <!--统计门店名称数量-->
+    <select id="countStoreName" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(store_name)
+        from t_sys_store
+        where is_deleted = 0
+        and  store_name = #{storeName}
+        <if test="storeNo != null and storeNo != ''">
+            and store_no != #{storeNo}
+        </if>
+
+
+    </select>
+    <!--统计是否存在该店长数量-->
+    <select id="countUserAcct" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(user_acct)
+        from t_sys_user
+        where is_deleted = 0
+        and role = 1
+        and  user_acct = #{userAcct}
+<!--        <if test="userAcct != null and userAcct != ''">-->
+<!--            and user_acct != #{userAcct}-->
+<!--        </if>-->
+
+
+    </select>
+
+    <!--统计是否存在该店长数量-->
+    <select id="countManagerAcct" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(user_acct)
+        from t_sys_store
+        where is_deleted = 0
+        and  user_acct = #{userAcct}
+        <if test="storeNo != null and storeNo != ''">
+            and store_no != #{storeNo}
+        </if>
+
+
+    </select>
+
+    <!--新增门店-->
+    <insert id="saveStore" parameterType="com.xzsd.pc.store.entity.StoreInfo" >
+        insert into t_sys_store
+        (store_no,
+         store_name,
+
+         store_phone,
+         user_acct,
+         business_license,
+         province,
+         city,
+         area,
+         store_address,
+         invitation_code,
+
+
+         is_deleted,
+         create_time,
+         create_user,
+         update_time,
+         update_user,
+         version)
+        values
+           (#{storeNo},
+            #{storeName},
+             #{storePhone},
+            #{userAcct},
+            #{businessLicense},
+            #{provinceName},
+            #{cityName},
+            #{areaName},
+            #{storeAddress},
+            #{invitationCode},
+
+
+            #{isDeleted},
+            now(),
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            0)
+    </insert>
+    <!--查询门店列表-->
+    <select id="listStoreByPage" resultType="com.xzsd.pc.store.entity.StoreVO" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        select
+        a.store_no storeNo,
+        a.store_name storeName,
+        a.store_phone storePhone,
+        a.store_address storeAddress,
+        b.user_name managerName,
+        a.invitation_code invitationCode,
+        a.version version
+        from
+        t_sys_store a,
+        t_sys_user b
+        where a.user_acct = b.user_acct
+        and a.is_deleted = 0
+
+        <if test="storeNo != null and storeNo != ''">
+            and a.store_no = #{storeNo}
+        </if>
+        <if test="storeName != null and storeName != ''">
+            and a.store_Name like concat('%', #{storeName}, '%')
+        </if>
+        <if test="managerName != null and managerName != ''">
+            and b.user_name like concat('%', #{managerName}, '%')
+        </if>
+        <if test="provinceName != null and provinceName != ''">
+            and a.province like concat('%', #{provinceName}, '%')
+        </if>
+        <if test="cityName != null and cityName != ''">
+            and a.city like concat('%', #{cityName}, '%')
+        </if>
+        <if test="areaName != null and areaName != ''">
+            and a.area like concat('%', #{areaName}, '%')
+        </if>
+    </select>
+
+    <!--查询门店详情-->
+    <select id="storeDetail" resultType="com.xzsd.pc.store.entity.StoreDetailVo">
+        select
+        user_Acct managerAcct,
+        business_license businessLicense,
+        province provinceName,
+        city cityName,
+        area areaName,
+        store_address storeAddress,
+        store_name storeName
+        from t_sys_store
+        where is_deleted = 0
+        and version = #{version}
+        and store_no = #{storeNo}
+
+
+    </select>
+
+    <!--修改门店信息-->
+    <update id="updateStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        update t_sys_store
+        set
+            store_name = #{storeName},
+            store_phone = #{storePhone},
+            user_acct = #{userAcct},
+            business_license = #{businessLicense},
+            province = #{provinceName},
+            city = #{cityName},
+            area = #{areaName},
+            store_address = #{storeAddress},
+            update_time = now(),
+            update_user   = #{lastModifiedBy},
+            version      = version + 1
+            where store_no = #{storeNo}
+            and version = #{version}
+
+    </update>
+
+    <!--删除门店信息-->
+    <update id="deteleStore" parameterType="com.xzsd.pc.store.entity.StoreInfo">
+        update t_sys_store
+        set
+        is_deleted = 1,
+        update_time = now(),
+        update_user = #{userCode},
+        version = version + 1
+        where store_no in
+        <foreach item='item' index='index' collection="listStoreNo" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

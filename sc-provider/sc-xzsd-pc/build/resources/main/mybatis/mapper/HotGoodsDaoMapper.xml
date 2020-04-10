@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.hotgoods.dao.HotGoodsDao">
+
+
+    <!--统计热门商品序号数量-->
+    <select id="countSortNo" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
+        select count(sort_no)
+        from t_sys_hotgoods
+        where is_deleted = 0
+        and sort_no = #{sortNo}
+        <if test="hotGoodsCode != null and hotGoodsCode != ''">
+            and hotgoods_code != #{hotGoodsCode}
+        </if>
+    </select>
+
+    <!--新增热门商品-->
+    <insert id="saveHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        insert into t_sys_hotgoods
+        (hotgoods_code,
+         sort_no,
+         sku_no,
+
+
+         is_deleted,
+         create_time,
+         create_user,
+         update_time,
+         update_user,
+         version)
+        values
+        (#{hotGoodsCode},
+         #{sortNo},
+         #{skuNo},
+
+         #{isDeleted},
+         now(),
+         #{createBy},
+         now(),
+         #{lastModifiedBy},
+         0)
+
+    </insert>
+
+    <!--热门商品位选择商品列表信息-->
+    <select id="hotListGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodListInfo" resultType="com.xzsd.pc.goods.entity.GoodListInfo">
+        select
+        a.sku_no skuNo,
+        a.sku_name skuName,
+
+        a.sku_state skuState ,
+        b.cate_name_parent cateParentName,
+        b.cate_name cateSonName,
+        a.version version
+
+
+        from t_sys_goods a,t_sys_classification b
+
+        where a.cate_code = b.cate_code
+        and a.is_deleted = 0
+        and a.sku_state = 1
+        <if test="skuName != null and skuName != ''">
+            and a.sku_name like concat('%', #{skuName}, '%')
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+            and a.sku_No like concat('%', #{skuNo}, '%')
+        </if>
+
+        order by a.create_time desc
+    </select>
+
+    <!--热门商品列表信息-->
+    <select id="hotGoodsListByPage" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo">
+        select
+        a.hotgoods_code hotGoodsCode,
+        a.sort_no sortNo,
+        a.sku_no skuNo,
+        b.sku_name skuName,
+        b.selling_price sellingPrice,
+        b.detail detail
+        from t_sys_hotgoods a,t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.is_deleted = 0
+        <if test="skuName != null and skuName != ''">
+            and b.sku_name like concat('%', #{skuName}, '%')
+        </if>
+        <if test="skuNo != null and skuNo != ''">
+            and a.sku_no like concat('%', #{skuNo}, '%')
+        </if>
+        order by a.sort_no ASC
+
+
+    </select>
+
+    <!--修改该热门商品-->
+    <update id="updateHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        update t_sys_hotgoods
+        set
+            sort_no = #{sortNo},
+            sku_no = #{skuNo},
+            update_time = now(),
+            update_user   = #{lastModifiedBy},
+            version      = version + 1
+        where hotgoods_code = #{hotGoodsCode}
+        and version = #{version}
+    </update>
+
+    <!--删除热门商品-->
+    <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        update t_sys_hotgoods
+        set
+            is_deleted = 1,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+        where hotgoods_code in
+        <foreach item="item" index="index" collection="hotGoodsCodeList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

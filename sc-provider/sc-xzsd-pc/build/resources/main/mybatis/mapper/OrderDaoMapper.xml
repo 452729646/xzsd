@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.order.dao.OrderDao">
+    
+    <!--查询订单列表-->
+
+    <select id="listOrderByPage" parameterType="com.xzsd.pc.order.entity.OrderVO" resultType="com.xzsd.pc.order.entity.OrderVO">
+        select
+        a.order_id orderId,
+        a.payment_money paymentMoney,
+        a.order_status orderStatus,
+        a.pay_status payStatus,
+        b.invite_code storeNo,
+        c.user_name userName,
+        c.phone userPhone,
+        a.pay_time payTime
+
+        from t_sys_orderfather a,
+        t_client_info b,
+        t_sys_user c
+        where a.user_code = b.client_user_code
+        and a.user_code = c.user_code
+        and is_deleted = 0
+        <if test="userName != null and userName != ''">
+            and c.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="orderId != null and orderId != ''">
+            and a.order_id like concat('%', #{orderId}, '%')
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and c.phone like concat('%', #{userPhone}, '%')
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+            and a.order_status =#{orderStatus}
+        </if>
+        <if test="startTime!=null and startTime != ''">
+            AND a.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime != ''">
+            AND a.pay_time &lt;= #{endTime}
+        </if>
+
+
+
+    </select>
+
+    <!--查询订单详情-->
+    <select id="listOrderDetailByPage" parameterType="com.xzsd.pc.order.entity.OrderDetailVO" resultType="com.xzsd.pc.order.entity.OrderDetailVO">
+        select
+        a.order_id orderId,
+        a.sku_no skuNo,
+        b.sku_name skuName,
+        a.goods_cnt goodsCnt,
+        a.order_money orderMoney,
+        a.selling_money sellingMoney
+        from t_sys_orderson a,
+        t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.is_deleted = 0
+        and a.order_id = #{orderId}
+
+    </select>
+
+    <!--修改订单状态（订单到货）-->
+    <update id="orderArrival" parameterType="java.util.List">
+
+
+        <foreach collection="list" item="mapList" index="index" separator="}" close="]">
+        update t_sys_orderfather
+        set
+            order_status = 2,
+            update_user = #{mapList.userCode},
+            update_time = now(),
+            version = version + 1
+
+        where order_id = #{mapList.orderId}
+        and version = #{mapList.version}
+
+        </foreach>
+    </update>
+</mapper>
