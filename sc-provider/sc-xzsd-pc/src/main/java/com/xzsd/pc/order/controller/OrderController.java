@@ -70,9 +70,66 @@ public class OrderController {
             String userCode = SecurityUtils.getCurrentUserId();
             return orderService.orderArrival(orderId,version,userCode);
         } catch (Exception e) {
-            logger.error("商品上架错误", e);
+            logger.error("修改订单到货错误", e);
             System.out.println(e.toString());
             throw e;
         }
     }
+
+
+    /**
+     * 修改订单状态（取消订单到货）
+     * @return App
+     * @date 2020-4-10
+     */
+    @PostMapping("orderCancelArrival")
+    public AppResponse orderCancelArrival (String orderId,String version){
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return orderService.orderCancelArrival(orderId,version,userCode);
+        } catch (Exception e) {
+            logger.error("修改取消订单到货错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 修改订单状态（订单已到货）
+     * @return App
+     * @date 2020-4-10
+     */
+    @PostMapping("orderTake")
+    public AppResponse ordeTake (String orderId,String version){
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return orderService.orderTake(orderId,version,userCode);
+        } catch (Exception e) {
+            logger.error("修改订单已取货错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 修改订单状态（取消订单已取货）
+     * @return App
+     * @date 2020-4-10
+     */
+    @PostMapping("orderCancelTake")
+    public AppResponse orderCancelTake (String orderId,String version){
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return orderService.orderCancelTake(orderId,version,userCode);
+        } catch (Exception e) {
+            logger.error("修改取消订单已取货错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
 }

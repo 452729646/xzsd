@@ -65,17 +65,77 @@
     <update id="orderArrival" parameterType="java.util.List">
 
 
-        <foreach collection="list" item="mapList" index="index" separator="}" close="]">
+        <foreach collection="list" item="mapList" index="index"  separator=";">
         update t_sys_orderfather
         set
             order_status = 2,
-            update_user = #{mapList.userCode},
             update_time = now(),
+            update_user = #{mapList.userCode},
             version = version + 1
 
         where order_id = #{mapList.orderId}
         and version = #{mapList.version}
+        and order_status = 1
 
         </foreach>
     </update>
+
+    <!--修改订单状态（取消订单到货）-->
+    <update id="orderCancelArrival" parameterType="java.util.List">
+
+
+        <foreach collection="list" item="mapList" index="index"  separator=";">
+            update t_sys_orderfather
+            set
+            order_status = 1,
+            update_time = now(),
+            update_user = #{mapList.userCode},
+            version = version + 1
+
+            where order_id = #{mapList.orderId}
+            and version = #{mapList.version}
+            and order_status = 2
+
+        </foreach>
+    </update>
+
+    <!--修改订单状态（订单已取货）-->
+    <update id="orderTake" parameterType="java.util.List">
+
+
+        <foreach collection="list" item="mapList" index="index"  separator=";">
+            update t_sys_orderfather
+            set
+            order_status = 3,
+            update_time = now(),
+            update_user = #{mapList.userCode},
+            version = version + 1
+
+            where order_id = #{mapList.orderId}
+            and version = #{mapList.version}
+            and order_status = 2
+
+        </foreach>
+    </update>
+
+    <!--修改订单状态（取消订单已取货）-->
+    <update id="orderCancelTake" parameterType="java.util.List">
+
+
+        <foreach collection="list" item="mapList" index="index"  separator=";">
+            update t_sys_orderfather
+            set
+            order_status = 2,
+            update_time = now(),
+            update_user = #{mapList.userCode},
+            version = version + 1
+
+            where order_id = #{mapList.orderId}
+            and version = #{mapList.version}
+            and order_status = 3
+
+        </foreach>
+    </update>
+
+
 </mapper>

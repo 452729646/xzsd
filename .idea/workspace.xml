@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="" />
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/service/OrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +57,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZQXxc5vjQ51sW2dLoRfqDRWJuq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -49,6 +69,7 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="true" />
@@ -333,12 +354,23 @@
       <workItem from="1586222168767" duration="23429000" />
       <workItem from="1586305299979" duration="25708000" />
       <workItem from="1586398677376" duration="22230000" />
-      <workItem from="1586485138021" duration="19747000" />
+      <workItem from="1586485138021" duration="24757000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">

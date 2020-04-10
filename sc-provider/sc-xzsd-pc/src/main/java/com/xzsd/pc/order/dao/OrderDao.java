@@ -27,7 +27,7 @@ public interface OrderDao {
     /**
      * 查询订单详细
      * @param orderId
-     * @param version
+     * @param
      * @author housum
      */
     List<OrderDetailVO> listOrderDetailByPage(OrderDetailVO orderDetailVO,@Param("orderId") String orderId);
@@ -39,4 +39,28 @@ public interface OrderDao {
      * @author housum
      */
     int orderArrival (List<Map> mapList);
+
+    /**
+     * 修改订单状态 取消订单到货
+     * @param mapList
+     * @param
+     * @author housum
+     */
+    int orderCancelArrival (List<Map> mapList);
+
+    /**
+     * 修改订单状态 订单已取货
+     * @param mapList
+     * @param
+     * @author housum
+     */
+    int orderTake (List<Map> mapList);
+
+    /**
+     * 修改订单状态 取消订单已取货
+     * @param mapList
+     * @param
+     * @author housum
+     */
+    int orderCancelTake (List<Map> mapList);
 }
