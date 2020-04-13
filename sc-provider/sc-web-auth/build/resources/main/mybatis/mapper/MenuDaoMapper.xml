@@ -178,7 +178,8 @@
             level,
             auth_code,
             gmt_modified,
-            last_modified_by
+            last_modified_by,
+            version
           ) values (
             #{id,jdbcType=VARCHAR},
             #{menuCode,jdbcType=VARCHAR},
@@ -187,14 +188,15 @@
             #{parentMenuCode,jdbcType=VARCHAR},
             #{type,jdbcType=NUMERIC},
             #{sortNo,jdbcType=NUMERIC},
-            #{isDeleted,jdbcType=VARCHAR},
+            0,
             #{remark,jdbcType=VARCHAR},
             now(),
             #{createBy,jdbcType=VARCHAR},
             #{level,jdbcType=NUMERIC},
             #{authCode,jdbcType=VARCHAR},
             now(),
-            #{createBy,jdbcType=VARCHAR})
+            #{createBy,jdbcType=VARCHAR},
+            0)
     </insert>
 
     <!-- 新增子菜单，更新父级菜单类型为目录 -->

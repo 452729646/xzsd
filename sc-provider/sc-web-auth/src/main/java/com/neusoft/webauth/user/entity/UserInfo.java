@@ -104,6 +104,16 @@ public class UserInfo {
 
     private String version;
 
+    private int role;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     public String getUserCode() {
         return userCode;
     }
