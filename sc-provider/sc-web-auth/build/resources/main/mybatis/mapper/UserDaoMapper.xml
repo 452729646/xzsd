@@ -25,9 +25,10 @@
         <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
         <result column="client_id" property="clientId" jdbcType="INTEGER" />
+        <result column="role" property="role" jdbcType="INTEGER" />
     </resultMap>
 
-    <!--新增用户-->
+<!--    新增用户-->
     <insert id="saveUser" parameterType="com.neusoft.webauth.user.entity.UserInfo">
         insert into t_sys_user
         (user_code,
@@ -49,7 +50,9 @@
          create_by,
          gmt_modified,
          last_modified_by,
-         version)
+         version,
+            role
+         )
         values
            (#{userCode},
             #{userName},
@@ -70,8 +73,11 @@
             #{createBy},
             NOW(),
             #{lastModifiedBy},
-            0)
+            0,
+            #{isAdmin}
+           )
     </insert>
+
     <!--获取用户信息-->
     <select id="getUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
