@@ -1,11 +1,9 @@
-package com.xzsd.app.order.controller;
+package com.xzsd.app.client.order.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.app.order.dao.OrderDao;
-import com.xzsd.app.order.entity.OrderInfo;
-import com.xzsd.app.order.entity.OrderVO;
-import com.xzsd.app.order.service.OrderService;
+import com.xzsd.app.client.order.entity.OrderInfo;
+import com.xzsd.app.client.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orderClient")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -29,7 +27,7 @@ public class OrderController {
      * @date 2020-4-9
      */
     @PostMapping("saveOrder")
-    public AppResponse saveOrder(OrderInfo orderInfo,String skuNo2,String goodsCnt,String sellingMoney){
+    public AppResponse saveOrder(OrderInfo orderInfo, String skuNo2, String goodsCnt, String sellingMoney){
         try{
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();

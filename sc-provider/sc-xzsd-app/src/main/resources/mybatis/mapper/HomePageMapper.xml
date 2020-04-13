@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.client.homePage.dao.HomePageDao">
+
+<!--    查询轮播图列表-->
+    <select id="listPicture" resultType="com.xzsd.app.client.homePage.entity.PictureInfo">
+        select
+        banner_code bannerCode,
+        image_url imageUrl,
+        sort_no sortNo,
+        sku_no skuNo
+        from t_sys_picture
+        where is_deleted = 0
+        order by sort_no ASC
+    </select>
+
+    <!--    查询热门商品展示数量-->
+    <select id="selectDisplayCnt" resultType="int" >
+        select
+        dict_value
+
+        from
+        t_dicitonary
+
+        where
+        dict_name = "displayCnt"
+        and is_deleted = 0
+    </select>
+
+<!--    查询热门商品列表-->
+    <select id="listHotGoods" parameterType="java.lang.Integer" resultType="com.xzsd.app.client.homePage.entity.ListHotGoodsInfo">
+        select
+        b.hotgoods_code hotGoodsCode,
+        b.sort_no sort_no,
+        b.sku_no skuNo,
+        a.picture_url pictureUrl,
+        a.sku_name skuName,
+        a.selling_price
+        from t_sys_goods a,
+        t_sys_hotgoods b
+        where a.sku_no = b.sku_no
+        and b.is_deleted = 0
+        order by b.sort_no ASC limit 0,#{displayCnt}
+
+
+    </select>
+</mapper>

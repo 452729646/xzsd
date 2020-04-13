@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.app.order.dao.OrderDao">
+<mapper namespace="com.xzsd.app.client.order.dao.OrderDao">
     
     <!--新增父订单列表-->
-    <insert id="saveOrderFather" parameterType="com.xzsd.app.order.entity.OrderInfo">
+    <insert id="saveOrderFather" parameterType="com.xzsd.app.client.order.entity.OrderInfo">
         insert into t_sys_orderfather
         (
         order_id,
@@ -44,14 +44,20 @@
         sku_no,
         goods_cnt,
         order_money,
-        selling_money
+        selling_money,
+        is_deleted,
+        create_user,
+        create_time
 
         )values (
         #{orderId},
         #{skuNo},
         #{goodsCnt2},
         #{totalPrice},
-        #{sellingPrice}
+        #{sellingPrice},
+        0,
+        #{userCode},
+        now()
         )
     </insert>
 </mapper>

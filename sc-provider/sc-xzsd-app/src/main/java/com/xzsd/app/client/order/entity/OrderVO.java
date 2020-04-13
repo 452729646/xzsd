@@ -1,4 +1,4 @@
-package com.xzsd.app.order.entity;
+package com.xzsd.app.client.order.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;

@@ -1,11 +1,11 @@
-package com.xzsd.app.order.dao;
+package com.xzsd.app.client.order.dao;
 
-import com.xzsd.app.order.entity.OrderInfo;
+import com.xzsd.app.client.order.entity.OrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
-import java.util.List;
+
 @Mapper
 public interface OrderDao {
     /**
@@ -20,5 +20,5 @@ public interface OrderDao {
      * @param orderId 订单编号
      * @param sum 总价
      */
-    int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum,@Param("userCode") String userCode);
+    int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode);
 }

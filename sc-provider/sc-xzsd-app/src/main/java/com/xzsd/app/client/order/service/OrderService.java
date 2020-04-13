@@ -1,22 +1,16 @@
-package com.xzsd.app.order.service;
+package com.xzsd.app.client.order.service;
 
-import com.google.common.collect.Lists;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
-import com.xzsd.app.order.dao.OrderDao;
-import com.xzsd.app.order.entity.OrderInfo;
-import org.apache.commons.collections.CollectionUtils;
+import com.xzsd.app.client.order.entity.OrderInfo;
+import com.xzsd.app.client.order.dao.OrderDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-
-import static com.neusoft.core.page.PageUtils.getPageInfo;
 
 /**
  * @DescriptionDemo 实现类
@@ -41,7 +35,7 @@ public class OrderService {
      * @date 2020-4-9
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse saveOrder(OrderInfo orderInfo,String skuNo2,String goodsCnt,String sellingMoney) {
+    public AppResponse saveOrder(OrderInfo orderInfo, String skuNo2, String goodsCnt, String sellingMoney) {
         List<String> listGoodsCnt = Arrays.asList(goodsCnt.split(","));
 
         List<String> listSellingMoney = Arrays.asList(sellingMoney.split(","));
