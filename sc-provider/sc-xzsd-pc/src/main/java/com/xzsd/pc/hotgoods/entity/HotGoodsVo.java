@@ -28,13 +28,25 @@ public class HotGoodsVo {
      * 介绍
      */
     private String detail;
-
+    /**
+     *
+     * 展示数量
+     */
+    private int displayCnt;
     /**
      * 版本号
      */
     private String version;
 
 
+
+    public int getDisplayCnt() {
+        return displayCnt;
+    }
+
+    public void setDisplayCnt(int displayCnt) {
+        this.displayCnt = displayCnt;
+    }
 
     public String getHotGoodsCode() {
         return hotGoodsCode;

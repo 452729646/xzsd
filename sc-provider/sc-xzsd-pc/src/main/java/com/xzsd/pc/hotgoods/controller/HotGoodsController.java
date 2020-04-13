@@ -126,4 +126,43 @@ public class HotGoodsController {
             throw e;
         }
     }
+
+    /**
+     * 设置展示数量
+     * @author housum
+     * @date 2020-4-13
+     *
+     */
+    @RequestMapping("setDisplayCnt")
+    public AppResponse setDisplayCnt(int displayCnt,int version){
+        try{
+            String userCode =SecurityUtils.getCurrentUserId();
+            return hotGoodsService.setDisplayCnt(displayCnt, userCode,version);
+        }catch (Exception e) {
+            logger.error("设置热门商品展示数量异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
+    /**
+     * 设置展示数量
+     * @author housum
+     * @date 2020-4-13
+     *
+     */
+    @RequestMapping("selectDisplayCnt")
+    public AppResponse selectDisplayCnt(HotGoodsVo hotGoodsVo){
+        try{
+            String userCode =SecurityUtils.getCurrentUserId();
+            return hotGoodsService.selectDisplayCnt(hotGoodsVo);
+        }catch (Exception e) {
+            logger.error("查询热门商品展示数量异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
 }

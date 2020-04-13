@@ -118,4 +118,31 @@
             #{item}
         </foreach>
     </update>
+
+<!--    设置热门商品展示数量-->
+    <update id="setDisplayCnt" >
+        update t_dicitonary
+        set
+        dict_value = #{displayCnt},
+        update_time = now(),
+        update_user = #{userCode},
+        version = version + 1
+        where version = #{version}
+        and dict_name = "displayCnt"
+    </update>
+
+    <!--    查询热门商品展示数量-->
+    <select id="selectDisplayCnt" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" >
+        select
+        dict_value displayCnt,
+        version version
+        from
+        t_dicitonary
+
+        where
+        dict_name = "displayCnt"
+        and is_deleted = 0
+    </select>
+
+
 </mapper>

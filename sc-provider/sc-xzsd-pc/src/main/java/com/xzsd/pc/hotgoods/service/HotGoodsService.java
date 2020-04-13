@@ -123,4 +123,33 @@ public class HotGoodsService {
 
     }
 
+    /**
+     * 设置展示数量
+     * @author housum
+     * @date 2020-4-13
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse setDisplayCnt(int displayCnt,String userCode,int version){
+        int count = hotGoodsDao.setDisplayCnt(displayCnt,userCode,version);
+        if (0 == count){
+            return AppResponse.bizError("设置失败,请重试");
+        }
+        return AppResponse.success("设置成功");
+    }
+
+    /**
+     * 查询展示数量
+     * @author housum
+     * @date 2020-4-13
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse selectDisplayCnt(HotGoodsVo hotGoodsVo){
+        HotGoodsVo data = hotGoodsDao.selectDisplayCnt(hotGoodsVo);
+
+
+        return AppResponse.success("查询成功",data);
+    }
+
+
+
 }

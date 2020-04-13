@@ -60,4 +60,19 @@ public interface HotGoodsDao {
      */
     int deleteHotGoods( @Param("hotGoodsCodeList")List<String> hotGoodsCodeList, @Param("userCode") String userCode);
 
+    /**
+     * 设置展示数量
+     * @param version
+     * @param userCode
+     * @param displayCnt
+     */
+    int setDisplayCnt(@Param("displayCnt")int displayCnt,@Param("userCode")String userCode,@Param("version")int version);
+
+    /**
+     * 查询展示数量
+     * @param hotGoodsVo
+
+     */
+    HotGoodsVo selectDisplayCnt(HotGoodsVo hotGoodsVo);
+
 }
