@@ -20,6 +20,8 @@ public interface OrderDao {
     /**
      * 查询订单列表
      * @param orderVO
+//     * @param role 角色权限
+//     * @param storeNo
      * @author housum
      */
     List<OrderVO> listOrderByPage (OrderVO orderVO);
@@ -63,4 +65,18 @@ public interface OrderDao {
      * @author housum
      */
     int orderCancelTake (List<Map> mapList);
+
+    /**
+     * 通过userCode找到角色
+     * @param userCode
+     * @author housum
+     */
+    int roleByUserCode(String userCode);
+
+    /**
+     * 通过店长的userCode找到storeNo
+     *
+     */
+    String storeNoByUserCode(String userCode);
+
 }

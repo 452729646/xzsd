@@ -3,6 +3,7 @@ package com.xzsd.pc.store.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 
+import com.xzsd.pc.store.entity.RegionInfo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.service.StoreService;
 import org.slf4j.Logger;
@@ -107,6 +108,40 @@ public class StoreController {
             return storeService.deleteStore(storeNo,userCode);
         }catch (Exception e){
             logger.error("删除门店信息错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 地区 省的下拉框
+     * @author housum
+     * @date 2020-4-13
+     */
+    @RequestMapping("province")
+    public AppResponse province(RegionInfo regionInfo){
+        try{
+            return storeService.province(regionInfo);
+
+        }catch (Exception e){
+            logger.error("查询地区信息错误",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 地区 市区下拉框
+     * @author housum
+     * @date 2020-4-13
+     */
+    @RequestMapping("city")
+    public AppResponse city(RegionInfo regionInfo){
+        try{
+            return storeService.city(regionInfo);
+
+        }catch (Exception e){
+            logger.error("查询地区信息错误",e);
             System.out.println(e.toString());
             throw e;
         }

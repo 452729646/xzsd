@@ -47,6 +47,25 @@ public class OrderVO {
     private String startTime;
     private String endTime;
 
+    private int role;
+    private String storeNo2;
+
+    public String getStoreNo2() {
+        return storeNo2;
+    }
+
+    public void setStoreNo2(String storeNo2) {
+        this.storeNo2 = storeNo2;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     public String getStartTime() {
         return startTime;
     }

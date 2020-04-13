@@ -1,6 +1,7 @@
 package com.xzsd.pc.order.service;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.order.entity.OrderDetailVO;
 import com.xzsd.pc.order.entity.OrderInfo;
@@ -28,6 +29,19 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listOrder(OrderVO orderVO){
+
+        //没有登录 获取的userCode是测试用户  会报错
+        String userCode = SecurityUtils.getCurrentUserId();
+//        String userCode = "2020032512003900484";
+        int role = orderDao.roleByUserCode(userCode);
+        orderVO.setRole(role);
+
+        if (1 == role){
+            //拿出该店长的门店编号
+            String storeNo = orderDao.storeNoByUserCode(userCode);
+            orderVO.setStoreNo2(storeNo);
+        }
+
         List<OrderVO> listInfoOrder = orderDao.listOrderByPage(orderVO);
         return AppResponse.success("查询成功",getPageInfo(listInfoOrder));
 

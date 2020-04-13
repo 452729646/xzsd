@@ -1,6 +1,7 @@
 package com.xzsd.pc.store.dao;
 
 
+import com.xzsd.pc.store.entity.RegionInfo;
 import com.xzsd.pc.store.entity.StoreDetailVo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -59,6 +60,18 @@ public interface StoreDao {
      * 删除门店信息
      */
     int deteleStore(@Param("listStoreNo")List<String> listStoreNo,@Param("userCode") String userCode);
+
+    /**
+     * 查询省份列表
+     * @param regionInfo
+     */
+    List<RegionInfo> listProvinceByPage(RegionInfo regionInfo);
+
+    /**
+     * 查询市区列表
+     * @param regionInfo
+     */
+    List<RegionInfo> listCityByPage(RegionInfo regionInfo);
 
 
 }

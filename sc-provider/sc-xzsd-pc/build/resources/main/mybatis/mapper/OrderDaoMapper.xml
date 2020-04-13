@@ -20,7 +20,7 @@
         t_sys_user c
         where a.user_code = b.client_user_code
         and a.user_code = c.user_code
-        and is_deleted = 0
+        and a.is_deleted = 0
         <if test="userName != null and userName != ''">
             and c.user_name like concat('%', #{userName}, '%')
         </if>
@@ -39,6 +39,10 @@
         <if test="endTime!=null and endTime != ''">
             AND a.pay_time &lt;= #{endTime}
         </if>
+        <if test="role == 1 and storeNo2 != ''and storeNo2 !=null">
+            AND b.invite_code = #{storeNo2}
+        </if>
+
 
 
 
@@ -136,6 +140,23 @@
 
         </foreach>
     </update>
+
+    <!--通过userCode找到role-->
+    <select id="roleByUserCode" parameterType="java.lang.String" resultType="int">
+        select role
+        from t_sys_user
+        where user_code = #{userCode}
+    </select>
+
+    <!--通过userCode找到storeNo-->
+    <select id="storeNoByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select a.store_no
+        from t_sys_store a,
+        t_sys_user b
+        where
+        a.user_acct = b.user_acct
+        and b.user_code = #{userCode}
+    </select>
 
 
 </mapper>

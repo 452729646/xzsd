@@ -2,7 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="新增订单模块">
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/entity/RegionInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-web-auth/src/main/resources/mybatis/mapper/MenuDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-web-auth/src/main/resources/mybatis/mapper/MenuDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/dao/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/entity/OrderVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/entity/OrderVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/order/service/OrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/controller/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/controller/StoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/service/StoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/service/StoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/entity/OrderVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/entity/OrderVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/controller/StoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/dao/StoreDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/dao/StoreDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/service/StoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/service/StoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/StoreDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/StoreDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-security/sc-security-core/src/main/java/com/neusoft/security/core/validate/filter/ValidateCodeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-security/sc-security-core/src/main/java/com/neusoft/security/core/validate/filter/ValidateCodeFilter.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,16 +97,16 @@
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-app\src\main\resources\mybatis\mapper" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.xzsd.app" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\resources\mybatis\mapper" />
       <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc" />
       <recent name="C:\Users\Administrator\Desktop\FY2020 课件20200220\京东行走书店项目资料\sc2019\sc-provider" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xzsd.app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-app\src\main\resources\mybatis\mapper" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -97,7 +121,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ScXzsdPcApplication (1)">
+  <component name="RunManager" selected="Spring Boot.ScWebAuthApplication (1)">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -233,6 +257,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ScWebAuthApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="sc2019.sc-provider.sc-web-auth.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.webauth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webauth.ScWebAuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ScWebAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="sc-web-auth_main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webauth.ScWebAuthApplication" />
@@ -243,19 +280,6 @@
     <configuration name="ScWebStaticApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="sc-web-static_main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webstatic.ScWebStaticApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ScXzsdAppApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="sc2019.sc-provider.sc-xzsd-app.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.xzsd.app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xzsd.app.ScXzsdAppApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -314,11 +338,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ScXzsdPcApplication (1)" />
-        <item itemvalue="Spring Boot.ScXzsdAppApplication (1)" />
+        <item itemvalue="Spring Boot.ScWebAuthApplication (1)" />
         <item itemvalue="Spring Boot.ScSecurityUaaApplication (1)" />
         <item itemvalue="Spring Boot.ScApiGatewayApplication (1)" />
         <item itemvalue="Spring Boot.ScEurekaApplication (1)" />
+        <item itemvalue="Spring Boot.ScXzsdPcApplication (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -340,7 +364,8 @@
       <workItem from="1586222168767" duration="23429000" />
       <workItem from="1586305299979" duration="25708000" />
       <workItem from="1586398677376" duration="22230000" />
-      <workItem from="1586485138021" duration="25316000" />
+      <workItem from="1586485138021" duration="32170000" />
+      <workItem from="1586738288978" duration="9917000" />
     </task>
     <task id="LOCAL-00001" summary="新增订单模块">
       <created>1586521163145</created>
@@ -349,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586521163145</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="新增订单模块">
+      <created>1586521499882</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1586521499882</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +392,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

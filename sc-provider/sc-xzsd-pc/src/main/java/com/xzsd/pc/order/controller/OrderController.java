@@ -30,8 +30,9 @@ public class OrderController {
      * @date 2020-4-10
      */
     @PostMapping("listOrder")
-    public AppResponse listOrder(OrderVO orderVO){
+    public AppResponse listOrder(OrderVO orderVO ){
         try{
+
             return orderService.listOrder(orderVO);
         }catch (Exception e){
             logger.error("查询订单列表异常",e);

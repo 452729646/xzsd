@@ -171,4 +171,55 @@
         </foreach>
     </update>
 
+    <!--查询省列表-->
+    <select id="listProvinceByPage" parameterType="com.xzsd.pc.store.entity.RegionInfo" resultType="com.xzsd.pc.store.entity.RegionInfo">
+        select
+        id id,
+        rname name,
+        pid pid
+        from
+        region
+        where level = 1
+    </select>
+
+    <!--查询市区列表-->
+    <resultMap id="cityMap1" type="com.xzsd.pc.store.entity.RegionInfo">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="pid" column="pid"></result>
+
+        <collection property="cityList" ofType="RegionInfo" javaType="java.util.List" column="id" select="getByPid">
+
+        </collection>
+
+    </resultMap>
+    <!--根据父类cateCode查找其子类别-->
+    <select id="getByPid" resultMap="cityMap1" parameterType="String">
+        SELECT
+        a.id id,
+        a.rname name,
+        a.pid pid
+        FROM region a
+        WHERE a.pid = #{id}
+
+
+    </select>
+
+
+
+    <!--查找所有类别(递归)-->
+    <select id="listCityByPage" resultMap="cityMap1" parameterType="com.xzsd.pc.store.entity.RegionInfo">
+        SELECT
+        id id,
+        rname name,
+        pid pid
+        FROM region
+        WHERE level = 2
+        and pid = #{id}
+
+
+
+    </select>
+
+
 </mapper>

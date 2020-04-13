@@ -6,6 +6,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 
 import com.xzsd.pc.store.dao.StoreDao;
+import com.xzsd.pc.store.entity.RegionInfo;
 import com.xzsd.pc.store.entity.StoreDetailVo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.stereotype.Service;
@@ -149,5 +150,30 @@ public class StoreService {
     }
 
 
+    /**
+     * 地区 省的下拉框
+     * @param regionInfo
+     * @author housum
+     * @date 2020-4-13
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse province(RegionInfo regionInfo){
+        List<RegionInfo> listProvinceInfo = storeDao.listProvinceByPage(regionInfo);
+        return AppResponse.success("查询成功！",  getPageInfo(listProvinceInfo));
+
+    }
+
+    /**
+     * 地区 市区下拉框
+     * @param regionInfo
+     * @author housum
+     * @date 2020-4-13
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse city(RegionInfo regionInfo){
+        List<RegionInfo> listCityInfo = storeDao.listCityByPage(regionInfo);
+        return AppResponse.success("查询成功！",  getPageInfo(listCityInfo));
+
+    }
 
 }
