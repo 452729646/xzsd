@@ -67,7 +67,8 @@
             update_time = now(),
             update_user = #{userCode},
             version = version + 1
-        where sku_no in
+        where sku_state = 0
+        and sku_no in
         <foreach item='item' index='index' collection="listSkuNo" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -182,4 +183,39 @@
             now()
             )
     </insert>
+
+<!--    查询需要下架的商品是否存在是热门商品-->
+    <select id="countInHotGoods"  resultType="int">
+        SELECT count(sku_no)
+        from t_sys_hotgoods
+        where is_deleted = 0
+        and sku_no in
+        <foreach item='item' index='index' collection="listSkuNo3" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </select>
+
+<!--    查询需要下架的商品是否存在是轮播图 状态是启动中-->
+    <select id="countInBanner"  resultType="int">
+        SELECT count(sku_no)
+        from t_sys_picture
+        where is_deleted = 0
+        and picture_state = 1
+        and sku_no in
+        <foreach item='item' index='index' collection="listSkuNo3" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--    查询需要下架的商品是否存在是上架中-->
+    <select id="countInSelling"  resultType="int">
+        SELECT count(sku_no)
+        from t_sys_goods
+        where is_deleted = 0
+        and sku_state = 1
+        and sku_no in
+        <foreach item='item' index='index' collection="listSkuNo" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

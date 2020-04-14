@@ -194,6 +194,7 @@ public class GoodsService {
     public AppResponse goodsUpper(String skuNo,String userCode,int version) {
         //选择的skuNo放进一个list
         List<String> listSkuNo2 = Arrays.asList(skuNo.split(","));
+
         AppResponse appResponse = AppResponse.success("上架成功！");
         // 修改为上架状态
         int count = goodsDao.goodsUpper(listSkuNo2,userCode,version);
