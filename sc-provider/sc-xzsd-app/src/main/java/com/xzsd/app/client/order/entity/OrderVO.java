@@ -43,14 +43,38 @@ public class OrderVO {
      * 订单状态
      */
     private int orderStatus;
-    /**
-     * 支付状态
-     */
-    private int payStatus;
+//    /**
+////     * 支付状态
+////     */
+////    private int payStatus;
     /**
      * 门店编号
      */
     private String storeNo;
+    /**
+     * 门店名称
+     */
+    private String storeName;
+    /**
+     * 门店地址
+     */
+    private String storeAddress;
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getStoreAddress() {
+        return storeAddress;
+    }
+
+    public void setStoreAddress(String storeAddress) {
+        this.storeAddress = storeAddress;
+    }
 
     /**
      * 下单人用户编号
@@ -63,11 +87,23 @@ public class OrderVO {
     /**
      * 付款时间
      */
-    private Date payTime;
+
+    private String createTime;
+    private String payTime;
     /**
      * 版本号
      */
     private int version;
+
+
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -93,13 +129,13 @@ public class OrderVO {
         this.orderStatus = orderStatus;
     }
 
-    public int getPayStatus() {
-        return payStatus;
-    }
-
-    public void setPayStatus(int payStatus) {
-        this.payStatus = payStatus;
-    }
+//    public int getPayStatus() {
+//        return payStatus;
+//    }
+//
+//    public void setPayStatus(int payStatus) {
+//        this.payStatus = payStatus;
+//    }
 
     public String getStoreNo() {
         return storeNo;
@@ -125,11 +161,11 @@ public class OrderVO {
         this.userPhone = userPhone;
     }
 
-    public Date getPayTime() {
+    public String getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Date payTime) {
+    public void setPayTime(String payTime) {
         this.payTime = payTime;
     }
 

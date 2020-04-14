@@ -85,11 +85,28 @@ public class OrderService {
      * @author housum
      * @date 2020-4-14
      */
-    @Transactional(rollbackFor = Exception.class)
+
     public AppResponse listOrderByUserCode(OrderVO orderVO) {
         List<OrderVO> listInfoOrder = orderDao.listOrderByUserCode(orderVO);
         return AppResponse.success("查询成功", listInfoOrder);
     }
+
+
+    /**
+     * 通过OrderId查询该订单详情
+     * @param orderInfo
+     * @author housum
+     * @date 2020-4-14
+     */
+    public AppResponse orderDetailByOrderId(OrderInfo orderInfo){
+        OrderVO orderDetail = orderDao.orderDetailByOrderId(orderInfo);
+        return AppResponse.success("查询成功",orderDetail);
+    }
+
+
+
+
+
 
 
 }

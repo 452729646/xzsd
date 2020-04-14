@@ -64,4 +64,33 @@ public class OrderController {
 
     }
 
+    /**
+     * 通过orderId来查询订单详情
+     * @return App
+     * @author housum
+     * @date 2020-4-14
+     */
+    @PostMapping("orderDetailByOrderId")
+    public AppResponse orderDetailByOrderId(OrderInfo orderInfo){
+        try{
+            String userCode = SecurityUtils.getCurrentUserId();
+            orderInfo.setUserCode(userCode);
+            return orderService.orderDetailByOrderId(orderInfo);
+        }catch (Exception e){
+            logger.error("查询订单详情异常",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+
+    }
+
+    /**
+     * 对已完成未评价的订单评价
+     */
+
+
+
+
+
+
 }

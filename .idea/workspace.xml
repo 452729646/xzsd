@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="新增app客户端的商品分类模块">
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/GoodsListVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/orderListInfo.java" afterDir="false" />
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中">
+      <change afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/EvaluateInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/controller/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/dao/OrderDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/OrderVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/OrderVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/user/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,21 +82,21 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.26551723" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\resources\mybatis\mapper" />
-      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc" />
-      <recent name="C:\Users\Administrator\Desktop\FY2020 课件20200220\京东行走书店项目资料\sc2019\sc-provider" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-app\src\main\resources\mybatis\mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.xzsd.app.user.entity" />
       <recent name="com.xzsd.app" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-app\src\main\resources\mybatis\mapper" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\resources\mybatis\mapper" />
+      <recent name="D:\bookstore\sc2019\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc" />
+      <recent name="C:\Users\Administrator\Desktop\FY2020 课件20200220\京东行走书店项目资料\sc2019\sc-provider" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -114,7 +111,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ScXzsdAppApplication (1)">
+  <component name="RunManager" selected="Spring Boot.ScXzsdPcApplication (1)">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -250,19 +247,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ScWebAuthApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="sc2019.sc-provider.sc-web-auth.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.neusoft.webauth.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webauth.ScWebAuthApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ScWebAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="sc-web-auth_main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webauth.ScWebAuthApplication" />
@@ -293,6 +277,19 @@
     <configuration name="ScXzsdAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="sc-xzsd-app_main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.xzsd.app.ScXzsdAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScXzsdPcApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="sc2019.sc-provider.sc-xzsd-pc.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xzsd.pc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xzsd.pc.ScXzsdPcApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -332,10 +329,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.ScXzsdAppApplication (1)" />
+        <item itemvalue="Spring Boot.ScXzsdPcApplication (1)" />
         <item itemvalue="Spring Boot.ScSecurityUaaApplication (1)" />
         <item itemvalue="Spring Boot.ScApiGatewayApplication (1)" />
         <item itemvalue="Spring Boot.ScEurekaApplication (1)" />
-        <item itemvalue="Spring Boot.ScWebAuthApplication (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -359,7 +356,8 @@
       <workItem from="1586398677376" duration="22230000" />
       <workItem from="1586485138021" duration="32170000" />
       <workItem from="1586738288978" duration="34918000" />
-      <workItem from="1586824645822" duration="11475000" />
+      <workItem from="1586824645822" duration="12639000" />
+      <workItem from="1586838159130" duration="13776000" />
     </task>
     <task id="LOCAL-00001" summary="新增订单模块">
       <created>1586521163145</created>
@@ -417,7 +415,28 @@
       <option name="project" value="LOCAL" />
       <updated>1586829251810</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修改了app 客户端新增订单接口 新增了app客户端查询该用户所有订单">
+      <created>1586837000548</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586837000548</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中">
+      <created>1586849440164</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586849440164</updated>
+    </task>
+    <task id="LOCAL-00011" summary="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中2">
+      <created>1586857805446</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586857805446</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -461,6 +480,9 @@
     <MESSAGE value="新增热门商品模块的设置展示数量和修改展示数量" />
     <MESSAGE value="新增客服app主页模块 用户模块的注册" />
     <MESSAGE value="新增app客户端的商品分类模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增app客户端的商品分类模块" />
+    <MESSAGE value="修改了app 客户端新增订单接口 新增了app客户端查询该用户所有订单" />
+    <MESSAGE value="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中" />
+    <MESSAGE value="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中2" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了管理端 商品下架时 判断是否存在热门商品 轮播图启动中2" />
   </component>
 </project>

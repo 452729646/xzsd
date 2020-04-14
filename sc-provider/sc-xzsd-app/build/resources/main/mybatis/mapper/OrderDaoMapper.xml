@@ -67,7 +67,7 @@
     <resultMap id="orderList" type="com.xzsd.app.client.order.entity.OrderVO">
         <id property="orderId" column="order_id"></id>
         <result property="orderStatus" column="order_status"></result>
-        <result property="payStatus" column="pay_stats"></result>
+
         <result property="goodsTotal" column="goods_total"></result>
         <result property="paymentMoney" column="payment_money"></result>
         <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId">
@@ -83,7 +83,7 @@
         select
         order_id ,
         order_status ,
-        pay_status,
+
         goods_total ,
         payment_money
 
@@ -108,4 +108,60 @@
         and a.order_id = #{order_id}
         order by a.goods_cnt ASC
     </select>
+
+
+
+    <resultMap id="detail" type="com.xzsd.app.client.order.entity.OrderVO">
+        <id property="orderId" column="order_id"></id>
+        <result property="createTime" column="create_time"></result>
+
+        <result property="orderStatus" column="order_status"></result>
+
+        <result property="goodsTotal" column="goods_total"></result>
+        <result property="paymentMoney" column="payment_money"></result>
+        <result property="storeName" column="store_name"></result>
+        <result property="storeAddress" column="address"></result>
+        <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId2">
+
+        </collection>
+
+    </resultMap>
+
+    <!--    查询该订单的所有商品-->
+    <select id="getByOrderId2" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
+        select
+        a.sku_no skuNo,
+        b.picture_url pictureUrl,
+        b.sku_name skuName,
+        b.detail detail,
+        a.selling_money sellingPrice,
+        a.goods_cnt goodsCnt
+        from t_sys_orderson a,
+        t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.order_id = #{order_id}
+        order by a.goods_cnt ASC
+    </select>
+<!--    通过orderId查询订单详情-->
+    <select id="orderDetailByOrderId" parameterType="com.xzsd.app.client.order.entity.OrderInfo" resultMap="detail">
+        select
+        a.order_id order_id,
+        a.create_time create_time,
+
+        a.order_status order_status,
+
+        a.goods_total goods_total,
+        a.payment_money payment_money,
+        c.store_name store_name,
+        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address
+        from t_sys_orderfather a,
+        t_client_info b,
+        t_sys_store c
+        where a.user_code = b.client_user_code
+        and b.invite_code = c.invitation_code
+        and a.is_deleted = 0
+        and a.order_id = #{orderId}
+    </select>
+
+
 </mapper>
