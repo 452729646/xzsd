@@ -2,12 +2,39 @@ package com.xzsd.app.client.order.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OrderVO {
     /**
      * 订单id
      */
     private String orderId;
+
+    /**
+     * 商品列表
+     */
+    List<GoodsListVO> goodsListVOList;
+
+    public List<GoodsListVO> getGoodsListVOList() {
+        return goodsListVOList;
+    }
+
+    public void setGoodsListVOList(List<GoodsListVO> goodsListVOList) {
+        this.goodsListVOList = goodsListVOList;
+    }
+
+    public int getGoodsTotal() {
+        return goodsTotal;
+    }
+
+    public void setGoodsTotal(int goodsTotal) {
+        this.goodsTotal = goodsTotal;
+    }
+
+    /**
+     * 订单物品总数
+     */
+    private int goodsTotal;
     /**
      * 订单总价
      */
@@ -24,10 +51,11 @@ public class OrderVO {
      * 门店编号
      */
     private String storeNo;
+
     /**
-     * 下单人姓名
+     * 下单人用户编号
      */
-    private String userName;
+    private String userCode;
     /**
      * 下单人电话
      */
@@ -81,12 +109,12 @@ public class OrderVO {
         this.storeNo = storeNo;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     public String getUserPhone() {

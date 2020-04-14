@@ -8,6 +8,7 @@
         (
         order_id,
         payment_money,
+        goods_total,
         order_status,
         pay_status,
         user_code,
@@ -22,6 +23,7 @@
         values (
         #{orderId},
         #{sum},
+        #{total},
         1,
         0,
         #{userCode},
@@ -60,4 +62,50 @@
         now()
         )
     </insert>
+
+
+    <resultMap id="orderList" type="com.xzsd.app.client.order.entity.OrderVO">
+        <id property="orderId" column="order_id"></id>
+        <result property="orderStatus" column="order_status"></result>
+        <result property="payStatus" column="pay_stats"></result>
+        <result property="goodsTotal" column="goods_total"></result>
+        <result property="paymentMoney" column="payment_money"></result>
+        <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+
+        </collection>
+
+
+    </resultMap>
+
+
+<!--    查询该用户的订单-->
+    <select id="listOrderByUserCode" parameterType="com.xzsd.app.client.order.entity.OrderVO" resultMap="orderList">
+        select
+        order_id ,
+        order_status ,
+        pay_status,
+        goods_total ,
+        payment_money
+
+
+        from t_sys_orderfather
+        where is_deleted = 0
+        and user_code = #{userCode}
+    </select>
+
+<!--    查询该订单的所有商品-->
+    <select id="getByOrderId" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
+        select
+        a.sku_no skuNo,
+        b.picture_url pictureUrl,
+        b.sku_name skuName,
+        b.detail detail,
+        a.selling_money sellingPrice,
+        a.goods_cnt goodsCnt
+        from t_sys_orderson a,
+        t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.order_id = #{order_id}
+        order by a.goods_cnt ASC
+    </select>
 </mapper>

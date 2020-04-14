@@ -3,6 +3,7 @@ package com.xzsd.app.client.order.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.app.client.order.entity.OrderInfo;
+import com.xzsd.app.client.order.entity.OrderVO;
 import com.xzsd.app.client.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,22 +44,24 @@ public class OrderController {
         }
     }
 
-//    /**
-//     * 查询订单列表
-//     * @return App
-//     * @author housum
-//     * @date 2020-4-10
-//     */
-//    @PostMapping("listOrder")
-//    public AppResponse listOrder(OrderInfo orderInfo){
-//        try{
-//            return orderService.listOrder(orderInfo);
-//        }catch (Exception e){
-//            logger.error("查询订单列表异常",e);
-//            System.out.println(e.toString());
-//            throw e;
-//        }
-//
-//    }
+    /**
+     * 查询该用户订单列表
+     * @return App
+     * @author housum
+     * @date 2020-4-10
+     */
+    @PostMapping("listOrder")
+    public AppResponse listOrderByUserCode(OrderVO orderVO){
+        try{
+            String userCode = SecurityUtils.getCurrentUserId();
+            orderVO.setUserCode(userCode);
+            return orderService.listOrderByUserCode(orderVO);
+        }catch (Exception e){
+            logger.error("查询订单列表异常",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+
+    }
 
 }

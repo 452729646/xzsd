@@ -4,6 +4,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.dao.OrderDao;
+import com.xzsd.app.client.order.entity.OrderVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,30 +41,24 @@ public class OrderService {
 
         List<String> listSellingMoney = Arrays.asList(sellingMoney.split(","));
 
-        //list String类型转换为list BigDecimal类型
-//        for(String str : listGoodsCnt) {
-//
-//            BigDecimal i=new BigDecimal(str);
-//            listGoodsCnt2.add(i);
-//        }
-//        for(String str :listSellingMoney) {
-//            BigDecimal i=new BigDecimal(str);
-//            listSellingMoney2.add(i);
-//        }
+
 
         List<String> listSkuNo = Arrays.asList(skuNo2.split(","));
 
 
         //算出这个订单的总价
         BigDecimal sum = new BigDecimal("0");
+//        用于计算该订单的物品总数量
+        BigDecimal total = new BigDecimal("0");
         for (int i = 0; i < listSkuNo.size(); i++) {
             BigDecimal a = new BigDecimal(listGoodsCnt.get(i)).multiply(new BigDecimal(listSellingMoney.get(i)));
+            total = total.add(new BigDecimal(listGoodsCnt.get(i)));
             sum = sum.add(a);
         }
         String orderId = StringUtil.getCommonCode(6);
         String userCode = orderInfo.getUserCode();
 
-        int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode);
+        int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode,total);
         for (int i = 0; i < listSkuNo.size(); i++) {
             String skuNo = listSkuNo.get(i);
             String goodsCnt2 = listGoodsCnt.get(i);
@@ -84,16 +79,17 @@ public class OrderService {
 
     }
 
-//    /**
-//     * 查询订单列表
-//     * @param orderInfo
-//     * @author housum
-//     * @date 2020-4-10
-//     */
-//    @Transactional(rollbackFor = Exception.class)
-//    public AppResponse listOrder(OrderInfo orderInfo){
-//        List<OrderInfo> listInfoOrder = OrderDao.listStoreByPage(orderInfo);
-//        return AppResponse.success("查询成功",getPageInfo(listInfoOrder));
+    /**
+     * 查询该用户的订单列表
+     * @param orderVO
+     * @author housum
+     * @date 2020-4-14
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse listOrderByUserCode(OrderVO orderVO) {
+        List<OrderVO> listInfoOrder = orderDao.listOrderByUserCode(orderVO);
+        return AppResponse.success("查询成功", listInfoOrder);
+    }
 
 
 }
