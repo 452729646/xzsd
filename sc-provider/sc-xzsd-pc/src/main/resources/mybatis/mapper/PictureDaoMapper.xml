@@ -116,12 +116,12 @@
         a.update_time = now(),
         a.update_user = #{userCode},
         a.version = a.version + 1
-        where banner_code in
+        where a.banner_code in
         <foreach item='item' index='index' collection="listBannerCode2" open="(" separator="," close=")">
             #{item}
         </foreach>
         and a.version = #{version}
-        and picture_state = 1
+        and a.picture_state = 1
     </update>
 
 </mapper>

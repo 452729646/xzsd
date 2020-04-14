@@ -79,4 +79,23 @@ public interface GoodsDao {
      * 添加goods的activeMq历史
      */
     int addGoodsActiveMq(String message);
+
+    /**
+     * 查询需要下架的商品是否存在是热门商品
+     *
+     */
+    int countInHotGoods(@Param("listSkuNo3")List<String> listSkuNo3);
+
+    /**
+     * 查询需要下架的商品是否存在是轮播图 状态是启动中
+     *
+     */
+    int countInBanner(@Param("listSkuNo3")List<String> listSkuNo3);
+
+    /**
+     * 查询需要下架的商品是否存在上架的
+     *
+     */
+    int countInSelling(@Param("listSkuNo") List<String> listSkuNo);
+
 }

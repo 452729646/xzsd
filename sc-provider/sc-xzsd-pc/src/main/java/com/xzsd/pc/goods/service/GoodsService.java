@@ -78,11 +78,7 @@ public class GoodsService {
     }
 
 
-//    // 发送消息，destination是发送到的队列，message是待发送的消息
-//    private void sendMessage(Destination destination, Object message) {
-//
-//        jmsMessagingTemplate.convertAndSend(destination, message);
-//    }
+
 
 
     /**
@@ -97,10 +93,14 @@ public class GoodsService {
     public AppResponse deleteGoods(String skuNo,String userCode) {
         List<String> listSkuNo = Arrays.asList(skuNo.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
+        int countInSelling = goodsDao.countInSelling(listSkuNo);
+        if (0 != countInSelling){
+            return AppResponse.bizError("选择的商品仍在上架中，无法删除");
+        }
         // 删除用户
         int count = goodsDao.deleteGoods(listSkuNo,userCode);
         if(0 == count) {
-            appResponse = AppResponse.bizError("删除失败，请重试！");
+            appResponse = AppResponse.bizError("删除，请重试！");
         }
         return appResponse;
     }
@@ -216,7 +216,15 @@ public class GoodsService {
         //选择的skuNo放进一个list
         List<String> listSkuNo3 = Arrays.asList(skuNo.split(","));
         AppResponse appResponse = AppResponse.success("下架成功！");
-        // 修改为上架状态
+        int countInHotGoods = goodsDao.countInHotGoods(listSkuNo3);
+        if (0 != countInHotGoods){
+            return AppResponse.bizError("选择的商品存在于热门商品，无法下架");
+        }
+        int countInBanner = goodsDao.countInBanner(listSkuNo3);
+        if (0 != countInBanner){
+            return AppResponse.bizError("选择的商品存在于轮播图，处于启动中，无法下架");
+        }
+//        // 修改为上架状态
         int count = goodsDao.goodsLower(listSkuNo3,userCode,version);
         if(0 == count) {
             appResponse = AppResponse.bizError("下架失败，请重试！");
