@@ -2,6 +2,7 @@ package com.xzsd.app.client.order.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.app.client.order.entity.EvaluateInfo;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.entity.OrderVO;
 import com.xzsd.app.client.order.service.OrderService;
@@ -86,7 +87,24 @@ public class OrderController {
 
     /**
      * 对已完成未评价的订单评价
+     * @return App
+     * @author housum
+     * @date 2020-4-14
      */
+    @PostMapping("appraiseByOrderId")
+    public AppResponse appraiseByOrderId(EvaluateInfo evaluateInfo){
+        try{
+            String userCode = SecurityUtils.getCurrentUserId();
+            evaluateInfo.setUserCode(userCode);
+
+            AppResponse appResponse = orderService.appraiseByOrderId(evaluateInfo);;
+            return appResponse;
+        }catch (Exception e){
+            logger.error("评价订单详情异常",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
 
 

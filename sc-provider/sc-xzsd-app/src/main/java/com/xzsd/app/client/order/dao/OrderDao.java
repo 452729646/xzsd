@@ -1,5 +1,6 @@
 package com.xzsd.app.client.order.dao;
 
+import com.xzsd.app.client.order.entity.EvaluateInfo;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.entity.OrderVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderDao {
@@ -37,6 +39,20 @@ public interface OrderDao {
      * @param
      */
     OrderVO orderDetailByOrderId(OrderInfo orderInfo);
+
+    /**
+     * 评价商品
+     * @param evaluateInfo
+     * @return
+     */
+    int appraiseByOrderId(EvaluateInfo evaluateInfo);
+
+    /**
+     * 修改订单已完成
+     * @param evaluateInfo
+     * @return
+     */
+    int updateOrderComplete(EvaluateInfo evaluateInfo);
 
 
 }

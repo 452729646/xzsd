@@ -2,6 +2,7 @@ package com.xzsd.app.client.order.service;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
+import com.xzsd.app.client.order.entity.EvaluateInfo;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.dao.OrderDao;
 import com.xzsd.app.client.order.entity.OrderVO;
@@ -10,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @DescriptionDemo 实现类
@@ -104,7 +104,45 @@ public class OrderService {
     }
 
 
+    /**
+     * 评价订单
+     * @param
+     * @author housum
+     * @date 2020-4-14
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse appraiseByOrderId(EvaluateInfo evaluateInfo){
+        //        完成评价 修改订单状态
+        int count2 = orderDao.updateOrderComplete(evaluateInfo);
+        if (0 == count2){
+            return  AppResponse.bizError("修改订单已完成失败");
+        }
+        evaluateInfo.setListSkuNo(Arrays.asList(evaluateInfo.getSkuNo().split(",")));
+        evaluateInfo.setListStarLevel(Arrays.asList(evaluateInfo.getStarLevel().split(",")));
+        evaluateInfo.setListAppraiseInfo(Arrays.asList(evaluateInfo.getAppraiseInfo().split("&&&")));
+        evaluateInfo.setListPictureUrl(Arrays.asList(evaluateInfo.getPhotoUrl().split("&&&")));
+        List<Map> mapList = new ArrayList<>();
+        //把对应的属性 放进map  然后在mybaits用foreacn遍历
+        for(int i =0 ;i<evaluateInfo.getListSkuNo().size(); i++){
+            Map map = new HashMap();
+            map.put("skuNo",evaluateInfo.getListSkuNo().get(i));
+            map.put("starLevel",Integer.parseInt(evaluateInfo.getListStarLevel().get(i)));
+            map.put("appraiseInfo",evaluateInfo.getListAppraiseInfo().get(i));
+            map.put("photoUrl",evaluateInfo.getListPictureUrl().get(i));
+            mapList.add(map);
+        }
+        evaluateInfo.setMapList(mapList);
+        evaluateInfo.setIsDeleted(0);
+//        AppResponse appResponse = AppResponse.success("评价商品成功！");
+        int count = orderDao.appraiseByOrderId(evaluateInfo);
+        if (0 == count){
+            return AppResponse.bizError("评价商品失败，请重试！");
+        }
 
+
+
+        return AppResponse.success("评价商品成功！");
+    }
 
 
 

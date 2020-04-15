@@ -163,5 +163,51 @@
         and a.order_id = #{orderId}
     </select>
 
+<!--    评价商品-->
+<insert id="appraiseByOrderId" parameterType="com.xzsd.app.client.order.entity.EvaluateInfo">
+    <foreach collection="mapList" item="mapList" index="index" separator=";">
+        insert into t_sys_goodsevaluate
+        (order_id,
+        user_code,
+        sku_no,
+        store_no,
+        star_level,
+        appraise_info,
+        photo_url,
+        is_deleted,
+        create_user,
+        create_time,
+        version
+        )values
+        (
+        #{orderId},
+        #{userCode},
+        #{mapList.skuNo},
+        (select invite_code from t_client_info where is_deleted =0 and client_user_code = #{userCode}),
+        #{mapList.starLevel},
+        #{mapList.appraiseInfo},
+        #{mapList.photoUrl},
+        #{isDeleted},
+        #{userCode},
+        now(),
+        0
+        )
+    </foreach>
 
+</insert>
+
+<!--    修改商品状态：已完成已评价-->
+    <update id="updateOrderComplete" parameterType="com.xzsd.app.client.order.entity.EvaluateInfo">
+        update  t_sys_orderfather
+        set
+        order_status = 4,
+        update_time = now(),
+        update_user = #{userCode},
+        version = version + 1
+        where order_id = #{orderId}
+        and version = #{version}
+        and order_status = 3
+
+    </update>
 </mapper>
+
