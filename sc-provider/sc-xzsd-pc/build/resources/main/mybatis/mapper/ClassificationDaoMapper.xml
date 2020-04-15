@@ -27,6 +27,16 @@
         <!--        </if>-->
     </select>
 
+    <!--统计分类名称数量-->
+    <select id="countCateName" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo" resultType="int">
+        select count(cate_name)
+        from t_sys_classification
+        where is_deleted = 0
+        and cate_name = #{cateName}
+
+
+    </select>
+
 
     <!--新增父级分类-->
     <insert id="saveFatherCate" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo">
@@ -190,7 +200,18 @@
         </foreach>
     </update>
 
-
+    <!--    修改分类信息-->
+    <update id="updateCate" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo">
+        update t_sys_classification
+        set
+        cate_name = #{cateName},
+        remark = #{remark},
+        update_user = #{lastModifiedBy},
+        update_time = now(),
+        version = version + 1
+        where cate_code = #{cateCode}
+        and version = #{version}
+    </update>
 
 
 

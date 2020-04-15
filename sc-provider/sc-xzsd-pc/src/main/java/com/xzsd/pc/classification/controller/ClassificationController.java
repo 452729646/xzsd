@@ -164,6 +164,29 @@ public class ClassificationController {
             throw e;
         }
     }
+
+
+    /**
+     * 修改分类信息
+     * @param classificationInfo
+     * @return
+     * @author housum
+     * @Date 2020-03-26
+     */
+    @PostMapping("updateCate")
+    public AppResponse update(ClassificationInfo classificationInfo) {
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+
+            classificationInfo.setLastModifiedBy(userCode);
+            return classificationService.updateCate(classificationInfo);
+        } catch (Exception e) {
+            logger.error("修改分类信息错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }
 
 

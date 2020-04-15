@@ -152,4 +152,26 @@ public class ClassificationService {
     }
 
 
+    /**
+     * 修改分类信息
+     * @param classificationInfo
+     * @return
+     *
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse updateCate(ClassificationInfo classificationInfo) {
+        int countNameCate = classificationDao.countCateName(classificationInfo);
+        if (0 != countNameCate) {
+            return AppResponse.bizError("此分类已存在，请重新输入！");
+        }
+
+        // 删除用户
+        int count = classificationDao.updateCate(classificationInfo);
+        if(0 == count) {
+            return AppResponse.bizError("修改失败，请重试！");
+        }
+        return  AppResponse.success("修改成功！");
+    }
+
+
 }

@@ -187,4 +187,36 @@ public class OrderService {
 
     }
 
+    /**
+     * 修改订单状态（取消订单）
+     * @param orderId
+     * @param version
+     * @param userCode
+     * @author housum
+     * @date 2020-4-10
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse orderCancel(String orderId,String version,String userCode){
+        List<String> listOrderId = Arrays.asList(orderId.split(","));
+        List<String> listVersion = Arrays.asList(version.split(","));
+
+        List<Map> mapList = new ArrayList<>();
+        //把orderId对应的version 放进map  然后在mybaits用foreacn遍历
+        for(int i =0 ;i<listOrderId.size(); i++){
+            Map map = new HashMap();
+            map.put("orderId",listOrderId.get(i));
+            map.put("version",Integer.parseInt(listVersion.get(i)));
+            map.put("userCode",userCode);
+            mapList.add(map);
+        }
+        AppResponse appResponse = AppResponse.success("修改取消订单已取货成功！");
+        int count = orderDao.orderCancel(mapList);
+        if (0 == count){
+            appResponse = AppResponse.bizError("数据有更新或者未处于已取货状态，请重试！");
+        }
+        return appResponse;
+
+
+    }
+
 }

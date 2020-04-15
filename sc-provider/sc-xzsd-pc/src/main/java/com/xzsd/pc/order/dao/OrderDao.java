@@ -67,6 +67,14 @@ public interface OrderDao {
     int orderCancelTake (List<Map> mapList);
 
     /**
+     * 修改订单状态 取消订单
+     * @param mapList
+     * @param
+     * @author housum
+     */
+    int orderCancel (List<Map> mapList);
+
+    /**
      * 通过userCode找到角色
      * @param userCode
      * @author housum

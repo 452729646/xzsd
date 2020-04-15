@@ -141,6 +141,25 @@
         </foreach>
     </update>
 
+    <!--修改订单状态（取消订单）-->
+    <update id="orderCancel" parameterType="java.util.List">
+
+
+        <foreach collection="list" item="mapList" index="index"  separator=";">
+            update t_sys_orderfather
+            set
+            order_status = 0,
+            update_time = now(),
+            update_user = #{mapList.userCode},
+            version = version + 1
+
+            where order_id = #{mapList.orderId}
+            and version = #{mapList.version}
+
+
+        </foreach>
+    </update>
+
     <!--通过userCode找到role-->
     <select id="roleByUserCode" parameterType="java.lang.String" resultType="int">
         select role

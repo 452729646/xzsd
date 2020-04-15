@@ -83,6 +83,10 @@ public class ClassificationInfo  {
      */
     private  int version;
 
+
+
+
+
     public String getCateCode() {
         return cateCode;
     }

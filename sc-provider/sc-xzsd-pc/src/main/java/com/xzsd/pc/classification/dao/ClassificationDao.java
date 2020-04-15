@@ -76,8 +76,22 @@ public interface ClassificationDao {
     /**
      * 删除商品信息
      * @param listCateCode 选中的用户编号集合
-     * @param cateCode 更新人
+     * @param userCode 更新人
      * @return
      */
     int deleteCate(@Param("listCateCode")List<String> listCateCode, @Param("userCode") String userCode);
+
+    /**
+     * 查看是否有重名
+     * @param classificationInfo
+     * @return
+     */
+    int countCateName(ClassificationInfo classificationInfo);
+
+    /**
+     * 修改分类信息
+     * @param classificationInfo
+     * @return
+     */
+    int updateCate(ClassificationInfo classificationInfo);
 }
