@@ -11,7 +11,7 @@ public enum AppResponseStatus {
     /**
      * 操作成功
      */
-    SUCCESS(0),
+    SUCCESS(1),
 
     /**
      * 服务繁忙
@@ -26,7 +26,9 @@ public enum AppResponseStatus {
     /**
      * 操作失败
      */
-    ERROR(-1),
+    ERROR(0),
+
+    ERROR2(-2),
 
     /**
      * 未登录或token非法
@@ -61,7 +63,8 @@ public enum AppResponseStatus {
     /**
      * 业务异常
      */
-    BIZ_ERROR(10000),
+    BIZ_ERROR(500),
+
 
     /**
      * 验证码错误
