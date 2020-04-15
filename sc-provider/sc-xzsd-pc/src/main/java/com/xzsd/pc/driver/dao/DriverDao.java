@@ -40,7 +40,7 @@ public interface DriverDao {
     /**
      * 查询该司机的详情信息
      */
-    DriverDetailVO driverDetail(@Param("driverNo") String driverNo,@Param("version") int version);
+    DriverDetailVO driverDetail(@Param("driverNo") String driverNo);
 
     /**
      * 修改司机信息

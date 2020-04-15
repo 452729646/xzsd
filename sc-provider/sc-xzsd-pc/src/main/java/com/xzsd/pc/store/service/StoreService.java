@@ -91,8 +91,8 @@ public class StoreService {
      * @date 2020-4-3
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse storeDetail(String storeNo,int version){
-        StoreDetailVo data = storeDao.storeDetail(storeNo,version);
+    public AppResponse storeDetail(String storeNo){
+        StoreDetailVo data = storeDao.storeDetail(storeNo);
         if (data == null || "".equals(data) ){
             return AppResponse.bizError("查询失败，请重试");
         }

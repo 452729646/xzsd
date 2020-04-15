@@ -32,10 +32,24 @@ public class OrderVO {
      * 下单人电话
      */
     private String userPhone;
+//    /**
+//     * 付款时间
+//     */
+//    private String payTime;
+
     /**
-     * 付款时间
+     * 下单时间
      */
-    private String payTime;
+    private String createTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     /**
      * 版本号
      */
@@ -138,13 +152,13 @@ public class OrderVO {
         this.userPhone = userPhone;
     }
 
-    public String getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(String payTime) {
-        this.payTime = payTime;
-    }
+//    public String getPayTime() {
+//        return payTime;
+//    }
+//
+//    public void setPayTime(String payTime) {
+//        this.payTime = payTime;
+//    }
 
     public int getVersion() {
         return version;

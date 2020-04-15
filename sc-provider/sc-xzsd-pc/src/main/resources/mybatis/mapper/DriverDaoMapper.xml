@@ -140,7 +140,7 @@
         t_sys_driver b
         where a.user_code = b.user_code
         and b.driver_no = #{driverNo}
-        and b.version = #{version}
+
     </select>
 
     <!--修改司机信息-->

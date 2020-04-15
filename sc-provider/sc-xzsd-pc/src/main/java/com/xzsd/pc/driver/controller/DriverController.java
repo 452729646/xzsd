@@ -66,9 +66,9 @@ public class DriverController {
      * @date 2020-4-8
      */
     @PostMapping("driverDetail")
-    public AppResponse driverDetail(String driverNo,int version){
+    public AppResponse driverDetail(String driverNo){
         try{
-            return driverService.driverDetail(driverNo,version);
+            return driverService.driverDetail(driverNo);
 
         }catch (Exception e){
             logger.error("查询该司机详情异常",e);

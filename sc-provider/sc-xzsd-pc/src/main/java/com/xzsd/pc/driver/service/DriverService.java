@@ -3,10 +3,12 @@ package com.xzsd.pc.driver.service;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 
+
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverDetailVO;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.store.entity.StoreInfo;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,17 @@ public class DriverService {
     @Resource
     private DriverDao driverDao;
 
-
     /**
-     *新增司机  还要在用户表新增用户 role=3
+     * 密码加密
+     * @param rawPassword
+     * @return
+     */
+    public static String generatePassword(String rawPassword) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(rawPassword);
+    }
+    /**
+     *新增司机  还要在用户表新增用户 role=2
      * @param
      * @author housum
      * @date 2020-4-8
@@ -40,6 +50,7 @@ public class DriverService {
         if (0 != countUserAcct) {
             return AppResponse.success("用户账号已存在，请重新输入！");
         }
+        driverInfo.setPassword(generatePassword(driverInfo.getPassword()));
         String userCode = StringUtil.getCommonCode(4);
         driverInfo.setDriverNo(StringUtil.getDriverNo(4));
         driverInfo.setUserCode(userCode);
@@ -75,8 +86,8 @@ public class DriverService {
      * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse driverDetail(String driverNo ,int version){
-        DriverDetailVO data = driverDao.driverDetail(driverNo , version);
+    public AppResponse driverDetail(String driverNo ){
+        DriverDetailVO data = driverDao.driverDetail(driverNo );
         if (data == null || "".equals(data)){
             return AppResponse.bizError("查询失败，请重试");
         }

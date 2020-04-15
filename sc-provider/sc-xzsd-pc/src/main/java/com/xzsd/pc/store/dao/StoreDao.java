@@ -47,7 +47,7 @@ public interface StoreDao {
     /**
      * 查询门店详情
      */
-    StoreDetailVo storeDetail(@Param("storeNo") String storeNo, @Param("version") int version);
+    StoreDetailVo storeDetail(@Param("storeNo") String storeNo);
 
     /**
      * 修改门店信息

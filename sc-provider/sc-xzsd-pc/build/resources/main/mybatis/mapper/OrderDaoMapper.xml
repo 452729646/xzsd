@@ -9,11 +9,11 @@
         a.order_id orderId,
         a.payment_money paymentMoney,
         a.order_status orderStatus,
-        a.pay_status payStatus,
+
         b.invite_code storeNo,
         c.user_name userName,
         c.phone userPhone,
-        a.pay_time payTime
+        a.create_time createTime
 
         from t_sys_orderfather a,
         t_client_info b,

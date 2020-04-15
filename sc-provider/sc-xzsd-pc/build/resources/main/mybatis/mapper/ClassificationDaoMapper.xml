@@ -164,8 +164,9 @@
     <select id="getCateDetail" parameterType="java.lang.String" resultType="com.xzsd.pc.classification.entity.ClassificationInfo">
         select
             cate_name cateName,
-            remark remark
-
+            remark remark,
+            is_parent isParent,
+            version version
         from t_sys_classification
         where cate_code = #{cateCode}
         and is_deleted = 0

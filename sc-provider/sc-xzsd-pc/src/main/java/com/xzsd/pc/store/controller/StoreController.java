@@ -68,9 +68,9 @@ public class StoreController {
      * @date 2020-4-3
      */
     @RequestMapping("storeDetail")
-    public AppResponse storeDetail(String storeNo , int version){
+    public AppResponse storeDetail(String storeNo ){
         try{
-            return storeService.storeDetail(storeNo,version);
+            return storeService.storeDetail(storeNo);
         }catch (Exception e) {
             logger.error("查询门店详情异常", e);
             System.out.println(e.toString());
@@ -101,7 +101,7 @@ public class StoreController {
      * @author housum
      * @date 2020-4-7
      */
-    @RequestMapping("deteleStore")
+    @RequestMapping("deleteStore")
     public AppResponse deleteStore(String storeNo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();

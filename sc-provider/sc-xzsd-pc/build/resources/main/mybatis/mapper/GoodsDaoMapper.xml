@@ -111,6 +111,7 @@
         a.author author,
         a.stock,
         a.book_number,
+        a.picture_url pictureUrl,
         a.is_deleted,
         a.create_time,
         a.create_user,

@@ -9,14 +9,9 @@
         a.sex sex,
         a.phone phone,
         a.email email,
-        a.id_card idCard,
+        a.id_card idCard
 
-        a.is_deleted,
-        a.gmt_create,
-        a.create_by,
-        a.gmt_modified,
-        a.last_modified_by,
-        a.version
+
         from
             t_sys_user a
         where a.is_deleted = 0
