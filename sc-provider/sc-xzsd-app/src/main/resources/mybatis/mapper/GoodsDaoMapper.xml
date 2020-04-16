@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.client.goods.dao.GoodsDao">
+<!--    查询商品信息 显示该用户绑定的门店名称-->
+    <select id="goodsDetail" parameterType="java.lang.String" resultType="com.xzsd.app.client.goods.entity.GoodsVO">
+        select
+        picture_url pictureUrl,
+        sku_name skuName,
+        detail detail,
+        selling_price sellingPrice
+        from t_sys_goods
+        where sku_no = #{skuNo}
+    </select>
+
+<!--    通过userCode查出所绑定的门店名称-->
+    <select id="selectStoreName" parameterType="java.lang.String" resultType="java.lang.String">
+        select b.store_name
+        from t_client_info a,
+        t_sys_store b
+        where a.invite_code = b.store_no
+        and client_user_code = #{userCode}
+    </select>
+
+<!--    查询商品评价-->
+    <select id="listEvaluateBySkuNoByPage" parameterType="com.xzsd.app.client.goods.entity.EvaluateInfo" resultType="com.xzsd.app.client.goods.entity.EvaluateInfo">
+        select
+        b.user_acct userAcct,
+        a.star_level starLevel,
+        a.appraise_info appraiseInfo,
+        a.create_time createTime
+        from t_sys_goodsevaluate a,
+        t_sys_user b
+        where a.user_code = b.user_code
+        and a.sku_no = #{skuNo}
+        and a.is_deleted = 0
+        <if test="evaluateLevel == 1">
+            and a.star_level &gt;= 4
+        </if>
+        <if test="evaluateLevel == 2">
+            and a.star_level = 3
+        </if>
+        <if test="evaluateLevel == 3">
+            and a.star_level &lt;= 2
+        </if>
+    </select>
+</mapper>
