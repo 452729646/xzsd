@@ -26,8 +26,6 @@
         from t_sys_classification
         where is_deleted = 0
         and cate_code_parent = #{cateCode}
-
-
     </select>
 
     <!--    查询该子分类商品列表-->

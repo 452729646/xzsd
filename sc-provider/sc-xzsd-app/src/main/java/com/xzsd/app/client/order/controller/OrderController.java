@@ -96,7 +96,6 @@ public class OrderController {
         try{
             String userCode = SecurityUtils.getCurrentUserId();
             evaluateInfo.setUserCode(userCode);
-
             AppResponse appResponse = orderService.appraiseByOrderId(evaluateInfo);;
             return appResponse;
         }catch (Exception e){

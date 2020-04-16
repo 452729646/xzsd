@@ -18,10 +18,8 @@
     <select id="selectDisplayCnt" resultType="int" >
         select
         dict_value
-
         from
         t_dicitonary
-
         where
         dict_name = "displayCnt"
         and is_deleted = 0
@@ -41,7 +39,5 @@
         where a.sku_no = b.sku_no
         and b.is_deleted = 0
         order by b.sort_no ASC limit 0,#{displayCnt}
-
-
     </select>
 </mapper>

@@ -142,7 +142,6 @@ public class UserController {
      */
     @RequestMapping(value = "getUserByUserCode")
     public AppResponse getUserByUserCode(@NotNull(message = "用户代码不能为空") String userCode) {
-
         UserInfo userInfo = null;
         try {
             userInfo = userService.getUserById(userCode);
@@ -153,7 +152,6 @@ public class UserController {
         if (userInfo == null) {
             return AppResponse.notFound("无查询结果");
         }
-
         return AppResponse.success("查询成功", userInfo);
     }
 }

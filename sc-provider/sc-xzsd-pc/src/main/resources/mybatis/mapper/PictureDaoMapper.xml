@@ -22,10 +22,7 @@
          sort_no,
          start_time,
          end_time,
-
-        sku_no,
-
-
+         sku_no,
          picture_state,
          is_deleted,
          create_time,
@@ -39,10 +36,7 @@
             #{sortNo},
             #{startTime},
             #{endTime},
-
             #{skuNo},
-
-
             #{pictureState},
             #{isDeleted},
             now(),
@@ -74,7 +68,6 @@
         a.picture_state pictureState,
         a.start_time startTime,
         a.end_time endTime,
-
         a.is_deleted,
         a.create_time,
         a.create_user,
@@ -86,8 +79,6 @@
         <if test="pictureState != null and pictureState != ''">
             and a.picture_state = #{pictureState}
         </if>
-
-
         order by create_time desc
     </select>
 

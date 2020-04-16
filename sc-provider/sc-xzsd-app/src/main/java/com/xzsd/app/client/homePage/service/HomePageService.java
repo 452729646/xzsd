@@ -29,14 +29,13 @@ public class HomePageService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listPicture(PictureInfo pictureInfo){
-        List<PictureInfo> pictureListInfo = homePageDao.listPicture(pictureInfo);
-
+        List<PictureInfo> pictureListInfo = homePageDao.listPictureByPage(pictureInfo);
         return AppResponse.success("查询成功！",pictureListInfo);
     }
 
     /**
      * 查询热门列表
-     * @param pictureInfo
+     * @param
      * @author hosum
      * @date 2020-4-13
      */
@@ -44,8 +43,7 @@ public class HomePageService {
     public AppResponse listHotGoods(){
         //热门商品展示数量
         int displayCnt = homePageDao.selectDisplayCnt();
-        List<ListHotGoodsInfo> hotGoodsListInfo = homePageDao.listHotGoods(displayCnt);
-
+        List<ListHotGoodsInfo> hotGoodsListInfo = homePageDao.listHotGoodsByPage(displayCnt);
         return AppResponse.success("查询成功！",hotGoodsListInfo);
     }
 

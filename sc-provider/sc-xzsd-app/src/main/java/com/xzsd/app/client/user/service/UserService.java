@@ -35,8 +35,8 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse registerUser(UserInfo userInfo){
+        //检验账号是否存在
         int countUserAcct = userdao.countUserAcct(userInfo);
-
         if (0 != countUserAcct){
             return AppResponse.bizError("此账号已存在,请重新输入");
         }
@@ -58,7 +58,6 @@ public class UserService {
             return AppResponse.bizError("注册失败，请重试！");
         }
         return AppResponse.success("注册成功");
-
     }
 
 }

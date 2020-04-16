@@ -38,7 +38,6 @@ public class PictureService {
      */
     //回滚
     @Transactional(rollbackFor = Exception.class)
-
     public AppResponse savePicture(PictureInfo pictureInfo) {
         // 校验轮播图序号是否存在
         int countSortNo = pictureDao.countSortNo(pictureInfo);
@@ -48,7 +47,6 @@ public class PictureService {
         pictureInfo.setBannerCode(StringUtil.getBannerCode(4));
         pictureInfo.setIsDeleted(0);
         pictureInfo.setPictureState(0);
-
         // 新增轮播图
         int count = pictureDao.savePicture(pictureInfo);
         if(0 == count) {
@@ -70,7 +68,6 @@ public class PictureService {
         List<String> listBannerCode = Arrays.asList(bannerCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
-
         int count = pictureDao.deletePicture(listBannerCode,userCode);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
@@ -86,10 +83,7 @@ public class PictureService {
      * @Date 2020-03-25
      */
     public AppResponse listPicture(PictureInfo pictureInfo) {
-//        PageHelper.startPage(pictureInfo.getPageNum(), pictureInfo.getPageSize());
         List<PictureInfo> pictureInfoList = pictureDao.listPictureByPage(pictureInfo);
-        // 包装Page对象
-//        PageInfo<PictureInfo> pageData = new PageInfo<PictureInfo>(pictureInfoList);
         return AppResponse.success("查询成功！", getPageInfo(pictureInfoList));
     }
 

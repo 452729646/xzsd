@@ -35,10 +35,7 @@ public class ClientService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listClient(ClientInfo clientInfo) {
-
         List<ClientInfo>  clinetInfoList = clientDao.listClientByPage(clientInfo);
-        // 包装Page对象
-//        PageInfo<ClientInfo> pageData = new PageInfo<ClientInfo>(clinetInfoList);
         return AppResponse.success("查询成功！",getPageInfo(clinetInfoList));
     }
 }

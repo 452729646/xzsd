@@ -10,8 +10,6 @@
         a.phone phone,
         a.email email,
         a.id_card idCard
-
-
         from
             t_sys_user a
         where a.is_deleted = 0
@@ -22,8 +20,6 @@
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
-
-
         order by gmt_create desc
     </select>
 </mapper>

@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-
+/**
+ * @Description 司机信息管理
+ * @Author housum
+ * @Date 2020-03-24
+ */
 @RestController
 @RequestMapping("/driver")
 public class DriverController {
@@ -69,7 +73,6 @@ public class DriverController {
     public AppResponse driverDetail(String driverNo){
         try{
             return driverService.driverDetail(driverNo);
-
         }catch (Exception e){
             logger.error("查询该司机详情异常",e);
             System.out.println(e.toString());
@@ -104,7 +107,6 @@ public class DriverController {
         try{
             String userCode = SecurityUtils.getCurrentUserId();
             return driverService.deleteDriver(driverNo,userCode);
-
         }catch (Exception e){
             logger.error("删除司机信息失败",e);
             System.out.println(e.toString());

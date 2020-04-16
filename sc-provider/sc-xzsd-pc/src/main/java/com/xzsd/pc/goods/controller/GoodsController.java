@@ -48,8 +48,6 @@ public class GoodsController {
             String userCode = SecurityUtils.getCurrentUserId();
             goodsInfo.setCreateBy(userCode);
             AppResponse appResponse = goodsService.saveGoods(goodsInfo);
-
-
             return appResponse;
         } catch (Exception e) {
             logger.error("商品新增失败", e);
@@ -90,7 +88,6 @@ public class GoodsController {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-//            goodsInfo.setCreateBy(userCode);
             goodsInfo.setLastModifiedBy(userCode);
             return goodsService.updateGoods(goodsInfo);
         } catch (Exception e) {

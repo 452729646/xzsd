@@ -10,9 +10,9 @@
         where is_deleted = 0
         and cate_name = #{cateName}
         and is_parent = 0
-<!--        <if test="skuNo != null and skuNo != ''">-->
-<!--            and sku_no != #{skuNo}-->
-<!--        </if>-->
+        <if test="cateCode != null and cateCode != ''">
+            and cate_code != #{cateCode}
+        </if>
     </select>
 
     <!--统计子类名称数量-->
@@ -22,9 +22,9 @@
         where is_deleted = 0
         and cate_name = #{cateName}
         and is_parent = 1
-        <!--        <if test="skuNo != null and skuNo != ''">-->
-        <!--            and sku_no != #{skuNo}-->
-        <!--        </if>-->
+        <if test="cateCode != null and cateCode != ''">
+            and cate_code != #{cateCode}
+        </if>
     </select>
 
     <!--统计分类名称数量-->
@@ -33,8 +33,9 @@
         from t_sys_classification
         where is_deleted = 0
         and cate_name = #{cateName}
-
-
+        <if test="cateCode != null and cateCode != ''">
+            and cate_code != #{cateCode}
+        </if>
     </select>
 
 
@@ -43,10 +44,8 @@
         insert into t_sys_classification
         (cate_code,
          cate_name,
-
          remark,
          is_parent,
-
          is_deleted,
          create_time,
          create_user,
@@ -58,7 +57,6 @@
             #{cateName},
             #{remark},
             #{isParent},
-
             #{isDeleted},
             now(),
             #{createBy},
@@ -72,12 +70,9 @@
         insert into t_sys_classification
         (cate_code,
          cate_name,
-
          remark,
          is_parent,
          is_deleted,
-
-
          create_time,
          create_user,
          update_time,
@@ -86,13 +81,8 @@
         values
            (#{cateCode},
             #{cateName},
-
             #{remark},
             #{isParent},
-
-
-
-
             #{isDeleted},
             now(),
             #{createBy},
@@ -108,7 +98,6 @@
         a.cate_code_parent = #{cateCodeParent},
         a.cate_name_parent = (select b.cate_name from (SELECT * FROM t_sys_classification ) b where b.is_deleted = 0 and b.cate_code = #{cateCodeParent})
     where a.cate_code = #{cateCode}
-
     </update>
 
     <!--父级分类信息-->
@@ -116,12 +105,8 @@
         select
         a.cate_code cateCode,
         a.cate_name cateName
-
-
         from t_sys_classification a
         where a.is_parent = 0
-
-
         order by a.create_time desc
     </select>
 
@@ -129,11 +114,8 @@
         <id property="cateCode" column="cate_code"></id>
         <result property="cateName" column="cate_name"></result>
         <result property="version" column="version"></result>
-
         <collection property="classificationSonList" ofType="CateListInfo" javaType="java.util.List" column="cate_code" select="getByCateCode">
-
         </collection>
-
     </resultMap>
     <!--根据父类cateCode查找其子类别-->
     <select id="getByCateCode" resultMap="cateMap1" parameterType="String">

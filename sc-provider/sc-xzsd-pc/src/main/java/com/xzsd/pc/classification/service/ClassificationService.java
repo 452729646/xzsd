@@ -38,7 +38,6 @@ public class ClassificationService {
      */
     //回滚
     @Transactional(rollbackFor = Exception.class)
-
     public AppResponse saveFatherCate(ClassificationInfo classificationInfo) {
         // 校验父级分类是否存在
         int countFatherCate = classificationDao.countFatherCate(classificationInfo);
@@ -48,8 +47,6 @@ public class ClassificationService {
         classificationInfo.setCateCode(StringUtil.getCateCode());
         classificationInfo.setIsDeleted(0);
         classificationInfo.setIsParent(0);
-
-
         // 新增用户
         int count = classificationDao.saveFatherCate(classificationInfo);
         if(0 == count) {
@@ -78,8 +75,6 @@ public class ClassificationService {
         classificationInfo.setCateCodeParent(cateCodeParent);
         classificationInfo.setIsDeleted(0);
         classificationInfo.setIsParent(1);
-
-
         // 新增用户
         int count = classificationDao.saveSonCate(classificationInfo);
         if (0 == count) {
@@ -103,16 +98,7 @@ public class ClassificationService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listCate(ClassificationInfo classificationInfo) {
-
-
         List<ClassificationInfo> categories = classificationDao.listCateByPage(0);
-//        List<CateListInfo> cateList2 = (List<CateListInfo>) new CateListInfo();
-//        BeanUtils.copyProperties(categories, cateList2);
-
-//        System.out.println("测试获取所有类别========》" + categories);
-
-         //包装Page对象
-//        PageInfo<ClassificationInfo> pageData = new PageInfo<ClassificationInfo>(categories);
         return AppResponse.success("查询成功！",getPageInfo(categories));
     }
 
@@ -164,7 +150,6 @@ public class ClassificationService {
         if (0 != countNameCate) {
             return AppResponse.bizError("此分类已存在，请重新输入！");
         }
-
         // 删除用户
         int count = classificationDao.updateCate(classificationInfo);
         if(0 == count) {

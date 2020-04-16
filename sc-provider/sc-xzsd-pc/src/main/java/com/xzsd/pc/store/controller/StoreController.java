@@ -63,7 +63,7 @@ public class StoreController {
 
     /**
      *查询门店详情
-     * @param storeInfo
+     * @param storeNo
      * @author housum
      * @date 2020-4-3
      */
@@ -122,7 +122,6 @@ public class StoreController {
     public AppResponse province(RegionInfo regionInfo){
         try{
             return storeService.province(regionInfo);
-
         }catch (Exception e){
             logger.error("查询地区信息错误",e);
             System.out.println(e.toString());
@@ -139,7 +138,6 @@ public class StoreController {
     public AppResponse city(RegionInfo regionInfo){
         try{
             return storeService.city(regionInfo);
-
         }catch (Exception e){
             logger.error("查询地区信息错误",e);
             System.out.println(e.toString());

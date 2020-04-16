@@ -43,7 +43,7 @@ public class HomePageContorller {
 
     /**
      * 查询热门商品列表
-     * @param hotGoodsVO
+     * @param
      * @return AppResponse
      * @author housum
      * @date 2020-4-13

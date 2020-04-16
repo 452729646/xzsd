@@ -1,7 +1,7 @@
 package com.xzsd.app.client.user.controller;
 
 import com.neusoft.core.restful.AppResponse;
-import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.app.client.user.dao.UserDao;
 import com.xzsd.app.client.user.entity.UserInfo;
 import com.xzsd.app.client.user.service.UserService;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping("/userClient")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-            @Resource UserService userService;
+    @Resource UserService userService;
 
 
     /**
@@ -40,8 +40,9 @@ public class UserController {
             System.out.println(e.toString());
             throw e;
         }
-
     }
+
+
 
 
 }

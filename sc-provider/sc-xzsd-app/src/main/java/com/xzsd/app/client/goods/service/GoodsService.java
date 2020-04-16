@@ -39,6 +39,11 @@ public class GoodsService {
         return AppResponse.success("查询成功",goodsDetail);
     }
 
+    /**
+     * 查询商品评价列表
+     * @param evaluateInfo
+     * @return
+     */
     public AppResponse listEvaluateBySkuNo(EvaluateInfo evaluateInfo){
         List<EvaluateInfo> listEvaluateInfo = goodsDao.listEvaluateBySkuNoByPage(evaluateInfo);
         return AppResponse.success("查询成功",listEvaluateInfo);

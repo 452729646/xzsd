@@ -20,8 +20,6 @@
         (hotgoods_code,
          sort_no,
          sku_no,
-
-
          is_deleted,
          create_time,
          create_user,
@@ -32,7 +30,6 @@
         (#{hotGoodsCode},
          #{sortNo},
          #{skuNo},
-
          #{isDeleted},
          now(),
          #{createBy},
@@ -47,15 +44,11 @@
         select
         a.sku_no skuNo,
         a.sku_name skuName,
-
         a.sku_state skuState ,
         b.cate_name_parent cateParentName,
         b.cate_name cateSonName,
         a.version version
-
-
         from t_sys_goods a,t_sys_classification b
-
         where a.cate_code = b.cate_code
         and a.is_deleted = 0
         and a.sku_state = 1
@@ -65,7 +58,6 @@
         <if test="skuNo != null and skuNo != ''">
             and a.sku_No like concat('%', #{skuNo}, '%')
         </if>
-
         order by a.create_time desc
     </select>
 
@@ -138,7 +130,6 @@
         version version
         from
         t_dicitonary
-
         where
         dict_name = "displayCnt"
         and is_deleted = 0

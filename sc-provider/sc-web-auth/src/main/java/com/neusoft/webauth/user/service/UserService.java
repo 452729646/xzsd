@@ -142,7 +142,6 @@ public class UserService {
             String oldPwd = PasswordUtils.generatePassword(userInfo.getUserPwd());
             // 获取用户信息
             UserInfo userDetail = userDao.getUserById(userInfo.getUserCode());
-
             if(null == userDetail) {
                 return AppResponse.bizError("用户不存在或已被删除！");
             } else {

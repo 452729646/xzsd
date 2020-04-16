@@ -35,7 +35,6 @@ public class PictureController {
      * @author housum
      * @Date 2020-03-25
      */
-
     @PostMapping("savePicture")
     public AppResponse savePicture(PictureInfo pictureInfo) {
         try {
@@ -49,7 +48,6 @@ public class PictureController {
             System.out.println(e.toString());
             throw e;
         }
-
     }
 
     /**

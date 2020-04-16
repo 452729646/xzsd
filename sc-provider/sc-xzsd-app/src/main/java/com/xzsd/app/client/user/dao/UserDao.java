@@ -2,6 +2,7 @@ package com.xzsd.app.client.user.dao;
 
 import com.xzsd.app.client.user.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName UserDao
@@ -31,4 +32,12 @@ public interface UserDao {
      * @return
      */
     int saveClient(UserInfo userInfo);
+
+//    /**
+//     * 修改头像url
+//     * @param imageName
+//     * @param userCode
+//     * @return
+//     */
+//    int updateHeadUrl(@Param("imageName") String imageName,@Param("userCode")String userCode);
 }

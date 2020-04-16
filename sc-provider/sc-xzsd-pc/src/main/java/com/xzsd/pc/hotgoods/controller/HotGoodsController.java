@@ -38,7 +38,6 @@ public class HotGoodsController {
      * @author housum
      * @Date 2020-03-27
      */
-
     @PostMapping("saveHotGoods")
     public AppResponse saveHotGoods(HotGoodsInfo hotGoodsInfo) {
         try {
@@ -65,7 +64,6 @@ public class HotGoodsController {
     @RequestMapping(value = "hotListGoods")
     public AppResponse hotListGoods(GoodListInfo goodListInfo) {
         try {
-
             return hotGoodsService.hotListGoods(goodListInfo);
         } catch (Exception e) {
             logger.error("查询商品列表异常", e);
@@ -93,7 +91,6 @@ public class HotGoodsController {
 
     /**
      * 修改热门商品信息
-     *
      * @author housum
      * @Date 2020-3-27
      */
@@ -147,7 +144,7 @@ public class HotGoodsController {
 
 
     /**
-     * 设置展示数量
+     * 查询展示数量
      * @author housum
      * @date 2020-4-13
      *
@@ -155,7 +152,6 @@ public class HotGoodsController {
     @RequestMapping("selectDisplayCnt")
     public AppResponse selectDisplayCnt(HotGoodsVo hotGoodsVo){
         try{
-            String userCode =SecurityUtils.getCurrentUserId();
             return hotGoodsService.selectDisplayCnt(hotGoodsVo);
         }catch (Exception e) {
             logger.error("查询热门商品展示数量异常", e);

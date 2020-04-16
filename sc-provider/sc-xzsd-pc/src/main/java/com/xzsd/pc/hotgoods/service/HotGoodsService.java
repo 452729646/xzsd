@@ -49,7 +49,6 @@ public class HotGoodsService {
         }
         hotGoodsInfo.setHotGoodsCode(StringUtil.getHotGoodsCode());
         hotGoodsInfo.setIsDeleted(0);
-
         // 新增热门商品
         int count = hotGoodsDao.saveHotGoods(hotGoodsInfo);
         if(0 == count) {
@@ -67,9 +66,7 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse hotListGoods(GoodListInfo goodListInfo) {
-
         List<GoodListInfo> goodsInfoList = hotGoodsDao.hotListGoodsByPage(goodListInfo);
-
         return AppResponse.success("查询成功！",goodsInfoList);
     }
 
@@ -80,9 +77,7 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse hotGoodsList(HotGoodsVo hotGoodsVo){
-//        PageHelper.startPage(hotGoodsVo.getPageNum(),hotGoodsVo.getPageSize());
         List<HotGoodsVo> hotGoodsVosList = hotGoodsDao.hotGoodsListByPage(hotGoodsVo);
-//        PageInfo<HotGoodsVo> pageData = new PageInfo<HotGoodsVo>(hotGoodsVosList);
         return AppResponse.success("查询成功！",getPageInfo(hotGoodsVosList));
     }
 
@@ -94,6 +89,7 @@ public class HotGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
         AppResponse appResponse = AppResponse.success("修改成功");
+        //查询热门排序号是否重复
         int countSortNo = hotGoodsDao.countSortNo(hotGoodsInfo);
         if(0 != countSortNo) {
             return AppResponse.bizError("热门排序号已存在，请重新输入！");
@@ -145,8 +141,6 @@ public class HotGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse selectDisplayCnt(HotGoodsVo hotGoodsVo){
         HotGoodsVo data = hotGoodsDao.selectDisplayCnt(hotGoodsVo);
-
-
         return AppResponse.success("查询成功",data);
     }
 

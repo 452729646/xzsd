@@ -107,12 +107,10 @@ public class MenuService {
         menuDao.deleteRoleMenuBtnByMenu(menu);
         // 删除角色关联菜单
         menuDao.deleteRoleMenu(menu);
-
         // 删除菜单按钮
         MenuBtn menuBtn = new MenuBtn();
         menuBtn.setMenuAuthCode(menu.getAuthCode());
         menuBtnDao.deleteMenuBtn(menuBtn);
-
         // 删除菜单
         menuDao.deleteMenu(menu);
 

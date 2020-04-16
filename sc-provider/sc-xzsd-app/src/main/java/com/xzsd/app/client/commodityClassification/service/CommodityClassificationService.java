@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @DescriptionDemo 实现类
+ * @Author housum
+ * @Date 2020-04-16
+ */
 @Service
 public class CommodityClassificationService {
 
@@ -16,7 +21,6 @@ public class CommodityClassificationService {
 
     /**
      * 查询父分类列表
-
      *
      * @param
      * @return

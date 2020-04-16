@@ -55,16 +55,16 @@ public class DriverService {
         driverInfo.setDriverNo(StringUtil.getDriverNo(4));
         driverInfo.setUserCode(userCode);
         driverInfo.setIsDeleted(0);
+        //在司机表添加司机
         int count = driverDao.saveDriver(driverInfo);
+        //在用户表添加用户
         int count2 = driverDao.saveUser(driverInfo);
         if (0 == count) {
-
             return AppResponse.success("新增失败，请重试！");
         }
         if (0 == count2){
             return AppResponse.success("在用户表新增用户失败，请重试！");
         }
-
         return AppResponse.success("新增成功！");
     }
 
@@ -107,8 +107,8 @@ public class DriverService {
         if (0 != countUserAcct) {
             return AppResponse.success("用户账号已存在，请重新输入！");
         }
+        //修改司机信息
         int count = driverDao.updateDriver(driverInfo);
-
         if (0 == count){
             return AppResponse.bizError("修改失败，请重试");
         }
@@ -127,7 +127,6 @@ public class DriverService {
         int count = driverDao.deleteDriver(listDriverNo,userCode);
         if (0 == count ){
             appResponse = AppResponse.bizError("删除失败，请重试");
-
         }
         return appResponse;
     }

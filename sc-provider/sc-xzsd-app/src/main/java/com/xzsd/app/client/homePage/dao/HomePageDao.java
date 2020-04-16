@@ -21,7 +21,7 @@ public interface HomePageDao {
      * @author housum
      * @date 2020-4-13
      */
-    List<PictureInfo> listPicture(PictureInfo pictureInfo);
+    List<PictureInfo> listPictureByPage(PictureInfo pictureInfo);
 
     /**
      * 查询热门商品展示数量
@@ -31,11 +31,10 @@ public interface HomePageDao {
 
     /**
      * 查询热门商品列表
-     * @param listHotGoodsInfo
      * @param displayCnt
      * @author housum
      * @date 2020-4-13
      */
-    List<ListHotGoodsInfo> listHotGoods(@Param("displayCnt")int displayCnt);
+    List<ListHotGoodsInfo> listHotGoodsByPage(@Param("displayCnt")int displayCnt);
 
 }

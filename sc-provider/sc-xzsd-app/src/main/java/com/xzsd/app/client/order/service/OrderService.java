@@ -37,15 +37,10 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveOrder(OrderInfo orderInfo, String skuNo2, String goodsCnt, String sellingMoney) {
+       //把goodsCnt skuN2 sellingMoney放进对应的list
         List<String> listGoodsCnt = Arrays.asList(goodsCnt.split(","));
-
         List<String> listSellingMoney = Arrays.asList(sellingMoney.split(","));
-
-
-
         List<String> listSkuNo = Arrays.asList(skuNo2.split(","));
-
-
         //算出这个订单的总价
         BigDecimal sum = new BigDecimal("0");
 //        用于计算该订单的物品总数量
@@ -55,15 +50,17 @@ public class OrderService {
             total = total.add(new BigDecimal(listGoodsCnt.get(i)));
             sum = sum.add(a);
         }
+        //生成订单id
         String orderId = StringUtil.getCommonCode(6);
         String userCode = orderInfo.getUserCode();
-
+        //生成父类订单
         int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode,total);
         for (int i = 0; i < listSkuNo.size(); i++) {
             String skuNo = listSkuNo.get(i);
             String goodsCnt2 = listGoodsCnt.get(i);
             String sellingPrice = listSellingMoney.get(i);
             BigDecimal totalPrice = new BigDecimal(listGoodsCnt.get(i)).multiply(new BigDecimal(listSellingMoney.get(i)));
+            //生成子类订单
             int count2 = orderDao.saveOrderSon(orderId, skuNo, goodsCnt2, sellingPrice, totalPrice,userCode);
             if (count2 == 0) {
                 return AppResponse.bizError("新增失败，请重试！");
@@ -71,12 +68,8 @@ public class OrderService {
         }
         if (count == 0) {
             return AppResponse.bizError("新增失败，请重试！");
-
         }
         return AppResponse.success("新增成功！");
-
-
-
     }
 
     /**
@@ -138,9 +131,6 @@ public class OrderService {
         if (0 == count){
             return AppResponse.bizError("评价商品失败，请重试！");
         }
-
-
-
         return AppResponse.success("评价商品成功！");
     }
 

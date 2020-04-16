@@ -77,9 +77,7 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listStore(StoreInfo storeInfo){
-
         List<StoreInfo> listInfoStore = storeDao.listStoreByPage(storeInfo);
-
         return AppResponse.success("查询成功！",  getPageInfo(listInfoStore));
     }
 
@@ -96,8 +94,6 @@ public class StoreService {
         if (data == null || "".equals(data) ){
             return AppResponse.bizError("查询失败，请重试");
         }
-
-
         return AppResponse.success("查询成功！",data);
     }
 
@@ -138,7 +134,6 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteStore(String storeNo , String userCode){
-
         List<String> listStoreNo = Arrays.asList(storeNo.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户istSkuN
@@ -160,7 +155,6 @@ public class StoreService {
     public AppResponse province(RegionInfo regionInfo){
         List<RegionInfo> listProvinceInfo = storeDao.listProvinceByPage(regionInfo);
         return AppResponse.success("查询成功！",  getPageInfo(listProvinceInfo));
-
     }
 
     /**
@@ -173,7 +167,6 @@ public class StoreService {
     public AppResponse city(RegionInfo regionInfo){
         List<RegionInfo> listCityInfo = storeDao.listCityByPage(regionInfo);
         return AppResponse.success("查询成功！",  getPageInfo(listCityInfo));
-
     }
 
 }

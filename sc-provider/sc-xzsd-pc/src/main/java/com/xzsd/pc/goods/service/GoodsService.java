@@ -52,7 +52,6 @@ public class GoodsService {
      */
     //回滚
     @Transactional(rollbackFor = Exception.class)
-
     public AppResponse saveGoods(GoodsInfo goodsInfo) {
         // 校验商品书号是否存在
         int countBookNumber = goodsDao.countBookNumber(goodsInfo);
@@ -68,13 +67,7 @@ public class GoodsService {
         if(0 == count) {
             return AppResponse.bizError("新增失败，请重试！");
         }
-        //发送queue
-
-//        String json = JsonUtils.toJson(goodsInfo);
-//
-//        this.sendMessage(this.queue,goodsInfo);
         return AppResponse.success("新增成功！");
-
     }
 
 
@@ -136,48 +129,9 @@ public class GoodsService {
      * @Author dingning
      * @Date 2020-03-21
      */
-
-
-
     public AppResponse listGoods(GoodsInfo goodsInfo) {
-//        PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
         List<GoodsInfo> goodsInfoList = goodsDao.listGoodsByPage(goodsInfo);
-//         包装Page对象
-//        PageInfo<GoodsInfo> pageData = new PageInfo<GoodsInfo>(goodsInfoList);
-        //直接查询
         return AppResponse.success("查询成功！", getPageInfo(goodsInfoList));
-
-//        //从Redis查询，将pageDate转换为json格式
-//        String json = JsonUtils.toJson(pageData);
-//
-//        System.out.println(redisOperator.get("GoodsTest") );
-//        System.out.println(json);
-//        if (redisOperator.hasKey("GoodsTest")){
-//            String json2 = redisOperator.get("GoodsTest");
-//            if (json.equals(json2)) {
-//                PageInfo result = JsonUtils.fromJson(redisOperator.get("GoodsTest"), PageInfo.class);
-//                return AppResponse.success("存在key，查询成功", result);
-//            }else{
-//                redisOperator.set("GoodsTest",json,300);
-//                PageInfo result = JsonUtils.fromJson(redisOperator.get("GoodsTest"),PageInfo.class);
-//                return AppResponse.success("上传redis————————查询成功！",result);
-//            }
-//        }else{
-//            redisOperator.set("GoodsTest",json,300);
-//            PageInfo result = JsonUtils.fromJson(redisOperator.get("GoodsTest"),PageInfo.class);
-//            return AppResponse.success("上传redis————————查询成功！",result);
-//        }
-
-
-//        redisOperator.get("GoodsTest");
-
-//        List<PageInfo> pageDate = JSON.parseObject(json,new TypeReference<List<PageInfo>>(){});
-//        List<PageInfo> pageDate2 = JSON.parseArray(redisOperator.get("GoodsTest"),PageInfo.class);
-
-
-
-
-//        return AppResponse.success("查询成功！",result);
     }
 
 
@@ -194,7 +148,6 @@ public class GoodsService {
     public AppResponse goodsUpper(String skuNo,String userCode,int version) {
         //选择的skuNo放进一个list
         List<String> listSkuNo2 = Arrays.asList(skuNo.split(","));
-
         AppResponse appResponse = AppResponse.success("上架成功！");
         // 修改为上架状态
         int count = goodsDao.goodsUpper(listSkuNo2,userCode,version);

@@ -85,7 +85,6 @@ public class ClassificationController {
     @RequestMapping(value = "listCate")
     public AppResponse listCate(ClassificationInfo classificationInfo) {
         try {
-
             return classificationService.listCate(classificationInfo);
         } catch (Exception e) {
             logger.error("查询分类列表异常", e);
@@ -178,7 +177,6 @@ public class ClassificationController {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-
             classificationInfo.setLastModifiedBy(userCode);
             return classificationService.updateCate(classificationInfo);
         } catch (Exception e) {
