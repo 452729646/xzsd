@@ -36,7 +36,7 @@
          gmt_modified,
          last_modified_by,
          version,
-            role
+         role
          )
         values
            (#{userCode},
@@ -55,11 +55,32 @@
             #{id},
             0,
             now(),
-            #{createBy},
+            #{userCode},
             NOW(),
             #{lastModifiedBy},
             0,
             3
            )
+    </insert>
+
+<!--    在客户表添加客户-->
+    <insert id="saveClient" parameterType="com.xzsd.app.client.user.entity.UserInfo">
+        insert into t_client_info
+        (client_user_code,
+        is_deleted,
+        create_user,
+        create_time,
+        update_user,
+        update_time,
+        version
+        )values (
+        #{userCode},
+        0,
+        #{userCode},
+        now(),
+        #{lastModifiedBy},
+        now(),
+        0
+        )
     </insert>
 </mapper>

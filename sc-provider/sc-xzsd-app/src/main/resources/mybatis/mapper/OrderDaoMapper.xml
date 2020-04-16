@@ -74,7 +74,7 @@
 
 
 <!--    查询该用户的订单-->
-    <select id="listOrderByUserCode" parameterType="com.xzsd.app.client.order.entity.OrderVO" resultMap="orderList">
+    <select id="listOrderByUserCodeByPage" parameterType="com.xzsd.app.client.order.entity.OrderVO" resultMap="orderList">
         select
         order_id ,
         order_status ,

@@ -87,7 +87,7 @@ public class OrderService {
      */
 
     public AppResponse listOrderByUserCode(OrderVO orderVO) {
-        List<OrderVO> listInfoOrder = orderDao.listOrderByUserCode(orderVO);
+        List<OrderVO> listInfoOrder = orderDao.listOrderByUserCodeByPage(orderVO);
         return AppResponse.success("查询成功", listInfoOrder);
     }
 

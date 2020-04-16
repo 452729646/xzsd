@@ -32,7 +32,7 @@ public interface OrderDao {
      * @param orderVO
      *
      */
-    List<OrderVO> listOrderByUserCode(OrderVO orderVO);
+    List<OrderVO> listOrderByUserCodeByPage(OrderVO orderVO);
 
     /**
      * 通过orderId查询订单详情

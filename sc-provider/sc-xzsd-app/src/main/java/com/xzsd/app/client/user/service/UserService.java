@@ -39,7 +39,6 @@ public class UserService {
 
         if (0 != countUserAcct){
             return AppResponse.bizError("此账号已存在,请重新输入");
-
         }
         if (!userInfo.getUserPwd().equals(userInfo.getUserPwd2())){
             return AppResponse.bizError("输入的密码不一致,请重新输入");
@@ -48,8 +47,14 @@ public class UserService {
         String password = generatePassword(userInfo.getUserPwd());
         userInfo.setUserPwd(password);
         userInfo.setIsDeleted(0);
+//        在用户表注册用户
         int count = userdao.registerUser(userInfo);
         if (0 == count){
+            return AppResponse.bizError("注册失败，请重试！");
+        }
+//        在客户表增加客户
+        int count2 = userdao.saveClient(userInfo);
+        if (0 == count2){
             return AppResponse.bizError("注册失败，请重试！");
         }
         return AppResponse.success("注册成功");

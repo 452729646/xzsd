@@ -33,12 +33,7 @@ public class UserController {
     @PostMapping("registerUser")
     public AppResponse registerUser(UserInfo userInfo){
         try{
-            //获取用户code
-            String userCode = SecurityUtils.getCurrentUserId();
-            userInfo.setCreateBy(userCode);
-
             AppResponse appResponse = userService.registerUser(userInfo);
-
             return appResponse;
         }catch (Exception e){
             logger.error("注册失败",e);

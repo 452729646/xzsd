@@ -24,4 +24,11 @@ public interface UserDao {
      * @return
      */
     int registerUser(UserInfo userInfo);
+
+    /**
+     * 在客户表添加客户
+     * @param userInfo
+     * @return
+     */
+    int saveClient(UserInfo userInfo);
 }
