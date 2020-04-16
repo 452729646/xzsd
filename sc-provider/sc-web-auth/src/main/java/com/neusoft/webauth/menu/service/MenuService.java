@@ -125,8 +125,14 @@ public class MenuService {
      * 作成者：朱庆锋
      * 作成时间：2018/11/28
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse insertMenu(Menu menu) {
         AppResponse appResponse = AppResponse.success("新增成功！");
+        int countMenuName = menuDao.countMenuName(menu);
+        if (0 != countMenuName)
+        {
+            return AppResponse.bizError("此菜单名字已存在，请重试！");
+        }
         // 菜单代码
         String menuCode = StringUtil.getCommonCode(2);
         // 根菜单就是菜单代码，其他新建子菜单时，获取父菜单的范围代码+‘3位自增长数’。
@@ -158,6 +164,11 @@ public class MenuService {
      */
     public AppResponse updateMenu(Menu menu) {
         AppResponse appResponse = AppResponse.success("修改成功！");
+        int countMenuName = menuDao.countMenuName(menu);
+        if (0 != countMenuName)
+        {
+            return AppResponse.bizError("此菜单名字已存在，请重试！");
+        }
         int count = menuDao.updateMenu(menu);
         if(0 == count) {
             appResponse = AppResponse.bizError("修改失败，请重试！");

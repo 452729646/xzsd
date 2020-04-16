@@ -20,6 +20,15 @@ public class Menu {
     private String menuUrl;
 
     private String parentMenuCode;
+    private int isMenu;
+
+    public int getIsMenu() {
+        return isMenu;
+    }
+
+    public void setIsMenu(int isMenu) {
+        this.isMenu = isMenu;
+    }
 
     private String type;
 

@@ -81,4 +81,11 @@ public interface MenuDao {
      * @return
      */
     int deleteRoleMenuBtnByMenu(Menu menu);
+
+    /**
+     * 查看是否有重复名字
+     * @param menu
+     * @return
+     */
+    int countMenuName(Menu menu);
 }

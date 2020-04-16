@@ -45,13 +45,13 @@
 		                a.parent_menu_code,
                         a.auth_code,
 		                a.menu_url,
-		                a.type,
+		                a.is_menu,
 		                a.sort_no,
 		                a.version,
 		                a.level
-		  from t_sys_menu a, t_sys_role_menu b, t_sys_user_role c
+		  from t_sys_menu a, t_sys_role_menu b, t_sys_user c
 		 where a.menu_code = b.menu_code
-		   and b.role_code = c.role_code
+		   and b.role_code = c.role
 		   and c.user_code = #{userCode}
 		   and a.is_deleted = 0
         <if test="parentMenuCode != null and parentMenuCode != ''">
@@ -169,7 +169,7 @@
             menu_name,
             menu_url,
             parent_menu_code,
-            type,
+            is_menu,
             sort_no,
             is_deleted,
             remark,
@@ -186,7 +186,7 @@
             #{menuName,jdbcType=VARCHAR},
             #{menuUrl,jdbcType=VARCHAR},
             #{parentMenuCode,jdbcType=VARCHAR},
-            #{type,jdbcType=NUMERIC},
+            #{isMenu},
             #{sortNo,jdbcType=NUMERIC},
             0,
             #{remark,jdbcType=VARCHAR},
@@ -227,7 +227,18 @@
           from t_sys_role_menu t1, t_sys_menu t2
          where t1.menu_code = t2.menu_code
            and t2.is_deleted = 0
-           and t2.type = 1
-           and t1.role_code = #{role_code}
+
+           and t1.role_code = #{roleCode}
+    </select>
+
+<!--    查看是否存在此菜单名字-->
+    <select id="countMenuName" parameterType="com.neusoft.webauth.menu.entity.Menu" resultType="int">
+        select count(menu_name)
+        from t_sys_menu
+        where is_deleted = 0
+        and menu_name = #{menuName}
+        <if test="menuCode != null and menuCode != ''">
+            and menu_code != #{menuCode}
+        </if>
     </select>
 </mapper>
