@@ -22,6 +22,8 @@ public class UserInfo {
      */
     @JsonIgnore
     private String userPwd;
+    @JsonIgnore
+    private String newPwd;
     private String userPwd2;
 
     public String getUserPwd2() {
@@ -36,6 +38,19 @@ public class UserInfo {
      * 管理员标记
      */
     private String isAdmin;
+    /**
+     * 邀请码
+     */
+    private String inviteCode;
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
+
     /**
      * 身份证号码
      */
@@ -56,6 +71,19 @@ public class UserInfo {
      * 电子邮件
      */
     private String email;
+    /**
+     * 头像
+     */
+    private String headPictureUrl;
+
+    public String getHeadPictureUrl() {
+        return headPictureUrl;
+    }
+
+    public void setHeadPictureUrl(String headPictureUrl) {
+        this.headPictureUrl = headPictureUrl;
+    }
+
     /**
      * IP地址
      */
@@ -110,8 +138,8 @@ public class UserInfo {
      */
     private String lastModifiedBy;
 
-    private String newPwd;
 
+    private String oldPwd;
     private String version;
 
     private int role;
@@ -322,6 +350,14 @@ public class UserInfo {
 
     public void setNewPwd(String newPwd) {
         this.newPwd = newPwd;
+    }
+
+    public String getOldPwd() {
+        return oldPwd;
+    }
+
+    public void setOldPwd(String oldPwd) {
+        this.oldPwd = oldPwd;
     }
 
     public String getVersion() {

@@ -66,10 +66,7 @@
         <result property="goodsTotal" column="goods_total"></result>
         <result property="paymentMoney" column="payment_money"></result>
         <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId">
-
         </collection>
-
-
     </resultMap>
 
 
@@ -195,7 +192,6 @@
         where order_id = #{orderId}
         and version = #{version}
         and order_status = 3
-
     </update>
 </mapper>
 
