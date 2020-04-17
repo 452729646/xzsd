@@ -135,7 +135,6 @@
         <if test="skuState != null and skuState != ''">
             and a.sku_state like concat('%', #{skuState}, '%')
         </if>
-
         order by create_time ASC
     </select>
 

@@ -50,11 +50,16 @@ public class OrderService {
             total = total.add(new BigDecimal(listGoodsCnt.get(i)));
             sum = sum.add(a);
         }
+        //通过userCode拿出storeNo
+        String storeNo = orderDao.selectStoreNo(orderInfo.getUserCode());
+        if (null == storeNo ||"".equals(storeNo)){
+            return AppResponse.bizError("您还没有绑定门店邀请码");
+        }
         //生成订单id
         String orderId = StringUtil.getCommonCode(6);
         String userCode = orderInfo.getUserCode();
         //生成父类订单
-        int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode,total);
+        int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode,total,storeNo);
         for (int i = 0; i < listSkuNo.size(); i++) {
             String skuNo = listSkuNo.get(i);
             String goodsCnt2 = listGoodsCnt.get(i);

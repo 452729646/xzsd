@@ -9,6 +9,7 @@
         order_id,
         payment_money,
         goods_total,
+        store_no,
         order_status,
         pay_status,
         user_code,
@@ -22,6 +23,7 @@
         #{orderId},
         #{sum},
         #{total},
+        #{storeNo},
         1,
         0,
         #{userCode},
@@ -140,10 +142,8 @@
         c.store_name store_name,
         GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address
         from t_sys_orderfather a,
-        t_client_info b,
         t_sys_store c
-        where a.user_code = b.client_user_code
-        and b.invite_code = c.invitation_code
+        where a.store_no = c.store_no
         and a.is_deleted = 0
         and a.order_id = #{orderId}
     </select>
@@ -193,5 +193,13 @@
         and version = #{version}
         and order_status = 3
     </update>
+
+<!--    通过userCode查出storeNo-->
+    <select id="selectStoreNo" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        invite_code
+        from t_client_info
+        where client_user_code = #{userCode}
+    </select>
 </mapper>
 

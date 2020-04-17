@@ -19,10 +19,8 @@
         (
         driver_no,
         driver_name,
-
         user_acct,
         user_code,
-
         province,
         city,
         area,
@@ -36,16 +34,12 @@
         (
         #{driverNo},
         #{driverName},
-
-
         #{userAcct},
         #{userCode},
-
         #{provinceName},
         #{cityName},
         #{areaName},
         #{isDeleted},
-
         now(),
         #{createBy},
         now(),
@@ -81,7 +75,6 @@
     #{driverPhone},
     2,
     #{isDeleted},
-
     now(),
     #{createBy},
     now(),

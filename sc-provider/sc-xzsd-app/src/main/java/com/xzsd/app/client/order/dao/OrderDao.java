@@ -25,7 +25,7 @@ public interface OrderDao {
      * @param sum 总价
      * @param total
      */
-    int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode,@Param("total") BigDecimal total);
+    int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode,@Param("total") BigDecimal total,@Param("storeNo") String storeNo);
 
     /**
      * 查询该用户的订单
@@ -53,6 +53,13 @@ public interface OrderDao {
      * @return
      */
     int updateOrderComplete(EvaluateInfo evaluateInfo);
+
+    /**
+     * 通过userCode查出storeNo
+     * @param userCode
+     * @return
+     */
+    String selectStoreNo(@Param("userCode") String userCode);
 
 
 }

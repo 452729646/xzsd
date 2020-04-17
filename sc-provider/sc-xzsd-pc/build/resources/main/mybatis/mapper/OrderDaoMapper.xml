@@ -9,12 +9,10 @@
         a.order_id orderId,
         a.payment_money paymentMoney,
         a.order_status orderStatus,
-
-        b.invite_code storeNo,
+        a.store_no storeNo,
         c.user_name userName,
         c.phone userPhone,
         a.create_time createTime
-
         from t_sys_orderfather a,
         t_client_info b,
         t_sys_user c
@@ -40,12 +38,8 @@
             AND a.pay_time &lt;= #{endTime}
         </if>
         <if test="role == 1 and storeNo2 != ''and storeNo2 !=null">
-            AND b.invite_code = #{storeNo2}
+            AND a.store_no = #{storeNo2}
         </if>
-
-
-
-
     </select>
 
     <!--查询订单详情-->
@@ -62,13 +56,10 @@
         where a.sku_no = b.sku_no
         and a.is_deleted = 0
         and a.order_id = #{orderId}
-
     </select>
 
     <!--修改订单状态（订单到货）-->
     <update id="orderArrival" parameterType="java.util.List">
-
-
         <foreach collection="list" item="mapList" index="index"  separator=";">
         update t_sys_orderfather
         set
@@ -76,18 +67,14 @@
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
-
         where order_id = #{mapList.orderId}
         and version = #{mapList.version}
         and order_status = 1
-
         </foreach>
     </update>
 
     <!--修改订单状态（取消订单到货）-->
     <update id="orderCancelArrival" parameterType="java.util.List">
-
-
         <foreach collection="list" item="mapList" index="index"  separator=";">
             update t_sys_orderfather
             set
@@ -95,18 +82,14 @@
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
-
             where order_id = #{mapList.orderId}
             and version = #{mapList.version}
             and order_status = 2
-
         </foreach>
     </update>
 
     <!--修改订单状态（订单已取货）-->
     <update id="orderTake" parameterType="java.util.List">
-
-
         <foreach collection="list" item="mapList" index="index"  separator=";">
             update t_sys_orderfather
             set
@@ -114,18 +97,14 @@
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
-
             where order_id = #{mapList.orderId}
             and version = #{mapList.version}
             and order_status = 2
-
         </foreach>
     </update>
 
     <!--修改订单状态（取消订单已取货）-->
     <update id="orderCancelTake" parameterType="java.util.List">
-
-
         <foreach collection="list" item="mapList" index="index"  separator=";">
             update t_sys_orderfather
             set
@@ -133,18 +112,14 @@
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
-
             where order_id = #{mapList.orderId}
             and version = #{mapList.version}
             and order_status = 3
-
         </foreach>
     </update>
 
     <!--修改订单状态（取消订单）-->
     <update id="orderCancel" parameterType="java.util.List">
-
-
         <foreach collection="list" item="mapList" index="index"  separator=";">
             update t_sys_orderfather
             set
@@ -152,11 +127,8 @@
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
-
             where order_id = #{mapList.orderId}
             and version = #{mapList.version}
-
-
         </foreach>
     </update>
 

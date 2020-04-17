@@ -9,7 +9,7 @@
         a.order_id orderId,
         a.payment_money paymentMoney,
         a.order_status orderStatus,
-        b.invite_code storeNo,
+        a.store_no storeNo,
         c.user_name userName,
         c.phone userPhone,
         a.create_time createTime
@@ -38,7 +38,7 @@
             AND a.pay_time &lt;= #{endTime}
         </if>
         <if test="role == 1 and storeNo2 != ''and storeNo2 !=null">
-            AND b.invite_code = #{storeNo2}
+            AND a.store_no = #{storeNo2}
         </if>
     </select>
 

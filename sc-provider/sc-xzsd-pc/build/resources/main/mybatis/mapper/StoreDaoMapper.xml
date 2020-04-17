@@ -21,11 +21,6 @@
         where is_deleted = 0
         and role = 1
         and  user_acct = #{userAcct}
-<!--        <if test="userAcct != null and userAcct != ''">-->
-<!--            and user_acct != #{userAcct}-->
-<!--        </if>-->
-
-
     </select>
 
     <!--统计是否存在该店长数量-->
@@ -37,8 +32,6 @@
         <if test="storeNo != null and storeNo != ''">
             and store_no != #{storeNo}
         </if>
-
-
     </select>
 
     <!--新增门店-->
@@ -46,7 +39,6 @@
         insert into t_sys_store
         (store_no,
          store_name,
-
          store_phone,
          user_acct,
          business_license,
@@ -55,8 +47,6 @@
          area,
          store_address,
          invitation_code,
-
-
          is_deleted,
          create_time,
          create_user,
@@ -96,7 +86,6 @@
         t_sys_user b
         where a.user_acct = b.user_acct
         and a.is_deleted = 0
-
         <if test="storeNo != null and storeNo != ''">
             and a.store_no = #{storeNo}
         </if>
@@ -129,10 +118,7 @@
         store_name storeName
         from t_sys_store
         where is_deleted = 0
-
         and store_no = #{storeNo}
-
-
     </select>
 
     <!--修改门店信息-->
@@ -152,7 +138,6 @@
             version      = version + 1
             where store_no = #{storeNo}
             and version = #{version}
-
     </update>
 
     <!--删除门店信息-->
@@ -185,11 +170,8 @@
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="pid" column="pid"></result>
-
         <collection property="cityList" ofType="RegionInfo" javaType="java.util.List" column="id" select="getByPid">
-
         </collection>
-
     </resultMap>
     <!--根据父类cateCode查找其子类别-->
     <select id="getByPid" resultMap="cityMap1" parameterType="String">
@@ -199,8 +181,6 @@
         a.pid pid
         FROM region a
         WHERE a.pid = #{id}
-
-
     </select>
 
 
@@ -214,9 +194,6 @@
         FROM region
         WHERE level = 2
         and pid = #{id}
-
-
-
     </select>
 
 
