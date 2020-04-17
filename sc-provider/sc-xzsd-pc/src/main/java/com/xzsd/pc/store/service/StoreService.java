@@ -3,8 +3,10 @@ package com.xzsd.pc.store.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 
+import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.RegionInfo;
 import com.xzsd.pc.store.entity.StoreDetailVo;
@@ -27,6 +29,7 @@ import static com.neusoft.core.page.PageUtils.getPageInfo;
 public class StoreService {
     @Resource
     private StoreDao storeDao;
+    @Resource OrderDao orderDao;
 
     /**
      * demo 新增门店
@@ -77,6 +80,16 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listStore(StoreInfo storeInfo){
+        //没有登录 获取的userCode是测试用户  会报错
+        String userCode = SecurityUtils.getCurrentUserId();
+        //通过userCode查询role
+        int role = orderDao.roleByUserCode(userCode);
+        //role=1为店长
+        if (1 == role){
+            //拿出该店长的门店编号
+            String storeNo = orderDao.storeNoByUserCode(userCode);
+            storeInfo.setStoreNo(storeNo);
+        }
         List<StoreInfo> listInfoStore = storeDao.listStoreByPage(storeInfo);
         return AppResponse.success("查询成功！",  getPageInfo(listInfoStore));
     }
