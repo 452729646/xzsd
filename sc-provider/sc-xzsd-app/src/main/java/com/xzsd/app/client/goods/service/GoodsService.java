@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.neusoft.core.page.PageUtils.getPageInfo;
+
 /**
  * @DescriptionDemo 实现类
  * @Author housum
@@ -46,6 +48,6 @@ public class GoodsService {
      */
     public AppResponse listEvaluateBySkuNo(EvaluateInfo evaluateInfo){
         List<EvaluateInfo> listEvaluateInfo = goodsDao.listEvaluateBySkuNoByPage(evaluateInfo);
-        return AppResponse.success("查询成功",listEvaluateInfo);
+        return AppResponse.success("查询成功",getPageInfo(listEvaluateInfo));
     }
 }

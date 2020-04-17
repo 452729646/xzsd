@@ -3,7 +3,7 @@
 <mapper namespace="com.xzsd.app.client.homePage.dao.HomePageDao">
 
 <!--    查询轮播图列表-->
-    <select id="listPicture" resultType="com.xzsd.app.client.homePage.entity.PictureInfo">
+    <select id="listPictureByPage" resultType="com.xzsd.app.client.homePage.entity.PictureInfo">
         select
         banner_code bannerCode,
         image_url imageUrl,

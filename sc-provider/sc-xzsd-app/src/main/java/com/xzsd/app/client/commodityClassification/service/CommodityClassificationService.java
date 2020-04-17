@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.neusoft.core.page.PageUtils.getPageInfo;
+
 /**
  * @DescriptionDemo 实现类
  * @Author housum
@@ -31,7 +33,7 @@ public class CommodityClassificationService {
 
     public AppResponse listFatherCate(){
         List<CommodityClassificationInfo> fatherCateInfoList = commodityClassificationDao.listFatherCate();
-        return AppResponse.success("查询成功！",fatherCateInfoList);
+        return AppResponse.success("查询成功！",getPageInfo(fatherCateInfoList));
     }
 
     /**
@@ -44,7 +46,7 @@ public class CommodityClassificationService {
 
     public AppResponse listSonCateGoods(ListSonCateGoodsInfo listSonCateGoodsInfo){
         List<ListSonCateGoodsInfo> listSonCateGoodsInfoList = commodityClassificationDao.listSonCateGoods(listSonCateGoodsInfo);
-        return AppResponse.success("查询成功",listSonCateGoodsInfoList);
+        return AppResponse.success("查询成功",getPageInfo(listSonCateGoodsInfoList));
     }
 
 }

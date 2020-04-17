@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static com.neusoft.core.page.PageUtils.getPageInfo;
+
 /**
  * @DescriptionDemo 实现类
  * @Author housum
@@ -86,7 +88,7 @@ public class OrderService {
 
     public AppResponse listOrderByUserCode(OrderVO orderVO) {
         List<OrderVO> listInfoOrder = orderDao.listOrderByUserCodeByPage(orderVO);
-        return AppResponse.success("查询成功", listInfoOrder);
+        return AppResponse.success("查询成功", getPageInfo(listInfoOrder));
     }
 
 

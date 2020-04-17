@@ -93,6 +93,11 @@ public class ShoppingCartService {
         return AppResponse.success("删除成功");
     }
 
+    /**
+     * 查询购物车列表
+     * @param shoppingCartInfo
+     * @return
+     */
     public AppResponse listCart(ShoppingCartInfo shoppingCartInfo){
         List<ShoppingCartInfo> cartInfoList = shoppingCartDao.listCartByPage(shoppingCartInfo);
         return AppResponse.success("查询成功",getPageInfo(cartInfoList));

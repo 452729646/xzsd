@@ -35,6 +35,6 @@ public interface HomePageDao {
      * @author housum
      * @date 2020-4-13
      */
-    List<ListHotGoodsInfo> listHotGoodsByPage(@Param("displayCnt")int displayCnt);
+    List<ListHotGoodsInfo> listHotGoods(@Param("displayCnt")int displayCnt);
 
 }
