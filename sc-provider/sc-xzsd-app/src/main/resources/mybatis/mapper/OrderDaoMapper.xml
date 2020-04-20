@@ -82,6 +82,15 @@
         from t_sys_orderfather
         where is_deleted = 0
         and user_code = #{userCode}
+        <if test="orderStatus == 1">
+            and order_status = #{orderStatus}
+        </if>
+        <if test="orderStatus == 2">
+            and order_status = #{orderStatus}
+        </if>
+        <if test="orderStatus == 3">
+            and order_status in (3,4)
+        </if>
     </select>
 
 <!--    查询该订单的所有商品-->
