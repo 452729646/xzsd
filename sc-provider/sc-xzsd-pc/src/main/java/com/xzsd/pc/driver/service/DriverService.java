@@ -1,6 +1,7 @@
 package com.xzsd.pc.driver.service;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 
 
@@ -76,6 +77,12 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listDriver(DriverInfo driverInfo){
+        String userCode = SecurityUtils.getCurrentUserId();
+        String role = driverDao.getRoleByUserCode(userCode);
+        if (2 == Integer.valueOf(role)){
+            String driverNo = driverDao.getDriverNo(userCode);
+            driverInfo.setDriverNo(driverNo);
+        }
         List<DriverInfo> driverInfoList = driverDao.listDriverByPage(driverInfo);
         return AppResponse.success("查询成功",driverInfoList);
     }

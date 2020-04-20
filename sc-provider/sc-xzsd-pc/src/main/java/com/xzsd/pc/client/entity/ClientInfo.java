@@ -71,8 +71,15 @@ public class ClientInfo {
      * 版本号
      */
     private  int version;
+    private String storeNo;
 
+    public String getStoreNo() {
+        return storeNo;
+    }
 
+    public void setStoreNo(String storeNo) {
+        this.storeNo = storeNo;
+    }
 
     public String getUserCode() {
         return userCode;

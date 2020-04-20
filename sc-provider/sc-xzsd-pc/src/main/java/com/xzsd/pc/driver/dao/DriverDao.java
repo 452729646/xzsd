@@ -51,4 +51,18 @@ public interface DriverDao {
      * 删除司机信息
      */
     int deleteDriver(@Param("listDriverNo") List<String> listDriverNo,@Param("userCode") String userCode);
+
+    /**
+     * 通过userCode拿role
+     * @param userCode
+     * @return
+     */
+    String getRoleByUserCode(@Param("userCode")String userCode);
+
+    /**
+     * 获取driverNo
+     * @param userCode
+     * @return
+     */
+    String getDriverNo(@Param("userCode")String userCode);
 }

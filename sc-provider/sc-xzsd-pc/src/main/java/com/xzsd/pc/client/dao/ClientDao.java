@@ -3,6 +3,8 @@ package com.xzsd.pc.client.dao;
 
 import com.xzsd.pc.client.entity.ClientInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
 
@@ -20,4 +22,18 @@ public interface ClientDao {
      * @return 所有用户信息
      */
     List<ClientInfo> listClientByPage(ClientInfo clientInfo);
+
+    /**
+     * 通过userCode拿role
+     * @param userCode
+     * @return
+     */
+    String getRoleByUserCode(@Param("userCode")String userCode);
+
+    /**
+     * 获取storeNo
+     * @param userCode
+     * @return
+     */
+    String getStoreNo(@Param("userCode")String userCode);
 }

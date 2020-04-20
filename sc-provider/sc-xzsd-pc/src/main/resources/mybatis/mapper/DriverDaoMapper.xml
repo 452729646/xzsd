@@ -180,4 +180,22 @@
         </foreach>
 
     </update>
+
+    <!--    获取driverNo-->
+    <select id="getDriverNo" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        driver_no
+        from t_sys_driver
+        where is_deleted = 0
+        and user_code = #{userCode}
+    </select>
+
+    <!--    获取role-->
+    <select id="getRoleByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        role
+        from t_sys_user
+        where is_deleted = 0
+        and user_code = #{userCode}
+    </select>
 </mapper>

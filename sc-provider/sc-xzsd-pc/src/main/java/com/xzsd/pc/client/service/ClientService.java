@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.client.dao.ClientDao;
 import com.xzsd.pc.client.entity.ClientInfo;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,13 @@ public class ClientService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listClient(ClientInfo clientInfo) {
-        List<ClientInfo>  clinetInfoList = clientDao.listClientByPage(clientInfo);
-        return AppResponse.success("查询成功！",getPageInfo(clinetInfoList));
+        String userCode = SecurityUtils.getCurrentUserId();
+        String role = clientDao.getRoleByUserCode(userCode);
+        if (1 == Integer.valueOf(role)){
+            String storeNo = clientDao.getStoreNo(userCode);
+            clientInfo.setStoreNo(storeNo);
+        }
+        List<ClientInfo>  clientInfoList = clientDao.listClientByPage(clientInfo);
+        return AppResponse.success("查询成功！",getPageInfo(clientInfoList));
     }
 }
