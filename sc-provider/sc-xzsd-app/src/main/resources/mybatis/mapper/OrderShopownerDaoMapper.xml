@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.shopowner.order.dao.OrderShopownerDao">
+<!--    通过userCode查出storeNo-->
+    <select id="selectStoreNo" parameterType="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo" resultType="java.lang.String">
+        select a.store_no
+        from t_sys_store a,
+        t_sys_user b
+        where a.user_acct = b.user_acct
+        and a.is_deleted = 0
+        and b.user_code = #{userCode}
+    </select>
+
+    <resultMap id="orderList" type="com.xzsd.app.shopowner.order.entity.OrderShopownerVO">
+        <id property="orderId" column="order_id"></id>
+        <result property="orderStatus" column="order_status"></result>
+        <result property="goodsTotal" column="goods_total"></result>
+        <result property="paymentMoney" column="payment_money"></result>
+        <result property="userName" column="user_name"></result>
+        <result property="userPhone" column="phone"></result>
+        <collection property="goodsListShopownerVOList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+        </collection>
+    </resultMap>
+
+
+    <!--    查询该店长的订单-->
+    <select id="listOrderByStoreNoByPage" parameterType="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo" resultMap="orderList">
+        select
+        a.order_id ,
+        a.order_status ,
+        a.goods_total ,
+        a.payment_money,
+        b.user_name,
+        b.phone
+        from t_sys_orderfather a,
+        t_sys_user b
+        where a.user_code = b.user_code
+        and a.is_deleted = 0
+        and a.store_no = #{storeNo}
+        <if test="orderStatus == 1">
+            and a.order_status = #{orderStatus}
+        </if>
+        <if test="orderStatus == 2">
+            and a.order_status = #{orderStatus}
+        </if>
+        <if test="orderStatus == 3">
+            and a.order_status in (3,4)
+        </if>
+
+    </select>
+
+    <!--    查询该订单的所有商品-->
+    <select id="getByOrderId" parameterType="java.lang.String" resultType="com.xzsd.app.shopowner.order.entity.GoodsListShopownerVO">
+        select
+        a.sku_no skuNo,
+        b.picture_url pictureUrl,
+        b.sku_name skuName,
+        b.detail detail,
+        a.selling_money sellingPrice,
+        a.goods_cnt goodsCnt
+        from t_sys_orderson a,
+        t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.order_id = #{order_id}
+        order by a.goods_cnt ASC
+    </select>
+
+
+    <resultMap id="detail" type="com.xzsd.app.shopowner.order.entity.OrderShopownerVO">
+        <id property="orderId" column="order_id"></id>
+        <result property="createTime" column="create_time"></result>
+        <result property="orderStatus" column="order_status"></result>
+        <result property="goodsTotal" column="goods_total"></result>
+        <result property="paymentMoney" column="payment_money"></result>
+        <result property="userName" column="user_name"></result>
+        <result property="userPhone" column="phone"></result>
+        <result property="storeName" column="store_name"></result>
+        <result property="storeAddress" column="address"></result>
+        <collection property="goodsListShopownerVOList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+        </collection>
+
+    </resultMap>
+
+<!--    &lt;!&ndash;    查询该订单的所有商品&ndash;&gt;-->
+<!--    <select id="getByOrderId2" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">-->
+<!--        select-->
+<!--        a.sku_no skuNo,-->
+<!--        b.picture_url pictureUrl,-->
+<!--        b.sku_name skuName,-->
+<!--        b.detail detail,-->
+<!--        a.selling_money sellingPrice,-->
+<!--        a.goods_cnt goodsCnt-->
+<!--        from t_sys_orderson a,-->
+<!--        t_sys_goods b-->
+<!--        where a.sku_no = b.sku_no-->
+<!--        and a.order_id = #{order_id}-->
+<!--        order by a.goods_cnt ASC-->
+<!--    </select>-->
+    <!--    通过orderId查询订单详情-->
+    <select id="orderDetailByOrderId" parameterType="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo" resultMap="detail">
+        select
+        a.order_id order_id,
+        a.create_time create_time,
+        a.order_status order_status,
+        a.goods_total goods_total,
+        a.payment_money payment_money,
+        b.user_name user_name,
+        b.phone phone,
+        c.store_name store_name,
+        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address
+        from t_sys_orderfather a,
+        t_sys_store c,
+        t_sys_user b
+        where a.user_code = b.user_code
+        and a.store_no = c.store_no
+        and a.is_deleted = 0
+        and a.order_id = #{orderId}
+    </select>
+</mapper>
