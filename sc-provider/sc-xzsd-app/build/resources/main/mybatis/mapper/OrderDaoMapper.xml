@@ -222,10 +222,6 @@
         </foreach>
     </update>
 
-    <resultMap id="listStock" type="com.xzsd.app.client.order.entity.StockInfo">
-    <id column="id" property="id" />
-    <result column="countStock" property="stock" />
-    </resultMap>
 
 <!--    检查是否库存充足-->
     <select id="countCheckStock" parameterType="java.util.List" resultType="java.lang.String">

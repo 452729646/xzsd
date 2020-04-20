@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.shopowner.driver.dao.DriverShopownerDao">
+
+    <!--    通过userCode查出storeNo-->
+    <select id="selectStoreNo" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        a.store_no
+        from t_sys_store a,
+        t_sys_user b
+        where a.is_deleted = 0
+        and a.user_acct = b.user_acct
+        and b.user_code = #{userCode}
+    </select>
+
+    <!--查询该门店的司机列表-->
+    <select id="listDriverByPage" parameterType="com.xzsd.app.shopowner.driver.entity.DriverShopownerInfo" resultType="com.xzsd.app.shopowner.driver.entity.DriverShopownerInfo">
+        SELECT
+	    c.user_name driverName,
+	    c.phone driverPhone
+        FROM
+	    t_sys_driver a,
+	    t_sys_store b,
+	    t_sys_user c
+        WHERE
+        a.is_deleted = 0
+        and a.user_acct = c.user_acct
+        AND a.province = b.province
+        AND a.city = b.city
+        AND a.area = b.area
+        AND b.store_no = #{storeNo}
+    </select>
+</mapper>
