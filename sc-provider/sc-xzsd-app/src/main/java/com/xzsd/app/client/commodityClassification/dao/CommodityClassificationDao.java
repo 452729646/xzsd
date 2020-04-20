@@ -18,12 +18,12 @@ public interface CommodityClassificationDao {
      * @param
      * @return 所有用户信息
      */
-    List<CommodityClassificationInfo> listFatherCate();
+    List<CommodityClassificationInfo> listFatherCateByPage();
 
     /**
      * 获取该分类编码下的子分类商品列表
      * @param listSonCateGoodsInfo
      * @return 该分类编码下的子分类商品列表
      */
-    List<ListSonCateGoodsInfo> listSonCateGoods(ListSonCateGoodsInfo listSonCateGoodsInfo);
+    List<ListSonCateGoodsInfo> listSonCateGoodsByPage(ListSonCateGoodsInfo listSonCateGoodsInfo);
 }

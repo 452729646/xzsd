@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.app.client.commodityClassification.dao.CommodityClassificationDao">
 <!--    查询父分类列表-->
-    <select id="listFatherCate" resultType="com.xzsd.app.client.commodityClassification.entity.CommodityClassificationInfo">
+    <select id="listFatherCateByPage" resultType="com.xzsd.app.client.commodityClassification.entity.CommodityClassificationInfo">
         select
         cate_code cateCode,
         cate_name cateName
@@ -19,7 +19,7 @@
         <collection property="listSonGoods" ofType="ListSonGoods" javaType="java.util.List" column="cate_code" select="getByCateCode"></collection>
     </resultMap>
 <!--    查询该分类的子分类列表-->
-    <select id="listSonCateGoods" parameterType="com.xzsd.app.client.commodityClassification.entity.ListSonCateGoodsInfo" resultMap="sonCateList">
+    <select id="listSonCateGoodsByPage" parameterType="com.xzsd.app.client.commodityClassification.entity.ListSonCateGoodsInfo" resultMap="sonCateList">
         select
         cate_code ,
         cate_name

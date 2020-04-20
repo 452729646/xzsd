@@ -32,7 +32,7 @@ public class CommodityClassificationService {
     //回滚
 
     public AppResponse listFatherCate(){
-        List<CommodityClassificationInfo> fatherCateInfoList = commodityClassificationDao.listFatherCate();
+        List<CommodityClassificationInfo> fatherCateInfoList = commodityClassificationDao.listFatherCateByPage();
         return AppResponse.success("查询成功！",getPageInfo(fatherCateInfoList));
     }
 
@@ -45,7 +45,7 @@ public class CommodityClassificationService {
      */
 
     public AppResponse listSonCateGoods(ListSonCateGoodsInfo listSonCateGoodsInfo){
-        List<ListSonCateGoodsInfo> listSonCateGoodsInfoList = commodityClassificationDao.listSonCateGoods(listSonCateGoodsInfo);
+        List<ListSonCateGoodsInfo> listSonCateGoodsInfoList = commodityClassificationDao.listSonCateGoodsByPage(listSonCateGoodsInfo);
         return AppResponse.success("查询成功",getPageInfo(listSonCateGoodsInfoList));
     }
 
