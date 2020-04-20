@@ -67,15 +67,23 @@ public class OrderService {
             String goodsCnt2 = listGoodsCnt.get(i);
             String sellingPrice = listSellingMoney.get(i);
             BigDecimal totalPrice = new BigDecimal(listGoodsCnt.get(i)).multiply(new BigDecimal(listSellingMoney.get(i)));
+            //减少库存
+            int countStock = orderDao.countStock(skuNo,Integer.valueOf(goodsCnt2));
+            if (0 == countStock){
+                return AppResponse.bizError("减少库存失败");
+            }
             //生成子类订单
             int count2 = orderDao.saveOrderSon(orderId, skuNo, goodsCnt2, sellingPrice, totalPrice,userCode);
             if (count2 == 0) {
                 return AppResponse.bizError("新增失败，请重试！");
             }
+
         }
         if (count == 0) {
             return AppResponse.bizError("新增失败，请重试！");
         }
+
+
         return AppResponse.success("新增成功！");
     }
 

@@ -28,6 +28,13 @@ public interface OrderDao {
     int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode,@Param("total") BigDecimal total,@Param("storeNo") String storeNo);
 
     /**
+     * 新增订单时减少库存
+     * @param skuNo
+     * @param goodsCnt2
+     * @return
+     */
+    int countStock(@Param("skuNo")String skuNo,@Param("goodsCnt2")Integer goodsCnt2 );
+    /**
      * 查询该用户的订单
      * @param orderVO
      *

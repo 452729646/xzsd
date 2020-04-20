@@ -210,5 +210,12 @@
         from t_client_info
         where client_user_code = #{userCode}
     </select>
+
+<!--    新增订单时减少库存-->
+    <update id="countStock" >
+        update t_sys_goods
+        set stock = stock - #{goodsCnt2}
+        where sku_no = #{skuNo}
+    </update>
 </mapper>
 
