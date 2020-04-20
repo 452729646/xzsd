@@ -38,7 +38,8 @@
     </insert>
 
     <!--新增子订单-->
-    <insert id="saveOrderSon" >
+    <insert id="saveOrderSon" parameterType="java.util.List">
+       <foreach collection="list" item="mapList" index="index" separator=";">
         insert into t_sys_orderson
         (
         order_id,
@@ -50,15 +51,16 @@
         create_user,
         create_time
         )values (
-        #{orderId},
-        #{skuNo},
-        #{goodsCnt2},
-        #{totalPrice},
-        #{sellingPrice},
+        #{mapList.orderId},
+        #{mapList.skuNo},
+        #{mapList.goodsCnt2},
+        #{mapList.totalPrice},
+        #{mapList.sellingPrice},
         0,
-        #{userCode},
+        #{mapList.userCode},
         now()
         )
+        </foreach>
     </insert>
 
 
@@ -212,10 +214,25 @@
     </select>
 
 <!--    新增订单时减少库存-->
-    <update id="countStock" >
+    <update id="countStock" parameterType="java.util.List">
+        <foreach collection="list" item="mapList" index="index" separator=";">
         update t_sys_goods
-        set stock = stock - #{goodsCnt2}
-        where sku_no = #{skuNo}
+        set stock = stock - #{mapList.goodsCnt2}
+        where sku_no = #{mapList.skuNo}
+        </foreach>
     </update>
+
+
+<!--    检查是否库存充足-->
+    <select id="countCheckStock" parameterType="java.util.List" resultType="java.lang.String">
+         select
+            stock stock
+            from t_sys_goods
+            where is_deleted = 0
+            and sku_no in
+        <foreach collection="list" item="mapList" index="index" open="(" separator="," close=")">
+            #{mapList.skuNo}
+        </foreach>
+    </select>
 </mapper>
 

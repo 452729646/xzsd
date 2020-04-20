@@ -6,6 +6,7 @@ import com.xzsd.app.client.order.entity.EvaluateInfo;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.dao.OrderDao;
 import com.xzsd.app.client.order.entity.OrderVO;
+import com.xzsd.app.client.order.entity.StockInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,31 +61,43 @@ public class OrderService {
         //生成订单id
         String orderId = StringUtil.getCommonCode(6);
         String userCode = orderInfo.getUserCode();
+        List<Map> mapList = new ArrayList<>();
+        for (int i = 0; i < listSkuNo.size(); i++){
+            Map map = new HashMap();
+            BigDecimal totalPrice = new BigDecimal(listGoodsCnt.get(i)).multiply(new BigDecimal(listSellingMoney.get(i)));
+            map.put("orderId",orderId);
+            map.put("skuNo",listSkuNo.get(i));
+            map.put("goodsCnt2",listGoodsCnt.get(i));
+            map.put("sellingPrice",listSellingMoney.get(i));
+            map.put("totalPrice",totalPrice);
+            map.put("userCode",userCode);
+            mapList.add(map);
+        }
+        System.out.println(mapList);
+        //检查查询库存充足
+        List<String> countCheckStock = orderDao.countCheckStock(mapList);
+        for(int i = 0; i<listSkuNo.size(); i++){
+            if (0 > Integer.valueOf(countCheckStock.get(i)) - Integer.valueOf(listGoodsCnt.get(i))){
+                return AppResponse.bizError("库存不足");
+            }
+        }
+        //减少库存
+        int countStock = orderDao.countStock(mapList);
+        if (0 == countStock){
+            return  AppResponse.bizError("删除库存，请重试！");
+        }
         //生成父类订单
         int count = orderDao.saveOrderFather(orderInfo, orderId, sum, userCode,total,storeNo);
-        for (int i = 0; i < listSkuNo.size(); i++) {
-            String skuNo = listSkuNo.get(i);
-            String goodsCnt2 = listGoodsCnt.get(i);
-            String sellingPrice = listSellingMoney.get(i);
-            BigDecimal totalPrice = new BigDecimal(listGoodsCnt.get(i)).multiply(new BigDecimal(listSellingMoney.get(i)));
-            //减少库存
-            int countStock = orderDao.countStock(skuNo,Integer.valueOf(goodsCnt2));
-            if (0 == countStock){
-                return AppResponse.bizError("减少库存失败");
-            }
-            //生成子类订单
-            int count2 = orderDao.saveOrderSon(orderId, skuNo, goodsCnt2, sellingPrice, totalPrice,userCode);
-            if (count2 == 0) {
-                return AppResponse.bizError("新增失败，请重试！");
-            }
-
-        }
-        if (count == 0) {
+        if (0 == count ){
             return AppResponse.bizError("新增失败，请重试！");
         }
+        //生成子订单
+        int count2 = orderDao.saveOrderSon(mapList);
+        if (count2 == 0) {
+            return AppResponse.bizError("新增失败，请重试！");
+        }
+        return AppResponse.success("新增订单成功");
 
-
-        return AppResponse.success("新增成功！");
     }
 
     /**

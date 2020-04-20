@@ -3,6 +3,7 @@ package com.xzsd.app.client.order.dao;
 import com.xzsd.app.client.order.entity.EvaluateInfo;
 import com.xzsd.app.client.order.entity.OrderInfo;
 import com.xzsd.app.client.order.entity.OrderVO;
+import com.xzsd.app.client.order.entity.StockInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +17,7 @@ public interface OrderDao {
      * 新增订单
      * @param
      */
-    int saveOrderSon(@Param("orderId")String orderId,@Param("skuNo")String skuNo,@Param("goodsCnt2") String goodsCnt2,@Param("sellingPrice")String sellingPrice,@Param("totalPrice")BigDecimal totalPrice,@Param("userCode") String userCode);
+    int saveOrderSon(List<Map> mapList);
 
     /**
      * 新增主表订单
@@ -27,13 +28,22 @@ public interface OrderDao {
      */
     int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode,@Param("total") BigDecimal total,@Param("storeNo") String storeNo);
 
+
     /**
      * 新增订单时减少库存
-     * @param skuNo
-     * @param goodsCnt2
+     * @param mapList
+     * @param
      * @return
      */
-    int countStock(@Param("skuNo")String skuNo,@Param("goodsCnt2")Integer goodsCnt2 );
+    int countStock(List<Map> mapList);
+
+    /**
+     * 检查是否库存充足
+     * @param mapList
+     * @return
+     */
+    List<String> countCheckStock(List<Map> mapList);
+
     /**
      * 查询该用户的订单
      * @param orderVO
