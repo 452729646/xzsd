@@ -234,5 +234,18 @@
             #{mapList.skuNo}
         </foreach>
     </select>
+
+    <!--修改订单状态（订单到货）-->
+    <update id="orderTake" >
+            update t_sys_orderfather
+            set
+            order_status = 3,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+            where order_id = #{orderId}
+            and version = #{version}
+            and order_status = 2
+    </update>
 </mapper>
 

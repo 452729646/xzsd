@@ -12,6 +12,19 @@ public class ShoppingCartInfo {
      */
     private String skuNo;
     /**
+     * 商品名称
+     */
+    private String skuName;
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
+    }
+
+    /**
      * 商品图片
      */
     private String pictureUrl;
@@ -19,6 +32,7 @@ public class ShoppingCartInfo {
      * 商品数量
      */
     private int goodsCnt;
+
     /**
      * 售价
      */

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * OrderShopownerDao
@@ -33,4 +34,20 @@ public interface OrderShopownerDao {
      * @param
      */
     OrderShopownerVO orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo);
+
+    /**
+     * 修改订单状态 订单到货
+     * @param
+     * @param
+     * @author housum
+     */
+    int orderArrival (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
+
+    /**
+     * 修改订单状态 订单已取货
+     * @param
+     * @param
+     * @author housum
+     */
+    int orderTake (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 }

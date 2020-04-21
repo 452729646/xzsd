@@ -10,7 +10,7 @@ public class GoodsListVO {
     /**
      * 图片url
      */
-    private String pictureUr;
+    private String pictureUrl;
     /**
      * 商品名称
      */
@@ -36,12 +36,12 @@ public class GoodsListVO {
         this.skuNo = skuNo;
     }
 
-    public String getPictureUr() {
-        return pictureUr;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPictureUr(String pictureUr) {
-        this.pictureUr = pictureUr;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public String getSkuName() {

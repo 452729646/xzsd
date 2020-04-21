@@ -77,6 +77,12 @@ public interface OrderDao {
      * @return
      */
     String selectStoreNo(@Param("userCode") String userCode);
-
+    /**
+     * 修改订单状态 订单已取货
+     * @param
+     * @param
+     * @author housum
+     */
+    int orderTake (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 
 }

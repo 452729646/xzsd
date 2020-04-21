@@ -15,7 +15,7 @@
         version
         from t_sys_shoppingcart
         where is_deleted = 0
-        and sku_no = #{skuNo}
+        and shoppingcart_code = #{shoppingCartCode}
         and create_user = #{userCode}
     </select>
 <!--    新增购物车-->

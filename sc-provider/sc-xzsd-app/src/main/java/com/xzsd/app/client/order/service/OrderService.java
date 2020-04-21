@@ -162,6 +162,24 @@ public class OrderService {
         return AppResponse.success("评价商品成功！");
     }
 
+    /**
+     * 修改订单状态（订单已取货）
+     * @param orderId
+     * @param version
+     * @param userCode
+     * @author housum
+     * @date 2020-4-10
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse orderTake(String orderId,String version,String userCode){
+        AppResponse appResponse = AppResponse.success("修改订单已取货成功！");
+        int count = orderDao.orderTake(orderId,version,userCode);
+        if (0 == count){
+            appResponse = AppResponse.bizError("数据有更新，请重试！");
+        }
+        return appResponse;
+    }
+
 
 
 

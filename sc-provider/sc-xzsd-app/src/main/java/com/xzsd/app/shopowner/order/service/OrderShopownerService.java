@@ -8,9 +8,10 @@ import com.xzsd.app.shopowner.order.dao.OrderShopownerDao;
 import com.xzsd.app.shopowner.order.entity.OrderShopownerInfo;
 import com.xzsd.app.shopowner.order.entity.OrderShopownerVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
 
 import static com.neusoft.core.page.PageUtils.getPageInfo;
 
@@ -46,5 +47,41 @@ public class OrderShopownerService {
     public AppResponse orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo){
         OrderShopownerVO orderDetail = orderShopownerDao.orderDetailByOrderId(orderShopownerInfo);
         return AppResponse.success("查询成功",orderDetail);
+    }
+
+    /**
+     * 修改订单状态（订单到货）
+     * @param orderId
+     * @param version
+     * @param userCode
+     * @author housum
+     * @date 2020-4-10
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse orderArrival(String orderId,String version,String userCode){
+        AppResponse appResponse = AppResponse.success("修改订单到货成功！");
+        int count = orderShopownerDao.orderArrival(orderId,version,userCode);
+        if (0 == count){
+            appResponse = AppResponse.bizError("数据有更新，请重试！");
+        }
+        return appResponse;
+    }
+
+    /**
+     * 修改订单状态（订单已取货）
+     * @param orderId
+     * @param version
+     * @param userCode
+     * @author housum
+     * @date 2020-4-10
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse orderTake(String orderId,String version,String userCode){
+        AppResponse appResponse = AppResponse.success("修改订单已取货成功！");
+        int count = orderShopownerDao.orderTake(orderId,version,userCode);
+        if (0 == count){
+            appResponse = AppResponse.bizError("数据有更新，请重试！");
+        }
+        return appResponse;
     }
 }

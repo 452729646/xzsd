@@ -105,7 +105,23 @@ public class OrderController {
         }
     }
 
-
+    /**
+     * 修改订单状态（订单已取货）
+     * @return App
+     * @date 2020-4-10
+     */
+    @PostMapping("orderTake")
+    public AppResponse orderTake (String orderId,String version){
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return orderService.orderTake(orderId,version,userCode);
+        } catch (Exception e) {
+            logger.error("修改订单已取货错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
 
 

@@ -107,7 +107,8 @@
         b.user_name user_name,
         b.phone phone,
         c.store_name store_name,
-        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address
+        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address,
+        a.version version
         from t_sys_orderfather a,
         t_sys_store c,
         t_sys_user b
@@ -116,4 +117,30 @@
         and a.is_deleted = 0
         and a.order_id = #{orderId}
     </select>
+
+    <!--修改订单状态（订单到货）-->
+    <update id="orderArrival" >
+            update t_sys_orderfather
+            set
+            order_status = 2,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+            where order_id = #{orderId}
+            and version = #{version}
+            and order_status = 1
+    </update>
+
+    <!--修改订单状态（订单到货）-->
+    <update id="orderTake" >
+            update t_sys_orderfather
+            set
+            order_status = 3,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+            where order_id = #{orderId}
+            and version = #{version}
+            and order_status = 2
+    </update>
 </mapper>
