@@ -93,6 +93,40 @@ public class ClassificationController {
         }
     }
 
+    /**
+     * 一级分类下来框
+     * @param classificationInfo
+     * @return
+     */
+    @RequestMapping(value = "listFatherCate")
+    public AppResponse listFateCate(ClassificationInfo classificationInfo) {
+        try {
+            return classificationService.listFatherCate(classificationInfo);
+        } catch (Exception e) {
+            logger.error("查询分类列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 二级分类下拉框
+     * @param classificationInfo
+     * @return
+     */
+    @RequestMapping(value = "listSonCate")
+    public AppResponse listSonCate(ClassificationInfo classificationInfo) {
+        try {
+            return classificationService.listSonCate(classificationInfo);
+        } catch (Exception e) {
+            logger.error("查询分类列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
+
 
 
 

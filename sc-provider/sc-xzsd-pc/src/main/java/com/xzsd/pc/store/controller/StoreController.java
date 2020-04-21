@@ -130,7 +130,7 @@ public class StoreController {
     }
 
     /**
-     * 地区 市区下拉框
+     *  市下拉框
      * @author housum
      * @date 2020-4-13
      */
@@ -144,5 +144,21 @@ public class StoreController {
             throw e;
         }
     }
+    /**
+     *  区下拉框
+     * @author housum
+     * @date 2020-4-13
+     */
+    @RequestMapping("area")
+    public AppResponse area(RegionInfo regionInfo){
+        try{
+            return storeService.area(regionInfo);
+        }catch (Exception e){
+            logger.error("查询地区信息错误",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
 
 }

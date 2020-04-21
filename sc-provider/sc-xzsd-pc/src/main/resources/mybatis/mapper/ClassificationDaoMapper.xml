@@ -101,12 +101,22 @@
     </update>
 
     <!--父级分类信息-->
-    <select id="listFatherCate" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo" resultType="com.xzsd.pc.classification.entity.ClassificationInfo">
+    <select id="listFatherCateByPage" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo" resultType="com.xzsd.pc.classification.entity.ClassificationInfo">
         select
         a.cate_code cateCode,
         a.cate_name cateName
         from t_sys_classification a
-        where a.is_parent = 0
+        where a.is_parent = 0 and is_deleted = 0
+        order by a.create_time desc
+    </select>
+
+    <!--父级分类信息-->
+    <select id="listSonCateByPage" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo" resultType="com.xzsd.pc.classification.entity.ClassificationInfo">
+        select
+        a.cate_code cateCode,
+        a.cate_name cateName
+        from t_sys_classification a
+        where a.cate_code_parent = #{cateCode} and a.is_deleted = 0
         order by a.create_time desc
     </select>
 

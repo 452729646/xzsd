@@ -102,6 +102,18 @@ public class ClassificationService {
         return AppResponse.success("查询成功！",getPageInfo(categories));
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse listFatherCate(ClassificationInfo classificationInfo) {
+        List<ClassificationInfo> categories = classificationDao.listFatherCateByPage(classificationInfo);
+        return AppResponse.success("查询成功！",getPageInfo(categories));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse listSonCate(ClassificationInfo classificationInfo) {
+        List<ClassificationInfo> categories = classificationDao.listSonCateByPage(classificationInfo);
+        return AppResponse.success("查询成功！",getPageInfo(categories));
+    }
+
 
 
     /**

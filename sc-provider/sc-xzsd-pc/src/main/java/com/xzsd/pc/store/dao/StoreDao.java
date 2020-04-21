@@ -73,5 +73,11 @@ public interface StoreDao {
      */
     List<RegionInfo> listCityByPage(RegionInfo regionInfo);
 
+    /**
+     * 查询区列表
+     * @param regionInfo
+     */
+    List<RegionInfo> listAreaByPage(RegionInfo regionInfo);
+
 
 }

@@ -11,8 +11,10 @@
         a.email email,
         a.id_card idCard
         from
-            t_sys_user a
-        where a.is_deleted = 0
+            t_sys_user a,
+            t_client_info b
+        where a.user_code = b.client_user_code
+        and a.is_deleted = 0
         and a.role = 3
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
@@ -20,6 +22,29 @@
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
+        <if test="storeNo != null and storeNo != ''">
+            and b.invite_code = #{storeNo}
+        </if>
         order by gmt_create desc
+    </select>
+
+<!--    获取storeNo-->
+    <select id="getStoreNo" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        a.store_no
+        from t_sys_store a,
+        t_sys_user b
+        where a.is_deleted = 0
+        and a.user_acct = b.user_acct
+        and b.user_code = #{userCode}
+    </select>
+
+<!--    获取role-->
+    <select id="getRoleByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        role
+        from t_sys_user
+        where is_deleted = 0
+        and user_code = #{userCode}
     </select>
 </mapper>

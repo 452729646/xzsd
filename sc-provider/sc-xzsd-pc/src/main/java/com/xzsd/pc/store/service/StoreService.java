@@ -171,7 +171,7 @@ public class StoreService {
     }
 
     /**
-     * 地区 市区下拉框
+     *  市下拉框
      * @param regionInfo
      * @author housum
      * @date 2020-4-13
@@ -179,6 +179,18 @@ public class StoreService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse city(RegionInfo regionInfo){
         List<RegionInfo> listCityInfo = storeDao.listCityByPage(regionInfo);
+        return AppResponse.success("查询成功！",  getPageInfo(listCityInfo));
+    }
+
+    /**
+     *  区下拉框
+     * @param regionInfo
+     * @author housum
+     * @date 2020-4-13
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse area(RegionInfo regionInfo){
+        List<RegionInfo> listCityInfo = storeDao.listAreaByPage(regionInfo);
         return AppResponse.success("查询成功！",  getPageInfo(listCityInfo));
     }
 

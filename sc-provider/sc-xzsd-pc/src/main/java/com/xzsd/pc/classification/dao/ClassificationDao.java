@@ -50,7 +50,8 @@ public interface ClassificationDao {
      * @param classificationInfo 分类信息
      * @return 信息
      */
-    List<ClassificationInfo>listFatherCate(ClassificationInfo classificationInfo);
+    List<ClassificationInfo>listFatherCateByPage(ClassificationInfo classificationInfo);
+    List<ClassificationInfo>listSonCateByPage(ClassificationInfo classificationInfo);
     /**
      *通过是否父级 拿出父级
      * @param classificationInfo 分类信息

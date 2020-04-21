@@ -185,14 +185,25 @@
 
 
 
-    <!--查找所有类别(递归)-->
-    <select id="listCityByPage" resultMap="cityMap1" parameterType="com.xzsd.pc.store.entity.RegionInfo">
+    <!--查找市列表-->
+    <select id="listCityByPage" resultType="com.xzsd.pc.store.entity.RegionInfo" parameterType="com.xzsd.pc.store.entity.RegionInfo">
         SELECT
         id id,
         rname name,
         pid pid
         FROM region
         WHERE level = 2
+        and pid = #{id}
+    </select>
+
+    <!--查找区列表-->
+    <select id="listAreaByPage" resultType="com.xzsd.pc.store.entity.RegionInfo" parameterType="com.xzsd.pc.store.entity.RegionInfo">
+        SELECT
+        id id,
+        rname name,
+        pid pid
+        FROM region
+        WHERE level = 3
         and pid = #{id}
     </select>
 
