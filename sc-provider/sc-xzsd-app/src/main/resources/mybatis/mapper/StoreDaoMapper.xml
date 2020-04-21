@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.driver.store.dao.StoreDao">
+<!--    查询与司机相同地区的门店信息-->
+    <select id="listStoreByPage" parameterType="com.xzsd.app.driver.store.entity.StoreInfo" resultType="com.xzsd.app.driver.store.entity.StoreInfo">
+        SELECT
+        a.store_no storeNo,
+        a.store_name storeName,
+        CONCAT( a.province, a.city, a.area, a.store_address ) address,
+        c.user_name shopOwnerName,
+        c.phone phone
+        FROM t_sys_store a,
+        t_sys_driver b,
+        t_sys_user c
+        WHERE a.is_deleted = 0
+        AND a.province = b.province
+        AND a.city = b.city
+        AND a.area = b.area
+        AND c.user_acct = a.user_acct
+        AND b.user_code = #{userCode}
+    </select>
+</mapper>
