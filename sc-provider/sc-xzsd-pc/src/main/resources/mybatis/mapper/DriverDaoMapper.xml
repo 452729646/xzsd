@@ -114,6 +114,38 @@
         </if>
         </select>
 
+    <!--司机列表分页查询-->
+    <select id="listDriverByShopownerByPage" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverVO">
+        select
+        b.driver_no driverNo,
+        b.driver_name driverName,
+        a.phone driverPhone,
+        a.id_card idCard,
+        b.user_acct userAcct,
+        b.user_code userCode,
+        b.version version
+        from
+        t_sys_user a,
+        t_sys_driver b,
+        t_sys_store c
+        where a.user_code=b.user_code  and c.store_no = #{storeNo} AND c.province = b.province AND c.city = b.city AND c.area = b.area
+        <if test="driverNo != null and driverNo != ''">
+            and b.driver_no like concat('%', #{driverNo}, '%')
+        </if>
+        <if test="driverName != null and driverName != ''">
+            and a.user_name like concat('%', #{driverName}, '%')
+        </if>
+        <if test="provinceName != null and provinceName != ''">
+            and b.province like concat('%', #{provinceName}, '%')
+        </if>
+        <if test="cityName != null and cityName != ''">
+            and b.city like concat('%', #{cityName}, '%')
+        </if>
+        <if test="areaName != null and areaName != ''">
+            and b.area like concat('%', #{areaName}, '%')
+        </if>
+    </select>
+
     <!--查询该司机的详情信息-->
     <select id="driverDetail" resultType="com.xzsd.pc.driver.entity.DriverDetailVO">
         select

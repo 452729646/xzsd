@@ -8,6 +8,7 @@ import com.neusoft.util.StringUtil;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverDetailVO;
 import com.xzsd.pc.driver.entity.DriverInfo;
+import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class DriverService {
 
     @Resource
     private DriverDao driverDao;
+    @Resource
+    private OrderDao orderDao;
 
     /**
      * 密码加密
@@ -79,6 +82,14 @@ public class DriverService {
     public AppResponse listDriver(DriverInfo driverInfo){
         String userCode = SecurityUtils.getCurrentUserId();
         String role = driverDao.getRoleByUserCode(userCode);
+        //店家 查询相同地区的司机
+        if (1 == Integer.valueOf(role)){
+            String storeNo = orderDao.storeNoByUserCode(userCode);
+            driverInfo.setStoreNo(storeNo);
+            List<DriverInfo> driverInfoList = driverDao.listDriverByShopownerByPage(driverInfo);
+            return AppResponse.success("查询成功",driverInfoList);
+        }
+        //司机本人查询
         if (2 == Integer.valueOf(role)){
             String driverNo = driverDao.getDriverNo(userCode);
             driverInfo.setDriverNo(driverNo);

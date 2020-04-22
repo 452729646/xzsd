@@ -74,6 +74,16 @@ public class DriverInfo {
      */
     private  int version;
 
+    private String storeNo;
+
+    public String getStoreNo() {
+        return storeNo;
+    }
+
+    public void setStoreNo(String storeNo) {
+        this.storeNo = storeNo;
+    }
+
     public String getDriverNo() {
         return driverNo;
     }

@@ -79,12 +79,12 @@ public interface OrderDao {
      * @param userCode
      * @author housum
      */
-    int roleByUserCode(String userCode);
+    int roleByUserCode(@Param("userCode") String userCode);
 
     /**
      * 通过店长的userCode找到storeNo
      *
      */
-    String storeNoByUserCode(String userCode);
+    String storeNoByUserCode(@Param("userCode") String userCode);
 
 }

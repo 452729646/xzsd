@@ -31,7 +31,10 @@ public interface DriverDao {
      * 新增用户 在用户表
      */
     int saveUser(DriverInfo driverInfo);
-
+    /**
+     * 司机信息分页查询
+     */
+    List<DriverInfo> listDriverByShopownerByPage(DriverInfo driverInfo);
     /**
      * 司机信息分页查询
      */
