@@ -69,6 +69,19 @@ public class EvaluateInfo {
     private List<String> listPictureUrl;
     private List<Map> mapList;
 
+    /**
+     * 评价列表
+     */
+    private List<EvaluateInfo> evaluateInfoList;
+
+    public List<EvaluateInfo> getEvaluateInfoList() {
+        return evaluateInfoList;
+    }
+
+    public void setEvaluateInfoList(List<EvaluateInfo> evaluateInfoList) {
+        this.evaluateInfoList = evaluateInfoList;
+    }
+
     public List<Map> getMapList() {
         return mapList;
     }

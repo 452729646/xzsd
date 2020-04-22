@@ -9,6 +9,7 @@ import com.xzsd.app.client.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -86,13 +87,28 @@ public class OrderController {
     }
 
     /**
+     * 评价页面的商品list
+     * @param orderId
+     * @return
+     */
+    @PostMapping("appraiseGoodsList")
+    public AppResponse appraiseGoodsList(String orderId){
+        try{
+            return orderService.appraiseGoodsList(orderId);
+        }catch (Exception e){
+            logger.error("查询订单商品列表异常",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+    /**
      * 对已完成未评价的订单评价
      * @return App
      * @author housum
      * @date 2020-4-14
      */
     @PostMapping("appraiseByOrderId")
-    public AppResponse appraiseByOrderId(EvaluateInfo evaluateInfo){
+    public AppResponse appraiseByOrderId(@RequestBody EvaluateInfo evaluateInfo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
             evaluateInfo.setUserCode(userCode);

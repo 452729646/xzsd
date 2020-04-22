@@ -1,9 +1,6 @@
 package com.xzsd.app.client.order.dao;
 
-import com.xzsd.app.client.order.entity.EvaluateInfo;
-import com.xzsd.app.client.order.entity.OrderInfo;
-import com.xzsd.app.client.order.entity.OrderVO;
-import com.xzsd.app.client.order.entity.StockInfo;
+import com.xzsd.app.client.order.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -62,7 +59,7 @@ public interface OrderDao {
      * @param evaluateInfo
      * @return
      */
-    int appraiseByOrderId(EvaluateInfo evaluateInfo);
+    int appraiseByOrderId(List<EvaluateDO> evaluateDOS);
 
     /**
      * 修改订单已完成
@@ -93,4 +90,5 @@ public interface OrderDao {
      */
     int orderCancel (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 
+    List<GoodsListVO> goodsList(@Param("orderId") String orderId);
 }

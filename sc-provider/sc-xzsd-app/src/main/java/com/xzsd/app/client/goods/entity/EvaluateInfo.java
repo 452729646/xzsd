@@ -1,5 +1,7 @@
 package com.xzsd.app.client.goods.entity;
 
+import java.util.List;
+
 public class EvaluateInfo {
     /**
      * 商品编码
@@ -29,6 +31,18 @@ public class EvaluateInfo {
      * 评价等级  1：好评 星级4~5 2：中评 星级3 3：差评 星级1~@
      */
     private int evaluateLevel;
+    /**
+     * 评价列表
+     */
+    private List<EvaluateInfo> evaluateInfoList;
+
+    public List<EvaluateInfo> getEvaluateInfoList() {
+        return evaluateInfoList;
+    }
+
+    public void setEvaluateInfoList(List<EvaluateInfo> evaluateInfoList) {
+        this.evaluateInfoList = evaluateInfoList;
+    }
 
     public int getEvaluateLevel() {
         return evaluateLevel;

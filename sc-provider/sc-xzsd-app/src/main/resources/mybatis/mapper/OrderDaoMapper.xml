@@ -160,7 +160,7 @@
     </select>
 
 <!--    评价商品-->
-<insert id="appraiseByOrderId" parameterType="com.xzsd.app.client.order.entity.EvaluateInfo">
+<insert id="appraiseByOrderId2" parameterType="com.xzsd.app.client.order.entity.EvaluateInfo">
     <foreach collection="mapList" item="mapList" index="index" separator=";">
         insert into t_sys_goodsevaluate
         (order_id,
@@ -261,6 +261,53 @@
             and order_status = 1
     </update>
 
+    <!--    查询该订单的所有商品-->
+    <select id="goodsList" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
+        select
+        a.sku_no skuNo,
+        b.picture_url pictureUrl
+        from t_sys_orderson a,
+        t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.order_id = #{orderId}
+        order by a.goods_cnt ASC
+    </select>
 
+    <insert id="appraiseByOrderId" parameterType="java.util.List">
+        <selectKey resultType ="java.lang.Integer" keyProperty= "id"
+                   order= "AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey >
+        insert into t_sys_goodsevaluate
+        (user_code,
+        sku_no,
+        is_deleted,
+        appraise_info,
+        star_level,
+        create_user,
+        create_time,
+        version,
+        appraise_id,
+        photo_url,
+        order_id
+        )
+        values
+        <foreach collection="list" item="evaluate" separator="," close=";">
+            (
+            #{evaluate.userCode},
+            #{evaluate.skuNo},
+            0,
+            #{evaluate.appraiseInfo},
+            #{evaluate.starLevel},
+            #{evaluate.userCode},
+            now(),
+            0,
+            #{evaluate.evaluateId},
+            #{evaluate.image},
+            #{evaluate.orderId}
+            )
+        </foreach >
+    </insert>
 </mapper>
+
 

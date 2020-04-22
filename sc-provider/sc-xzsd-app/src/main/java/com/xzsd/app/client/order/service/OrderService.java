@@ -1,12 +1,10 @@
 package com.xzsd.app.client.order.service;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
-import com.xzsd.app.client.order.entity.EvaluateInfo;
-import com.xzsd.app.client.order.entity.OrderInfo;
+import com.xzsd.app.client.order.entity.*;
 import com.xzsd.app.client.order.dao.OrderDao;
-import com.xzsd.app.client.order.entity.OrderVO;
-import com.xzsd.app.client.order.entity.StockInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -124,6 +122,15 @@ public class OrderService {
         return AppResponse.success("查询成功",orderDetail);
     }
 
+    /**
+     * 评价页面的商品列表
+     * @param orderId
+     * @return
+     */
+    public AppResponse appraiseGoodsList(String orderId){
+        List<GoodsListVO> goodsListVOS = orderDao.goodsList(orderId);
+        return AppResponse.success("查询成功",goodsListVOS);
+    }
 
     /**
      * 评价订单
@@ -138,24 +145,20 @@ public class OrderService {
         if (0 == count2){
             return  AppResponse.bizError("修改订单已完成失败");
         }
-        evaluateInfo.setListSkuNo(Arrays.asList(evaluateInfo.getSkuNo().split(",")));
-        evaluateInfo.setListStarLevel(Arrays.asList(evaluateInfo.getStarLevel().split(",")));
-        evaluateInfo.setListAppraiseInfo(Arrays.asList(evaluateInfo.getAppraiseInfo().split("&&&")));
-        evaluateInfo.setListPictureUrl(Arrays.asList(evaluateInfo.getPhotoUrl().split("&&&")));
-        List<Map> mapList = new ArrayList<>();
-        //把对应的属性 放进map  然后在mybaits用foreacn遍历
-        for(int i =0 ;i<evaluateInfo.getListSkuNo().size(); i++){
-            Map map = new HashMap();
-            map.put("skuNo",evaluateInfo.getListSkuNo().get(i));
-            map.put("starLevel",Integer.parseInt(evaluateInfo.getListStarLevel().get(i)));
-            map.put("appraiseInfo",evaluateInfo.getListAppraiseInfo().get(i));
-            map.put("photoUrl",evaluateInfo.getListPictureUrl().get(i));
-            mapList.add(map);
+        List<GoodsListVO> goodsListVOS = orderDao.goodsList(evaluateInfo.getOrderId());
+        List<EvaluateDO> evaluateDOS = new ArrayList<>();
+        for (int i = 0;i < goodsListVOS.size();i++){
+            EvaluateDO evaluateDO = new EvaluateDO();
+            evaluateDO.setEvaluateId(StringUtil.getCommonCode(4));
+            evaluateDO.setSkuNo(goodsListVOS.get(i).getSkuNo());
+            evaluateDO.setAppraiseInfo(evaluateInfo.getEvaluateInfoList().get(i).getAppraiseInfo());
+            evaluateDO.setImage(evaluateInfo.getEvaluateInfoList().get(i).getPhotoUrl());
+            evaluateDO.setStarLevel(evaluateInfo.getEvaluateInfoList().get(i).getStarLevel());
+            evaluateDO.setOrderId(evaluateInfo.getOrderId());
+            evaluateDO.setUserCode(SecurityUtils.getCurrentUserId());
+            evaluateDOS.add(evaluateDO);
         }
-        evaluateInfo.setMapList(mapList);
-        evaluateInfo.setIsDeleted(0);
-//        AppResponse appResponse = AppResponse.success("评价商品成功！");
-        int count = orderDao.appraiseByOrderId(evaluateInfo);
+        int count = orderDao.appraiseByOrderId(evaluateDOS);
         if (0 == count){
             return AppResponse.bizError("评价商品失败，请重试！");
         }
