@@ -84,4 +84,22 @@ public class OrderShopownerService {
         }
         return appResponse;
     }
+
+    /**
+     * 修改订单状态（订单取消）
+     * @param orderId
+     * @param version
+     * @param userCode
+     * @author housum
+     * @date 2020-4-10
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public AppResponse orderCancel(String orderId,String version,String userCode){
+        AppResponse appResponse = AppResponse.success("修改取消订单成功！");
+        int count = orderShopownerDao.orderCancel(orderId,version,userCode);
+        if (0 == count){
+            appResponse = AppResponse.bizError("数据有更新，请重试！");
+        }
+        return appResponse;
+    }
 }

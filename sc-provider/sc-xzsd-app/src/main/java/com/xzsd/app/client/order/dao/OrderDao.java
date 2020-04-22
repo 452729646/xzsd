@@ -85,4 +85,12 @@ public interface OrderDao {
      */
     int orderTake (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 
+    /**
+     * 修改订单状态 取消订单
+     * @param
+     * @param
+     * @author housum
+     */
+    int orderCancel (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
+
 }

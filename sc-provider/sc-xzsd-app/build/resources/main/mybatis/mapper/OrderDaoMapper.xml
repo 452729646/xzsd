@@ -247,5 +247,20 @@
             and version = #{version}
             and order_status = 2
     </update>
+
+    <!--修改订单状态（订单取消）-->
+    <update id="orderCancel" >
+            update t_sys_orderfather
+            set
+            order_status = 0,
+            update_time = now(),
+            update_user = #{userCode},
+            version = version + 1
+            where order_id = #{orderId}
+            and version = #{version}
+            and order_status = 1
+    </update>
+
+
 </mapper>
 

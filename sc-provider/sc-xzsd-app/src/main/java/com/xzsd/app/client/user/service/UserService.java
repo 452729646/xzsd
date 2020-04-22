@@ -133,4 +133,9 @@ public class UserService {
         return AppResponse.success("修改成功");
     }
 
+    public AppResponse roleByUserCode(String userCode){
+        String role = userDao.roleByUserCode(userCode);
+        return AppResponse.success("查询成功",role);
+    }
+
 }

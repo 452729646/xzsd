@@ -118,5 +118,16 @@ public class UserController {
         }
     }
 
-
+    @PostMapping("roleByUserCode")
+    public AppResponse roleByUserCode(){
+        try{
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return userService.roleByUserCode(userCode);
+        }catch (Exception e){
+            logger.error("获取role失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

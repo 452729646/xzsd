@@ -50,4 +50,11 @@ public interface OrderShopownerDao {
      * @author housum
      */
     int orderTake (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
+    /**
+     * 修改订单状态 订单取消
+     * @param
+     * @param
+     * @author housum
+     */
+    int orderCancel (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 }

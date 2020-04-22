@@ -123,6 +123,26 @@ public class OrderController {
         }
     }
 
+    /**
+     * 修改订单状态（取消订单）
+     * @return App
+     * @date 2020-4-10
+     */
+    @PostMapping("orderCancel")
+    public AppResponse orderCancel (String orderId,String version){
+        try {
+            //获取用户id
+            String userCode = SecurityUtils.getCurrentUserId();
+            return orderService.orderCancel(orderId,version,userCode);
+        } catch (Exception e) {
+            logger.error("修改订单取消订单错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
+
 
 
 

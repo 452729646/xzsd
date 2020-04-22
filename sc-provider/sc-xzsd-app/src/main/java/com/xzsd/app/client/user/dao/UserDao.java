@@ -76,6 +76,8 @@ public interface UserDao {
      */
     int updateHeadPicture(UserInfo userInfo);
 
+    String roleByUserCode(@Param("userCode")String userCode);
+
 
 //    /**
 //     * 修改头像url
