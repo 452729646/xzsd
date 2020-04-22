@@ -236,4 +236,9 @@ public class MenuService {
             }
         }
     }
+
+    public AppResponse cateDetail(String menuCode){
+        List<Menu> data = menuDao.cateDetail(menuCode);
+        return AppResponse.success("查询成功",data);
+    }
 }

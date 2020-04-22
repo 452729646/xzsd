@@ -1,6 +1,7 @@
 package com.neusoft.webauth.menu.dao;
 
 import com.neusoft.webauth.menu.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -88,4 +89,6 @@ public interface MenuDao {
      * @return
      */
     int countMenuName(Menu menu);
+
+    List<Menu> cateDetail(@Param("menuCode") String menuCode);
 }

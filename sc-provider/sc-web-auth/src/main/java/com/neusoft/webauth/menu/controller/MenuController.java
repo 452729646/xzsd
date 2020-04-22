@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -129,6 +130,16 @@ public class MenuController {
         } catch (Exception e) {
             logger.error("获取菜单失败", e);
             throw new ScServerException("获取菜单失败，请重试");
+        }
+    }
+
+    @RequestMapping("cateDetail")
+    public AppResponse cateDetail(String menuCode){
+        try{
+            return menuService.cateDetail(menuCode);
+        }catch (Exception e){
+        logger.error("获取菜单失败", e);
+        throw new ScServerException("获取菜单失败，请重试");
         }
     }
 }
