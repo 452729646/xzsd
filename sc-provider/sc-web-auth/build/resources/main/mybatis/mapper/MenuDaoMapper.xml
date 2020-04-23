@@ -29,7 +29,7 @@
             menu_url,
             parent_menu_code ,
             auth_code ,
-            type ,
+
         	version ,
             level,
             remark,
@@ -90,9 +90,10 @@
 
     <!--删除角色关联菜单-->
     <delete id="deleteRoleMenu" parameterType="com.neusoft.webauth.menu.entity.Menu">
-        delete from t_sys_role_menu
+        update  t_sys_role_menu
+        set is_deleted = 1
         where menu_code in
-        (select menu_code from t_sys_menu where auth_code like concat(#{authCode},'%') )
+        (select menu_code from t_sys_menu where auth_code like concat(#{menuCode},'%') )
     </delete>
 
 <!--    <delete id="deleteAdditionMenu">
@@ -109,7 +110,7 @@
                version      = version + 1,
                gmt_modified = now(),
                last_modified_by   = #{lastModifiedBy,jdbcType=VARCHAR}
-         where auth_code like concat(#{authCode}, '%')
+         where auth_code like concat(#{menuCode}, '%')
     </update>
 
     <!--删除角色菜单按钮-->
@@ -229,6 +230,7 @@
            and t2.is_deleted = 0
 
            and t1.role_code = #{roleCode}
+           order by t2.sort_no ASC
     </select>
 
 <!--    查看是否存在此菜单名字-->
@@ -240,5 +242,15 @@
         <if test="menuCode != null and menuCode != ''">
             and menu_code != #{menuCode}
         </if>
+    </select>
+
+    <select id="cateDetail" parameterType="java.lang.String" resultType="com.neusoft.webauth.menu.entity.Menu">
+        select
+        menu_name menuName,
+        menu_url menuUrl,
+        remark remark
+        from t_sys_menu
+        where is_deleted = 0
+        and menu_code = #{menuCode}
     </select>
 </mapper>

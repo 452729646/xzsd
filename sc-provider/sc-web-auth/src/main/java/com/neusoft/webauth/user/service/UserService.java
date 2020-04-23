@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.neusoft.core.page.PageUtils.getPageInfo;
@@ -45,7 +46,7 @@ public class UserService {
             return AppResponse.bizError("用户账号已存在，请重新输入！");
         }
         // 密码加密 默认为123456
-        String pwd = PasswordUtils.generatePassword("123456");
+        String pwd = PasswordUtils.generatePassword(userInfo.getPassword());
         userInfo.setUserCode(StringUtil.getCommonCode(2));
         userInfo.setUserPwd(pwd);
         userInfo.setIsDeleted(0);
@@ -118,6 +119,7 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteUser(UserSettingDTO userSettingDTO) {
+        userSettingDTO.setUserList(Arrays.asList(userSettingDTO.getUserCode().split(",")));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
         int count = userDao.deleteUser(userSettingDTO);

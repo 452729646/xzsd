@@ -22,6 +22,7 @@ public class UserInfo {
      */
     @JsonIgnore
     private String userPwd;
+    private String password;
     /**
      * 管理员标记
      */
@@ -86,7 +87,7 @@ public class UserInfo {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private String gmtCreate;
     /**
      * 创建者
      */
@@ -94,7 +95,7 @@ public class UserInfo {
     /**
      * 更新时间
      */
-    private Date gmtModified;
+    private String gmtModified;
     /**
      * 更新者
      */
@@ -274,11 +275,11 @@ public class UserInfo {
         this.sortNo = sortNo;
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
@@ -290,11 +291,11 @@ public class UserInfo {
         this.createBy = createBy;
     }
 
-    public Date getGmtModified() {
+    public String getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(String gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -320,5 +321,13 @@ public class UserInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
