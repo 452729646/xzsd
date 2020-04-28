@@ -25,6 +25,11 @@ public class StoreController {
     @Resource
     StoreService storeService;
 
+    /**
+     * 门店列表
+     * @param storeInfo
+     * @return
+     */
     @PostMapping("listDriverStores")
     private AppResponse listStore(StoreInfo storeInfo){
         try{

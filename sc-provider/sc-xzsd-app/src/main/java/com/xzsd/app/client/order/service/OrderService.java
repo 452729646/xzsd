@@ -160,6 +160,7 @@ public class OrderService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse appraiseByOrderId(EvaluateInfo evaluateInfo){
         List<GoodsListVO> goodsListVOS = orderDao.goodsList(evaluateInfo.getOrderId());
+        //把传过来的json拆分 封装成一个实体类list
         List<EvaluateDO> evaluateDOS = new ArrayList<>();
         for (int i = 0;i < goodsListVOS.size();i++){
             EvaluateDO evaluateDO = new EvaluateDO();
@@ -183,15 +184,17 @@ public class OrderService {
             mapSaleGoods.put("goodsCnt", goodsListVOS.get(j).getCartGoodsCount());
             mapGoodsSaleList.add(mapSaleGoods);
         }
+        //更新销量
         int countUpdateSaleCnt = orderDao.updateSaleCnt(mapGoodsSaleList);
         if (0 == countUpdateSaleCnt){
             return AppResponse.bizError("更新销量失败");
         }
         // 完成评价 修改订单状态
-        int count2 = orderDao.updateOrderComplete(evaluateInfo);
-        if (0 == count2){
+        int countUpdateOrderComplete = orderDao.updateOrderComplete(evaluateInfo);
+        if (0 == countUpdateOrderComplete){
             return  AppResponse.bizError("修改订单已完成失败");
         }
+        //新增评价
         int count = orderDao.appraiseByOrderId(evaluateDOS);
         if (0 == count){
             return AppResponse.bizError("评价商品失败，请重试！");
@@ -200,7 +203,6 @@ public class OrderService {
         for (int i = 0;i < goodsListVOS.size(); i++){
             goodsIdList.add(evaluateInfo.getEvaluateList().get(i).getGoodsId());
         }
-
         //先拿出评价的总星级数和评价总数
         List<EvaluateInfo> evaluateTotal = orderDao.evaluateTotal(goodsIdList);
         //把总星级数 总评价数 商品评分放进mapList

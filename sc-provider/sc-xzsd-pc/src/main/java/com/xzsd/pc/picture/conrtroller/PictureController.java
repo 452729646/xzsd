@@ -131,6 +131,11 @@ public class PictureController {
         }
     }
 
+    /**
+     * 商品列表
+     * @param goodsInfo
+     * @return
+     */
     @RequestMapping("listGoods")
     public AppResponse listGoods(GoodsInfo goodsInfo){
         try {

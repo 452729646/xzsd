@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+/**
+ * 注册客户
+ */
 @Service
 public class RegisterService {
     @Resource RegisterDao registerDao;

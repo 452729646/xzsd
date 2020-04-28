@@ -57,7 +57,7 @@ public class PictureService {
 
     /**
      * demo 删除轮播图
-     * @param bannerCode
+     * @param
      * @param userCode
      * @return
      * @Author housum
@@ -141,6 +141,11 @@ public class PictureService {
         return appResponse;
     }
 
+    /**
+     * 商品列表
+     * @param goodsInfo
+     * @return
+     */
     public AppResponse listGoods(GoodsInfo goodsInfo){
         List<GoodsInfo> goodsInfos = pictureDao.listGoodsByPage(goodsInfo);
         return AppResponse.success("查询成功",getPageInfo(goodsInfos));

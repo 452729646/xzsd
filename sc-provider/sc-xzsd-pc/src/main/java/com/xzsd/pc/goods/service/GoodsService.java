@@ -77,7 +77,7 @@ public class GoodsService {
 
     /**
      * demo 删除商品
-     * @param skuNo
+     * @param goodsId
      * @param userCode
      * @return
      * @Author dingning
@@ -139,8 +139,7 @@ public class GoodsService {
 
     /**
      * demo 上架商品
-     * @param skuNo
-     * @param userCode
+     * @param goodsInfo
      * @return
      * @Author housum
      * @Date 2020-03-25
@@ -210,6 +209,11 @@ public class GoodsService {
         return appResponse;
     }
 
+    /**
+     * 分类下拉框
+     * @param classifyId
+     * @return
+     */
     public AppResponse listGoodsClassify(String classifyId){
         List<ClassifyInfo> classifyInfos = goodsDao.listGoodsClassify(classifyId);
         GoodsClassifyList goodsClassifyList = new GoodsClassifyList();
@@ -217,6 +221,11 @@ public class GoodsService {
         return AppResponse.success("查询成功",goodsClassifyList);
     }
 
+    /**
+     * 商品详情
+     * @param goodsId
+     * @return
+     */
     public AppResponse getGoods(String goodsId){
         GoodsInfo data = goodsDao.getGoods(goodsId);
         return AppResponse.success("查询成功",data);

@@ -135,7 +135,6 @@ public class MenuService {
 //            // 获取菜单范围代码
 //            menu.setAuthCode(menuDao.getAuthCode(menu));
 //        }
-
         menu.setId(UUIDUtils.getUUID());
         menu.setMenuId(menuCode);
         menu.setIsDeleted(GlobalConstant.ZF_BJ_N);
@@ -184,7 +183,6 @@ public class MenuService {
     /*if (null == menu.getAuthCode() || "".equals(menu.getAuthCode())) {
         menu.setParentMenuCode(GlobalConstant.MENU_ROOT);
     }*/
-
         // 获取所有菜单
         List<MenuVO> menuList2 = menuDao.listUserMenus(menu);
         MenuList menuList = new MenuList();

@@ -27,7 +27,7 @@ public class GoodsController {
 
     /**
      * app客户端显示商品信息
-     * @param skuNo
+     * @param goodsId
      * @return
      * @author housum
      * @date 2020-4-16

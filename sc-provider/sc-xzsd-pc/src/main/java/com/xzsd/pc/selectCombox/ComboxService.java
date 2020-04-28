@@ -15,7 +15,13 @@ import java.util.List;
 public class ComboxService {
     @Resource ComboxDao comboxDao;
 
+    /**
+     * 地区下拉框
+     * @param regionInfo
+     * @return
+     */
     public AppResponse listArea(RegionInfo regionInfo){
+        //省的下拉表
         if ("0".equals(regionInfo.getAreaId())){
             regionInfo.setAreaId("100000");
         }

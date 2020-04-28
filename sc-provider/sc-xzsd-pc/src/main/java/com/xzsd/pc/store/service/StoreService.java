@@ -67,9 +67,7 @@ public class StoreService {
             }else {
                 return AppResponse.bizError("此店长账号已绑定另外门店，请重新输入！");
             }
-
         }
-
     }
 
     /**
@@ -163,7 +161,7 @@ public class StoreService {
 
 
     /**
-     * 地区 省的下拉框
+     * 地区 下拉框
      * @param regionInfo
      * @author housum
      * @date 2020-4-13

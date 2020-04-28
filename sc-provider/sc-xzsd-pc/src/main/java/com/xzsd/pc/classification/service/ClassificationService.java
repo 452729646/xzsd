@@ -78,12 +78,12 @@ public class ClassificationService {
         classificationInfo.setIsDeleted(0);
         classificationInfo.setIsParent(1);
         // 新增用户
-        int count = classificationDao.saveSonCate(classificationInfo);
-        if (0 == count) {
+        int countSaveSonCate = classificationDao.saveSonCate(classificationInfo);
+        if (0 == countSaveSonCate) {
             return AppResponse.bizError("新增失败，请重试！");
         }
-        int count2 = classificationDao.saveSonCateParent(classificationInfo.getClassifyId(),cateCodeParent);
-        if (0 == count2) {
+        int countSaveSonCateParent = classificationDao.saveSonCateParent(classificationInfo.getClassifyId(),cateCodeParent);
+        if (0 == countSaveSonCateParent) {
             return AppResponse.bizError("新增失败，请重试！");
         }
         return AppResponse.success("新增成功！");
@@ -122,7 +122,7 @@ public class ClassificationService {
 
     /**
      * demo 查询用分类详情
-     * @param cateCode
+     * @param
      * @return
      * @Author housum
      * @Date 2020-03-21
@@ -135,7 +135,7 @@ public class ClassificationService {
 
     /**
      * demo 删除分类  要判断是否是父类 父类的话 要把子类全部删除
-     * @param cateCode
+     * @param
      * @param userCode
      * @return
      * @Author dingning

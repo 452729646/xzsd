@@ -114,6 +114,7 @@ public class OrderService {
                 return AppResponse.bizError("返回库存失败");
             }
         }
+        //更新订单状态
         int count = orderDao.updateOrderState(mapList);
         if (0 == count){
             return AppResponse.bizError("数据有更新，请重试！");

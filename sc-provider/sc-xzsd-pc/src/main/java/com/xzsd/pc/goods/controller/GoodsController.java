@@ -158,7 +158,7 @@ public class GoodsController {
 
     /**
      * 一级分类下来框
-     * @param classificationInfo
+     * @param classifyId
      * @return
      */
     @RequestMapping(value = "listGoodsClassify")
@@ -172,6 +172,11 @@ public class GoodsController {
         }
     }
 
+    /**
+     * 商品详情
+     * @param goodsId
+     * @return
+     */
     @RequestMapping("getGoods")
     public AppResponse getGoods(String goodsId){
         try {

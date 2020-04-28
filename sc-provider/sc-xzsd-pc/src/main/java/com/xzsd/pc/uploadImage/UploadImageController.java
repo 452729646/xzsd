@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
 
+/**
+ * 上传图片腾讯云
+ */
 
 @RestController
 @RequestMapping("/imageUpload")
@@ -22,7 +25,6 @@ public class UploadImageController {
     @PostMapping("uploadImage")
     public AppResponse uploadImage( MultipartFile imageFile) throws IOException {
         try{
-
             AppResponse appResponse = uploadImageService.uploadImage(imageFile);
             return appResponse;
         }catch (Exception e){

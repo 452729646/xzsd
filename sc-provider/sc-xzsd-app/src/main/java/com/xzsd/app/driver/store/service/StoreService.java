@@ -28,8 +28,8 @@ public class StoreService {
      */
     public AppResponse listStore(StoreInfo storeInfo){
         List<StoreInfo> listStoreInfo = storeDao.listStoreByPage(storeInfo);
-        StoreInfo storeInfo1 = new StoreInfo();
-        storeInfo1.setList(listStoreInfo);
-        return AppResponse.success("查询成功",storeInfo1);
+        StoreInfo storeInfoVO = new StoreInfo();
+        storeInfoVO.setList(listStoreInfo);
+        return AppResponse.success("查询成功",storeInfoVO);
     }
 }

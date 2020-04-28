@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * 顶栏部的个人信息
+ */
 @RestController
 @RequestMapping("/topOfColumn")
 public class TopController {

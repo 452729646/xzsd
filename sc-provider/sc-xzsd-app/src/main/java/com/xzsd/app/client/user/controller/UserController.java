@@ -104,6 +104,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改头像
+     * @param userInfo
+     * @return
+     */
     @PostMapping("updateHeadPicture")
     public AppResponse updateHeadPicture(UserInfo userInfo){
         try{
@@ -118,6 +123,10 @@ public class UserController {
         }
     }
 
+    /**
+     * 通过userCode查出role
+     * @return
+     */
     @PostMapping("roleByUserCode")
     public AppResponse roleByUserCode(){
         try{

@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+/**
+ * 修改邀请码
+ */
 @Service
 public class ClientInfoService {
 

@@ -165,4 +165,13 @@
            and user_code != #{userId}
         </if>
     </select>
+
+<!--    获取role-->
+    <select id="getRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        role
+        from t_sys_user
+        where is_deleted = 0
+        and user_code = #{userCode}
+    </select>
 </mapper>

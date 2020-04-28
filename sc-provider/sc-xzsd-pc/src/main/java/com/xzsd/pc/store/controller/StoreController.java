@@ -64,7 +64,7 @@ public class StoreController {
 
     /**
      *查询门店详情
-     * @param storeNo
+     * @param
      * @author housum
      * @date 2020-4-3
      */

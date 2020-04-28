@@ -26,6 +26,11 @@ public class UserInformationController {
     @Resource UserInformationService userInformationService;
     @Resource UserService userService;
 
+    /**
+     * 获取登录用户的个人信息
+     * @param userInformationInfo
+     * @return
+     */
     @PostMapping("/getUser")
     public AppResponse getUser(UserInformationInfo userInformationInfo){
         try{

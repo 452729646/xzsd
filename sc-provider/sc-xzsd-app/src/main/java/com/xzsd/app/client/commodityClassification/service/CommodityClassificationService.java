@@ -29,8 +29,6 @@ public class CommodityClassificationService {
      * @Author housum
      * @Date 2020-04-13
      */
-    //回滚
-
     public AppResponse listFatherCate(){
         List<CommodityClassificationInfo> fatherCateInfoList = commodityClassificationDao.listFatherCateByPage();
         return AppResponse.success("查询成功！",getPageInfo(fatherCateInfoList));

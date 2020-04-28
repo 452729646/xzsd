@@ -54,6 +54,9 @@ public class DriverService {
         if ("2".equals(driverInfo.getNowRole())){
             return AppResponse.bizError("店长无权限");
         }
+        if ("3".equals(driverInfo.getNowRole())){
+            return AppResponse.bizError("司机无权限");
+        }
         //检验账号是否存在
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct) {
@@ -65,13 +68,13 @@ public class DriverService {
         driverInfo.setUserCode(userCode);
         driverInfo.setIsDeleted(0);
         //在司机表添加司机
-        int count = driverDao.saveDriver(driverInfo);
+        int countSaveDriver = driverDao.saveDriver(driverInfo);
         //在用户表添加用户
-        int count2 = driverDao.saveUser(driverInfo);
-        if (0 == count) {
+        int countSaveUser = driverDao.saveUser(driverInfo);
+        if (0 == countSaveDriver) {
             return AppResponse.success("新增失败，请重试！");
         }
-        if (0 == count2){
+        if (0 == countSaveUser){
             return AppResponse.success("在用户表新增用户失败，请重试！");
         }
         return AppResponse.success("新增成功！");
@@ -151,6 +154,9 @@ public class DriverService {
     public AppResponse deleteDriver(String driverId , String userCode,String nowRole){
         if ("2".equals(nowRole)){
             return AppResponse.bizError("店长无权限");
+        }
+        if ("3".equals(nowRole)){
+            return AppResponse.bizError("司机无权限");
         }
         List<String> listDriverNo = Arrays.asList(driverId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功");

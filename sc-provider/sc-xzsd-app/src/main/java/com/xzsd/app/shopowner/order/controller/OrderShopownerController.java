@@ -75,7 +75,7 @@ public class OrderShopownerController {
             orderShopownerInfo.setUserId(userCode);
             return orderShopownerService.updateOrderState(orderShopownerInfo);
         } catch (Exception e) {
-            logger.error("修改订单到货错误", e);
+            logger.error("修改订单状态错误", e);
             System.out.println(e.toString());
             throw e;
         }

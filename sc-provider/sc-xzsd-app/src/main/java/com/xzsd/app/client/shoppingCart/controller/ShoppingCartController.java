@@ -86,6 +86,11 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * 购物车列表
+     * @param shoppingCartInfo
+     * @return
+     */
     @PostMapping("listShoppingCarts")
     public AppResponse listCart(ShoppingCartInfo shoppingCartInfo){
         try {

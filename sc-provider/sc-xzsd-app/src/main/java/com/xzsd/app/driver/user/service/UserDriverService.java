@@ -17,6 +17,11 @@ public class UserDriverService {
     @Resource
     UserDriverDao userDriverDao;
 
+    /**
+     * 司机个人信息
+     * @param userDriverInfo
+     * @return
+     */
     public AppResponse userDetail(UserDriverInfo userDriverInfo){
         UserDriverInfo data = userDriverDao.userDetail(userDriverInfo);
         return AppResponse.success("查询成功",data);

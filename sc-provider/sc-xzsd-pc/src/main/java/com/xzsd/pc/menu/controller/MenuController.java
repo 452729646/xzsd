@@ -65,7 +65,6 @@ public class MenuController {
         try {
             String userId = SecurityUtils.getCurrentUserId();
             menu.setLastModifiedBy(userId);
-
             return menuService.deleteMenu(menu);
         } catch (Exception e) {
             logger.error("菜单删除错误", e);
@@ -124,7 +123,6 @@ public class MenuController {
             String userId =  SecurityUtils.getCurrentUserId();
             // 菜单范围代码
 //            String authCode = request.getParameter("authCode");
-
             return  menuService.listUserMenus(userId);
         } catch (Exception e) {
             logger.error("获取菜单失败", e);

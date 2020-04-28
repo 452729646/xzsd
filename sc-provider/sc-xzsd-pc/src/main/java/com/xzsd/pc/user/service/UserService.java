@@ -1,6 +1,7 @@
 package com.xzsd.pc.user.service;
 
 import com.neusoft.core.restful.AppResponse;
+import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 import com.neusoft.util.UUIDUtils;
 import com.xzsd.pc.user.dao.UserDao;
@@ -39,6 +40,9 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveUser(UserInfo userInfo) {
+        if ("4".equals(userInfo.getNowRole())||"3".equals(userInfo.getNowRole())){
+            return AppResponse.bizError("无法创建用户");
+        }
         if (userInfo.getRole().equals(userInfo.getNowRole())){
             return AppResponse.bizError("管理员无法创建管理员账号");
         }
@@ -83,6 +87,11 @@ public class UserService {
      */
     //@SystemLog(operation = "获取用户列表。。。。。")
     public AppResponse listUsers(UserInfo userInfo) {
+        //获取role 客户不显示用户列表
+        String role = userDao.getRole(SecurityUtils.getCurrentUserId());
+        if ("4".equals(role) || "3".equals(role)){
+            return AppResponse.bizError("客户不能查询用户列表");
+        }
         List<UserInfo> userInfoList = userDao.listUsersByPage(userInfo);
         return AppResponse.success("查询成功！", getPageInfo(userInfoList));
     }

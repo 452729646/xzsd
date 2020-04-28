@@ -23,7 +23,7 @@ public interface UserDao {
 
     /**
      * 获取用户信息
-     * @param userCode 用户代码
+     * @param  用户代码
      * @return 用户信息
      */
     UserInfo getUserById(@Param("userId") String userId);
@@ -61,4 +61,11 @@ public interface UserDao {
      * @return
      */
     int countUserAcct(UserInfo userInfo);
+
+    /**
+     * 获取role
+     * @param userCode
+     * @return
+     */
+    String getRole(@Param("userCode")String userCode);
 }

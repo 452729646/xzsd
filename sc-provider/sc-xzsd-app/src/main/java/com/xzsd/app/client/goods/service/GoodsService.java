@@ -54,6 +54,7 @@ public class GoodsService {
      */
     public AppResponse listEvaluateBySkuNo(EvaluateInfo evaluateInfo){
         List<EvaluateInfo> listEvaluateInfo = goodsDao.listEvaluateBySkuNoByPage(evaluateInfo);
+        //加密 隐藏客户账号的几个字符
         for (int j = 0 ; j < listEvaluateInfo.size(); j++) {
             char[] cs = listEvaluateInfo.get(j).getUserAcct().toCharArray();
             for(int i = cs.length - 1, d = 0; i>= 0 && d < 4; --i){
@@ -75,7 +76,6 @@ public class GoodsService {
      * @Author housum
      * @Date 2020-04-13
      */
-    //回滚
     public AppResponse listFatherCate(){
         List<CommodityClassificationInfo> fatherCateInfoList = commodityClassificationDao.listFatherCateByPage();
         ListFatherCateInfo listFatherCateInfo = new ListFatherCateInfo();

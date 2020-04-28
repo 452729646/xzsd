@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * 注册客户
+ */
 @RestController
 @RequestMapping("/register")
 public class RegisterController {

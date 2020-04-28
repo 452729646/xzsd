@@ -26,6 +26,11 @@ public class DriverShopownerController {
     @Resource
     DriverShopownerService driverShopownerService;
 
+    /**
+     * APP店长端查看相同地区的司机列表
+     * @param driverShopownerInfo
+     * @return
+     */
     @PostMapping("listManagerDrivers")
     public AppResponse listDriver(DriverShopownerInfo driverShopownerInfo){
         try{

@@ -20,6 +20,11 @@ public class DriverShopownerService {
     @Resource
     DriverShopownerDao driverShopownerDao;
 
+    /**
+     * APP店长端查看相同地区的司机列表
+     * @param driverShopownerInfo
+     * @return
+     */
     public AppResponse listDriver(DriverShopownerInfo driverShopownerInfo){
         //通过店长的userCode查询storeNo
         String storeNo = driverShopownerDao.selectStoreNo(driverShopownerInfo.getUserCode());
