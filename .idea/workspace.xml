@@ -1,46 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="完成修改参数  联调完">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="修改代码规范">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/clientInfo/service/ClientInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/clientInfo/service/ClientInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/commodityClassification/service/CommodityClassificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/commodityClassification/service/CommodityClassificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/goods/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/goods/controller/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/goods/service/GoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/register/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/register/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/register/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/register/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/shoppingCart/controller/ShoppingCartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/shoppingCart/controller/ShoppingCartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/store/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/store/controller/StoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/store/service/StoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/store/service/StoreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/user/service/UserDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/driver/user/service/UserDriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/driver/controller/DriverShopownerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/driver/controller/DriverShopownerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/driver/service/DriverShopownerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/driver/service/DriverShopownerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/order/controller/OrderShopownerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/shopowner/order/controller/OrderShopownerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/userInformation/UserInformationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/userInformation/UserInformationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/service/DriverService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/service/DriverService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/classification/service/ClassificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/classification/service/ClassificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/service/DriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/service/DriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/controller/GoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/controller/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/goods/service/GoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/hotgoods/service/HotGoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/hotgoods/service/HotGoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/menu/service/MenuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/conrtroller/PictureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/conrtroller/PictureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/service/PictureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/picture/service/PictureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/selectCombox/ComboxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/selectCombox/ComboxService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/controller/StoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/service/StoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/store/service/StoreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/top/controller/TopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/top/controller/TopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/uploadImage/UploadImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/uploadImage/UploadImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/uploadImage/UploadImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/uploadImage/UploadImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/UserDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/UserDaoMapper.xml" afterDir="false" />
     </list>
     <list id="da0a0863-e504-4295-a57e-70741577ee32" name="修改完app注册" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -113,7 +75,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26551723" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -432,7 +394,8 @@
       <workItem from="1587781331885" duration="28939000" />
       <workItem from="1587861538093" duration="38568000" />
       <workItem from="1587947996671" duration="36216000" />
-      <workItem from="1588034951203" duration="13994000" />
+      <workItem from="1588034951203" duration="14233000" />
+      <workItem from="1588087462490" duration="986000" />
     </task>
     <task id="LOCAL-00001" summary="新增订单模块">
       <created>1586521163145</created>
@@ -728,7 +691,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588045561201</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="修改代码规范">
+      <created>1588087154948</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1588087154948</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -822,7 +792,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修改好pc端 菜单权限" />
     <MESSAGE value="新增app客户端查询商品详情信息 查看该商品的评价列表" />
     <MESSAGE value="删除空行" />
     <MESSAGE value="新增图片上传接口" />
@@ -847,6 +816,7 @@
     <MESSAGE value="新增菜单详情" />
     <MESSAGE value="修改app客户端评价商品逻辑" />
     <MESSAGE value="完成修改参数  联调完" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成修改参数  联调完" />
+    <MESSAGE value="修改代码规范" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改代码规范" />
   </component>
 </project>
