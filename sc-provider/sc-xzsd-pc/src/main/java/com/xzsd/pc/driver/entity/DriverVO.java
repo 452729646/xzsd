@@ -4,16 +4,16 @@ public class DriverVO {
     /**
      * 司机编号
      */
-    private String driverNo;
+    private String driverId;
     /**
      * 司机名称
      *
      */
-    private String driverName;
+    private String userName;
     /**
      * 司机手机号
      */
-    private String driverPhone;
+    private String phone;
     /**
      * 身份证
      */
@@ -29,30 +29,30 @@ public class DriverVO {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
-    public String getDriverNo() {
-        return driverNo;
+    public String getDriverId() {
+        return driverId;
     }
 
-    public void setDriverNo(String driverNo) {
-        this.driverNo = driverNo;
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getDriverPhone() {
-        return driverPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDriverPhone(String driverPhone) {
-        this.driverPhone = driverPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getIdCard() {
@@ -79,11 +79,11 @@ public class DriverVO {
         this.userCode = userCode;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

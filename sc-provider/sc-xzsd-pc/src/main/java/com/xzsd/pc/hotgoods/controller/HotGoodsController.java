@@ -38,7 +38,7 @@ public class HotGoodsController {
      * @author housum
      * @Date 2020-03-27
      */
-    @PostMapping("saveHotGoods")
+    @PostMapping("addHotGoods")
     public AppResponse saveHotGoods(HotGoodsInfo hotGoodsInfo) {
         try {
             //获取用户id
@@ -78,7 +78,7 @@ public class HotGoodsController {
      * @author housum
      * @Date 2020-3-27
      */
-    @RequestMapping(value = "hotGoodsList")
+    @RequestMapping(value = "listHotGoods")
     public AppResponse hotGoodsList(HotGoodsVo hotGoodsVo) {
         try {
             return hotGoodsService.hotGoodsList(hotGoodsVo);
@@ -113,10 +113,10 @@ public class HotGoodsController {
      * @date 2020-3-27
      */
     @RequestMapping(value = "deleteHotGoods")
-    public AppResponse deleteHotGoods(String hotGoodsCode) {
+    public AppResponse deleteHotGoods(String hotGoodsId) {
         try {
             String userCode =SecurityUtils.getCurrentUserId();
-            return hotGoodsService.deleteHotGoods(hotGoodsCode, userCode);
+            return hotGoodsService.deleteHotGoods(hotGoodsId, userCode);
         } catch (Exception e) {
             logger.error("删除热门商品异常", e);
             System.out.println(e.toString());
@@ -130,11 +130,11 @@ public class HotGoodsController {
      * @date 2020-4-13
      *
      */
-    @RequestMapping("setDisplayCnt")
-    public AppResponse setDisplayCnt(int displayCnt,int version){
+    @RequestMapping("updateHotGoodsShowNum")
+    public AppResponse setDisplayCnt(int hotGoodsShowNum,int version){
         try{
             String userCode =SecurityUtils.getCurrentUserId();
-            return hotGoodsService.setDisplayCnt(displayCnt, userCode,version);
+            return hotGoodsService.setDisplayCnt(hotGoodsShowNum, userCode,version);
         }catch (Exception e) {
             logger.error("设置热门商品展示数量异常", e);
             System.out.println(e.toString());
@@ -149,12 +149,30 @@ public class HotGoodsController {
      * @date 2020-4-13
      *
      */
-    @RequestMapping("selectDisplayCnt")
+    @RequestMapping("getHotGoodsShowNum")
     public AppResponse selectDisplayCnt(HotGoodsVo hotGoodsVo){
         try{
             return hotGoodsService.selectDisplayCnt(hotGoodsVo);
         }catch (Exception e) {
             logger.error("查询热门商品展示数量异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+
+    /**
+     * 查询热门商品详情
+     *
+     * @author housum
+     * @Date 2020-3-27
+     */
+    @RequestMapping(value = "getHotGoods")
+    public AppResponse getHotGoods(HotGoodsVo hotGoodsVo) {
+        try {
+            return hotGoodsService.getHotGoods(hotGoodsVo);
+        } catch (Exception e) {
+            logger.error("查询热门商品列表异常", e);
             System.out.println(e.toString());
             throw e;
         }

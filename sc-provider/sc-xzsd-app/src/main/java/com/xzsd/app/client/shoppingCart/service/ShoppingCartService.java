@@ -33,9 +33,9 @@ public class ShoppingCartService {
         //检验该用户所选择的商品是否存在购物车
         int countGoods = shoppingCartDao.countGoods(shoppingCartInfo);
         if (0 != countGoods){
-            //获取version
-            int version = shoppingCartDao.selectVersion(shoppingCartInfo);
-            shoppingCartInfo.setVersion(version);
+//            //获取version
+//            int version = shoppingCartDao.selectVersion(shoppingCartInfo);
+//            shoppingCartInfo.setVersion(version);
             //说明购物车已存在该商品 应该是修改商品数量
             int countUpdateCart = shoppingCartDao.updateCartInSave(shoppingCartInfo);
             if (0 == countUpdateCart){
@@ -43,7 +43,7 @@ public class ShoppingCartService {
             }
             return AppResponse.success("新增购物车成功");
         }
-        shoppingCartInfo.setShoppingCartCode(StringUtil.getCommonCode(6));
+        shoppingCartInfo.setShopCartId(StringUtil.getCommonCode(6));
         shoppingCartInfo.setIsDeleted(0);
         //新增购物车
         int count = shoppingCartDao.saveShoppingCart(shoppingCartInfo);
@@ -83,7 +83,7 @@ public class ShoppingCartService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteCart(ShoppingCartInfo shoppingCartInfo){
         //选择多个购物车商品code 放进一个list
-        List<String> listShoppingCartCode = Arrays.asList(shoppingCartInfo.getShoppingCartCode().split(","));
+        List<String> listShoppingCartCode = Arrays.asList(shoppingCartInfo.getShopCartId().split(","));
         //获取userCode
         String userCode = shoppingCartInfo.getUserCode();
         int count = shoppingCartDao.deleteCart(listShoppingCartCode,userCode);

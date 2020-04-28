@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @Date 2020-4-17
  */
 @RestController
-@RequestMapping("/shoppingCart")
+@RequestMapping("/clientShopCart")
 public class ShoppingCartController {
     private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
     @Resource
@@ -30,7 +30,7 @@ public class ShoppingCartController {
      * @param shoppingCartInfo
      * @return
      */
-    @PostMapping("saveShoppingCart")
+    @PostMapping("addShoppingCart")
     public AppResponse saveShoppingCart(ShoppingCartInfo shoppingCartInfo){
         try{
             //获取用户编号
@@ -51,7 +51,7 @@ public class ShoppingCartController {
      * @author housum
      * @date 2020-4-17
      */
-    @PostMapping("updateCart")
+    @PostMapping("updateShoppingCart")
     public AppResponse updateCart(ShoppingCartInfo shoppingCartInfo){
         try{
             //获取用户编号
@@ -72,7 +72,7 @@ public class ShoppingCartController {
      * @author housum
      * @date 2020-4-17
      */
-    @PostMapping("deleteCart")
+    @PostMapping("deleteShoppingCart")
     public AppResponse deleteCart(ShoppingCartInfo shoppingCartInfo){
         try{
             //获取用户编号
@@ -86,7 +86,7 @@ public class ShoppingCartController {
         }
     }
 
-    @PostMapping("listCart")
+    @PostMapping("listShoppingCarts")
     public AppResponse listCart(ShoppingCartInfo shoppingCartInfo){
         try {
             //获取用户编号

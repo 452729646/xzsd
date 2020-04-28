@@ -18,14 +18,14 @@ import javax.annotation.Resource;
  * @date 2020-4-21
  */
 @RestController
-@RequestMapping("/storeInDriver")
+@RequestMapping("/driverHome")
 public class StoreController {
     private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 
     @Resource
     StoreService storeService;
 
-    @PostMapping("listStore")
+    @PostMapping("listDriverStores")
     private AppResponse listStore(StoreInfo storeInfo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();

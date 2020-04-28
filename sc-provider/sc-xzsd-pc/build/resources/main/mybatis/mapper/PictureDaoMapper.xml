@@ -7,9 +7,9 @@
         select count(sort_no)
         from t_sys_picture
         where is_deleted = 0
-        and sort_no = #{sortNo}
-        <if test="bannerCode != null and bannerCode != ''">
-            and banner_code != #{bannerCode}
+        and sort_no = #{slideshowNum}
+        <if test="slideshowId != null and slideshowId != ''">
+            and banner_code != #{slideshowId}
         </if>
     </select>
 
@@ -31,13 +31,13 @@
          update_user,
          version)
         values
-           (#{imageUrl},
-            #{bannerCode},
-            #{sortNo},
+           (#{imagePath},
+            #{slideshowId},
+            #{slideshowNum},
             #{startTime},
             #{endTime},
-            #{skuNo},
-            #{pictureState},
+            #{goodsId},
+            #{slideshowStateId},
             #{isDeleted},
             now(),
             #{createBy},
@@ -55,7 +55,7 @@
         update_user = #{userCode},
         version = version + 1
         where banner_code in
-        <foreach item='item' index='index' collection="listBannerCode" open="(" separator="," close=")">
+        <foreach item='item' index='index' collection="listSlideshowId" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
@@ -63,40 +63,34 @@
     <!--轮播图列表信息-->
     <select id="listPictureByPage" parameterType="com.xzsd.pc.picture.entity.PictureInfo" resultType="com.xzsd.pc.picture.entity.PictureInfo">
         select
-        a.sort_no sortNo,
-        a.image_url imageUrl,
-        a.picture_state pictureState,
+        a.sort_no slideshowNum,
+        a.image_url slideshowPath,
+        a.picture_state slideshowStateId,
         a.start_time startTime,
         a.end_time endTime,
-        a.is_deleted,
-        a.create_time,
-        a.create_user,
-        a.update_time,
-        a.update_user,
+        a.banner_code slideshowId,
         a.version
         from t_sys_picture a
         where a.is_deleted = 0
-        <if test="pictureState != null and pictureState != ''">
-            and a.picture_state = #{pictureState}
+        <if test="slideshowStateId != null and slideshowStateId != ''">
+            and a.picture_state = #{slideshowStateId}
         </if>
-        order by create_time desc
+        order by a.sort_no ASC
     </select>
 
 
     <!--启用轮播图-->
-    <update id='pictureUpper' parameterType="com.xzsd.pc.picture.entity.PictureInfo">
+    <update id='pictureUpper' parameterType="java.util.List">
+        <foreach item='mapList' index='index' collection="list" separator=";">
         update t_sys_picture a
         set
-        a.picture_state = 1,
+        a.picture_state = #{mapList.slideshowStateId},
         a.update_time = now(),
-        a.update_user = #{userCode},
+        a.update_user = #{mapList.userCode},
         a.version = a.version + 1
-        where banner_code in
-        <foreach item='item' index='index' collection="listBannerCode" open="(" separator="," close=")">
-            #{item}
+        where a.banner_code = #{mapList.slideshowId}
+        and a.version = #{mapList.version}
         </foreach>
-        and a.version = #{version}
-        and picture_state = 0
     </update>
 
     <!--下架商品-->
@@ -115,4 +109,16 @@
         and a.picture_state = 1
     </update>
 
+<!--    上架商品列表-->
+    <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
+        select
+        a.sku_no goodsId,
+        a.sku_name goodsName,
+        a.sku_state goodsStateId,
+        b.cate_name_parent oneClassifyName,
+        b.cate_name twoClassifyName
+        from t_sys_goods a,t_sys_classification b
+        where a.is_deleted = 0 and a.cate_code = b.cate_code
+        and a.sku_state = 1
+    </select>
 </mapper>

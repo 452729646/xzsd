@@ -21,27 +21,27 @@ public interface OrderShopownerDao {
      * @param userCode
      * @return
      */
-    String selectStoreNo(@Param("userCode")String userCode);
+    String selectStoreNo(@Param("userId")String userCode);
     /**
      * 通过StoreNo查询订单
      * @param orderShopownerInfo
      * @return
      */
-    List<OrderShopownerVO> listOrderByStoreNoByPage(OrderShopownerInfo orderShopownerInfo);
+    List<OrderShopownerInfo> listOrderByStoreNoByPage(OrderShopownerInfo orderShopownerInfo);
 
     /**
      * 通过orderId查询订单详情
      * @param
      */
-    OrderShopownerVO orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo);
+    OrderShopownerInfo orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo);
 
     /**
-     * 修改订单状态 订单到货
+     * 修改订单状态
      * @param
      * @param
      * @author housum
      */
-    int orderArrival (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
+    int updateOrderState (OrderShopownerInfo orderShopownerInfo);
 
     /**
      * 修改订单状态 订单已取货

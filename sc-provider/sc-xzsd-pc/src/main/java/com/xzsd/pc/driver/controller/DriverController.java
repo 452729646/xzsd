@@ -31,7 +31,7 @@ public class DriverController {
      * @author housum
      * @date 2020-4-8
      */
-    @PostMapping("saveDriver")
+    @PostMapping("addDriver")
     public AppResponse saveDriver (DriverInfo driverInfo){
         try{
             //获取用户id
@@ -52,12 +52,12 @@ public class DriverController {
      * @author housum
      * @date 2020-4-8
      */
-    @PostMapping("listDriver")
+    @PostMapping("listDrivers")
     public AppResponse driverList(DriverInfo driverInfo){
         try {
             return driverService.listDriver(driverInfo);
         } catch (Exception e) {
-            logger.error("查询用户列表异常", e);
+            logger.error("查询司机列表异常", e);
             System.out.println(e.toString());
             throw e;
         }
@@ -69,10 +69,10 @@ public class DriverController {
      * @author housum
      * @date 2020-4-8
      */
-    @PostMapping("driverDetail")
-    public AppResponse driverDetail(String driverNo){
+    @PostMapping("getDriver")
+    public AppResponse driverDetail(String driverId){
         try{
-            return driverService.driverDetail(driverNo);
+            return driverService.driverDetail(driverId);
         }catch (Exception e){
             logger.error("查询该司机详情异常",e);
             System.out.println(e.toString());
@@ -91,6 +91,7 @@ public class DriverController {
         try{
             String userCode = SecurityUtils.getCurrentUserId();
             driverInfo.setLastModifiedBy(userCode);
+            driverInfo.setUserCode(userCode);
             return driverService.updateDriver(driverInfo);
         }catch(Exception e){
             logger.error("修改司机信息错误");
@@ -103,10 +104,10 @@ public class DriverController {
      * 删除司机信息
      */
     @PostMapping("deleteDriver")
-    public AppResponse deleteDriver(String driverNo){
+    public AppResponse deleteDriver(String driverId,String nowRole){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
-            return driverService.deleteDriver(driverNo,userCode);
+            return driverService.deleteDriver(driverId,userCode,nowRole);
         }catch (Exception e){
             logger.error("删除司机信息失败",e);
             System.out.println(e.toString());

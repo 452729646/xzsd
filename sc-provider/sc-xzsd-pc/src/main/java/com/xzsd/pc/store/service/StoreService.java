@@ -1,14 +1,12 @@
 package com.xzsd.pc.store.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.neusoft.util.StringUtil;
 
 import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.store.dao.StoreDao;
-import com.xzsd.pc.store.entity.RegionInfo;
+import com.xzsd.pc.selectCombox.RegionInfo;
 import com.xzsd.pc.store.entity.StoreDetailVo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.springframework.stereotype.Service;
@@ -41,6 +39,9 @@ public class StoreService {
     //回滚
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveStore(StoreInfo storeInfo){
+        if ("2".equals(storeInfo.getNowRole())){
+            return AppResponse.bizError("店长无权限");
+        }
         // 校验门店名称是否存在
         int countStoreName = storeDao.countStoreName(storeInfo);
         if(0 != countStoreName) {
@@ -54,7 +55,7 @@ public class StoreService {
         }else{
             if (0 == countManagerAcct){
                 String storeNo = StringUtil.getStoreNo();
-                storeInfo.setStoreNo(storeNo);
+                storeInfo.setStoreId(storeNo);
                 storeInfo.setInvitationCode(storeNo);
                 storeInfo.setIsDeleted(0);
                 //新增门店
@@ -84,11 +85,11 @@ public class StoreService {
         String userCode = SecurityUtils.getCurrentUserId();
         //通过userCode查询role
         int role = orderDao.roleByUserCode(userCode);
-        //role=1为店长
-        if (1 == role){
+        //role=2为店长
+        if (2 == role){
             //拿出该店长的门店编号
             String storeNo = orderDao.storeNoByUserCode(userCode);
-            storeInfo.setStoreNo(storeNo);
+            storeInfo.setStoreId(storeNo);
         }
         List<StoreInfo> listInfoStore = storeDao.listStoreByPage(storeInfo);
         return AppResponse.success("查询成功！",  getPageInfo(listInfoStore));
@@ -102,8 +103,8 @@ public class StoreService {
      * @date 2020-4-3
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse storeDetail(String storeNo){
-        StoreDetailVo data = storeDao.storeDetail(storeNo);
+    public AppResponse storeDetail(StoreDetailVo storeDetailVo){
+        StoreDetailVo data = storeDao.storeDetail(storeDetailVo);
         if (data == null || "".equals(data) ){
             return AppResponse.bizError("查询失败，请重试");
         }
@@ -146,8 +147,11 @@ public class StoreService {
      * 删除门店信息
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteStore(String storeNo , String userCode){
-        List<String> listStoreNo = Arrays.asList(storeNo.split(","));
+    public AppResponse deleteStore(String storeId , String userCode,String nowRole){
+        if ("2".equals(nowRole)){
+            return AppResponse.bizError("店长无权限");
+        }
+        List<String> listStoreNo = Arrays.asList(storeId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户istSkuN
         int count = storeDao.deteleStore(listStoreNo,userCode);

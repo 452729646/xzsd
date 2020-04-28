@@ -41,7 +41,7 @@ public class GoodsController {
      * @Date 2020-03-24
      */
 
-    @PostMapping("saveGoods")
+    @PostMapping("addGoods")
     public AppResponse saveGoods(GoodsInfo goodsInfo) {
         try {
             //获取用户id
@@ -64,11 +64,11 @@ public class GoodsController {
      * @Date 2020-03-21
      */
     @PostMapping("deleteGoods")
-    public AppResponse deleteGoods(String skuNo) {
+    public AppResponse deleteGoods(String goodsId) {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return goodsService.deleteGoods(skuNo,userCode);
+            return goodsService.deleteGoods(goodsId,userCode);
         } catch (Exception e) {
             logger.error("商品删除错误", e);
             System.out.println(e.toString());
@@ -122,12 +122,13 @@ public class GoodsController {
      * @author housum
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "goodsUpper")
-    public AppResponse goodsUpper(String skuNo, int version) {
+    @RequestMapping(value = "updateGoodsShelfState")
+    public AppResponse goodsUpper(GoodsInfo goodsInfo) {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return goodsService.goodsUpper(skuNo, userCode, version);
+            goodsInfo.setUserId(userCode);
+            return goodsService.goodsUpper(goodsInfo);
         } catch (Exception e) {
             logger.error("商品上架错误", e);
             System.out.println(e.toString());
@@ -150,6 +151,33 @@ public class GoodsController {
             return goodsService.goodsLower(skuNo, userCode, version);
         } catch (Exception e) {
             logger.error("商品下架错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 一级分类下来框
+     * @param classificationInfo
+     * @return
+     */
+    @RequestMapping(value = "listGoodsClassify")
+    public AppResponse listFateCate(String classifyId) {
+        try {
+            return goodsService.listGoodsClassify(classifyId);
+        } catch (Exception e) {
+            logger.error("查询分类列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    @RequestMapping("getGoods")
+    public AppResponse getGoods(String goodsId){
+        try {
+            return goodsService.getGoods(goodsId);
+        }catch (Exception e) {
+            logger.error("查询商品详情异常", e);
             System.out.println(e.toString());
             throw e;
         }

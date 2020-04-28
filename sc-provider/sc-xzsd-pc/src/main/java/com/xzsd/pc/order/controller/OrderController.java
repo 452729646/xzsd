@@ -33,7 +33,7 @@ public class OrderController {
      * @author housum
      * @date 2020-4-10
      */
-    @PostMapping("listOrder")
+    @PostMapping("listOrders")
     public AppResponse listOrder(OrderVO orderVO ){
         try{
 
@@ -52,7 +52,7 @@ public class OrderController {
      * @author housum
      * @date 2020-4-10
      */
-    @PostMapping("orderDetail")
+    @PostMapping("getListOrder")
     public AppResponse orderDetail(OrderDetailVO orderDetailVO,String orderId ){
         try{
             return orderService.orderDetail(orderDetailVO,orderId);
@@ -68,12 +68,13 @@ public class OrderController {
      * @return App
      * @date 2020-4-10
      */
-    @PostMapping("orderArrival")
-    public AppResponse orderArrival (String orderId,String version){
+    @PostMapping("updateOrderState")
+    public AppResponse updateOrderState (OrderInfo orderInfo){
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return orderService.orderArrival(orderId,version,userCode);
+            orderInfo.setUserCode(userCode);
+            return orderService.updateOrderState(orderInfo);
         } catch (Exception e) {
             logger.error("修改订单到货错误", e);
             System.out.println(e.toString());

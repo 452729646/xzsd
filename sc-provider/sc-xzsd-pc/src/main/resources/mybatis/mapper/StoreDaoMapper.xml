@@ -8,29 +8,29 @@
         from t_sys_store
         where is_deleted = 0
         and  store_name = #{storeName}
-        <if test="storeNo != null and storeNo != ''">
-            and store_no != #{storeNo}
+        <if test="storeId != null and storeId != ''">
+            and store_no != #{storeId}
         </if>
 
 
     </select>
     <!--统计是否存在该店长数量-->
     <select id="countUserAcct" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
-        select count(user_acct)
+        select count(user_code)
         from t_sys_user
         where is_deleted = 0
-        and role = 1
-        and  user_acct = #{userAcct}
+        and role = 2
+        and  user_code = #{userId}
     </select>
 
     <!--统计是否存在该店长数量-->
     <select id="countManagerAcct" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
-        select count(user_acct)
+        select count(user_code)
         from t_sys_store
         where is_deleted = 0
-        and  user_acct = #{userAcct}
-        <if test="storeNo != null and storeNo != ''">
-            and store_no != #{storeNo}
+        and  user_code = #{userId}
+        <if test="storeId != null and storeId != ''">
+            and store_no != #{storeId}
         </if>
     </select>
 
@@ -40,11 +40,11 @@
         (store_no,
          store_name,
          store_phone,
-         user_acct,
+         user_code,
          business_license,
-         province,
-         city,
-         area,
+         province_no,
+         city_no,
+         area_no,
          store_address,
          invitation_code,
          is_deleted,
@@ -54,15 +54,15 @@
          update_user,
          version)
         values
-           (#{storeNo},
+           (#{storeId},
             #{storeName},
-            #{storePhone},
-            #{userAcct},
-            #{businessLicense},
-            #{provinceName},
-            #{cityName},
-            #{areaName},
-            #{storeAddress},
+            #{phone},
+            #{userId},
+            #{businessCode},
+            #{provinceId},
+            #{cityId},
+            #{areaId},
+            #{address},
             #{invitationCode},
             #{isDeleted},
             now(),
@@ -74,51 +74,58 @@
     <!--查询门店列表-->
     <select id="listStoreByPage" resultType="com.xzsd.pc.store.entity.StoreVO" parameterType="com.xzsd.pc.store.entity.StoreInfo">
         select
-        a.store_no storeNo,
+        a.store_no storeId,
         a.store_name storeName,
-        a.store_phone storePhone,
-        a.store_address storeAddress,
-        b.user_name managerName,
-        a.invitation_code invitationCode,
+        a.store_phone phone,
+        a.store_address address,
+        b.user_name userName,
+        a.invitation_code inviteCode,
+        b.user_acct userAcct,
         a.version version
         from
         t_sys_store a,
         t_sys_user b
-        where a.user_acct = b.user_acct
-        and a.is_deleted = 0
-        <if test="storeNo != null and storeNo != ''">
-            and a.store_no = #{storeNo}
+        where a.user_code = b.user_code
+        and a.is_deleted = 0 and b.is_deleted = 0
+        <if test="storeId != null and storeId != ''">
+            and a.store_no like concat('%', #{storeId}, '%')
         </if>
         <if test="storeName != null and storeName != ''">
             and a.store_Name like concat('%', #{storeName}, '%')
         </if>
-        <if test="managerName != null and managerName != ''">
-            and b.user_name like concat('%', #{managerName}, '%')
+        <if test="userName != null and userName != ''">
+            and b.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="provinceName != null and provinceName != ''">
-            and a.province like concat('%', #{provinceName}, '%')
+        <if test="provinceId != null and provinceId != ''">
+            and a.province_no like concat('%', #{provinceId}, '%')
         </if>
-        <if test="cityName != null and cityName != ''">
-            and a.city like concat('%', #{cityName}, '%')
+        <if test="cityId != null and cityId != ''">
+            and a.city_no like concat('%', #{cityId}, '%')
         </if>
-        <if test="areaName != null and areaName != ''">
-            and a.area like concat('%', #{areaName}, '%')
+        <if test="areaId != null and areaId != ''">
+            and a.area_no like concat('%', #{areaId}, '%')
         </if>
     </select>
 
     <!--查询门店详情-->
-    <select id="storeDetail" resultType="com.xzsd.pc.store.entity.StoreDetailVo">
+    <select id="storeDetail" parameterType="com.xzsd.pc.store.entity.StoreDetailVo" resultType="com.xzsd.pc.store.entity.StoreDetailVo">
         select
-        user_Acct managerAcct,
-        business_license businessLicense,
-        province provinceName,
-        city cityName,
-        area areaName,
-        store_address storeAddress,
-        store_name storeName
+        user_code userId,
+        business_license businessCode,
+        store_phone phone,
+        (select rname from region where id = (select province_no from t_sys_store where store_no = #{storeId})) provinceName,
+        (select rname from region where id = (select city_no from t_sys_store where store_no = #{storeId})) cityName,
+        (select rname from region where id = (select area_no from t_sys_store where store_no = #{storeId})) areaName,
+        province_no provinceId,
+        city_no cityId,
+        area_no areaId,
+        store_address address,
+        store_name storeName,
+        store_no storeId,
+        version version
         from t_sys_store
         where is_deleted = 0
-        and store_no = #{storeNo}
+        and store_no = #{storeId}
     </select>
 
     <!--修改门店信息-->
@@ -126,17 +133,17 @@
         update t_sys_store
         set
             store_name = #{storeName},
-            store_phone = #{storePhone},
-            user_acct = #{userAcct},
-            business_license = #{businessLicense},
-            province = #{provinceName},
-            city = #{cityName},
-            area = #{areaName},
-            store_address = #{storeAddress},
+            store_phone = #{phone},
+            user_acct = #{userId},
+            business_license = #{businessCode},
+            province_no = #{provinceId},
+            city_no = #{cityId},
+            area_no = #{areaId},
+            store_address = #{address},
             update_time = now(),
             update_user   = #{lastModifiedBy},
             version      = version + 1
-            where store_no = #{storeNo}
+            where store_no = #{storeId}
             and version = #{version}
     </update>
 
@@ -155,7 +162,7 @@
     </update>
 
     <!--查询省列表-->
-    <select id="listProvinceByPage" parameterType="com.xzsd.pc.store.entity.RegionInfo" resultType="com.xzsd.pc.store.entity.RegionInfo">
+    <select id="listProvinceByPage" parameterType="com.xzsd.pc.selectCombox.RegionInfo" resultType="com.xzsd.pc.selectCombox.RegionInfo">
         select
         id id,
         rname name,
@@ -166,7 +173,7 @@
     </select>
 
     <!--查询市区列表-->
-    <resultMap id="cityMap1" type="com.xzsd.pc.store.entity.RegionInfo">
+    <resultMap id="cityMap1" type="com.xzsd.pc.selectCombox.RegionInfo">
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="pid" column="pid"></result>
@@ -186,7 +193,7 @@
 
 
     <!--查找市列表-->
-    <select id="listCityByPage" resultType="com.xzsd.pc.store.entity.RegionInfo" parameterType="com.xzsd.pc.store.entity.RegionInfo">
+    <select id="listCityByPage" resultType="com.xzsd.pc.selectCombox.RegionInfo" parameterType="com.xzsd.pc.selectCombox.RegionInfo">
         SELECT
         id id,
         rname name,
@@ -197,7 +204,7 @@
     </select>
 
     <!--查找区列表-->
-    <select id="listAreaByPage" resultType="com.xzsd.pc.store.entity.RegionInfo" parameterType="com.xzsd.pc.store.entity.RegionInfo">
+    <select id="listAreaByPage" resultType="com.xzsd.pc.selectCombox.RegionInfo" parameterType="com.xzsd.pc.selectCombox.RegionInfo">
         SELECT
         id id,
         rname name,

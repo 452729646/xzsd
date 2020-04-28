@@ -26,6 +26,8 @@ public class DriverShopownerService {
         driverShopownerInfo.setStoreNo(storeNo);
         //查询列表
         List<DriverShopownerInfo> listDriverShopownerInfo = driverShopownerDao.listDriverByPage(driverShopownerInfo);
-        return AppResponse.success("查询成功",getPageInfo(listDriverShopownerInfo));
+        DriverShopownerInfo driverShopownerInfo1 = new DriverShopownerInfo();
+        driverShopownerInfo1.setList(listDriverShopownerInfo);
+        return AppResponse.success("查询成功",driverShopownerInfo1);
     }
 }

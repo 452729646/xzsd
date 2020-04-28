@@ -11,11 +11,11 @@ public class OrderVO {
     /**
      * 订单总价
      */
-    private BigDecimal paymentMoney;
+    private String orderAllCost;
     /**
      * 订单状态
      */
-    private int orderStatus;
+    private String orderStateId;
     /**
      * 支付状态
      */
@@ -23,7 +23,7 @@ public class OrderVO {
     /**
      * 门店编号
      */
-    private String storeNo;
+    private String storeId;
     /**
      * 下单人姓名
      */
@@ -31,7 +31,7 @@ public class OrderVO {
     /**
      * 下单人电话
      */
-    private String userPhone;
+    private String phone;
 //    /**
 //     * 付款时间
 //     */
@@ -40,15 +40,8 @@ public class OrderVO {
     /**
      * 下单时间
      */
-    private String createTime;
+    private String payTime;
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
 
     /**
      * 版本号
@@ -58,11 +51,13 @@ public class OrderVO {
     /**
      * 查询开始日期
      */
-    private String startTime;
-    private String endTime;
+    private String payTimeStart;
+    private String payTimeEnd;
 
-    private int role;
+    private String role;
     private String storeNo2;
+
+
 
     public String getStoreNo2() {
         return storeNo2;
@@ -72,29 +67,6 @@ public class OrderVO {
         this.storeNo2 = storeNo2;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
 
     public String getOrderId() {
         return orderId;
@@ -104,21 +76,7 @@ public class OrderVO {
         this.orderId = orderId;
     }
 
-    public BigDecimal getPaymentMoney() {
-        return paymentMoney;
-    }
 
-    public void setPaymentMoney(BigDecimal paymentMoney) {
-        this.paymentMoney = paymentMoney;
-    }
-
-    public int getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     public int getPayStatus() {
         return payStatus;
@@ -128,13 +86,6 @@ public class OrderVO {
         this.payStatus = payStatus;
     }
 
-    public String getStoreNo() {
-        return storeNo;
-    }
-
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
-    }
 
     public String getUserName() {
         return userName;
@@ -144,13 +95,7 @@ public class OrderVO {
         this.userName = userName;
     }
 
-    public String getUserPhone() {
-        return userPhone;
-    }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
 
 //    public String getPayTime() {
 //        return payTime;
@@ -166,5 +111,69 @@ public class OrderVO {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getOrderAllCost() {
+        return orderAllCost;
+    }
+
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
+    }
+
+    public String getOrderStateId() {
+        return orderStateId;
+    }
+
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
+    }
+
+    public String getPayTimeStart() {
+        return payTimeStart;
+    }
+
+    public void setPayTimeStart(String payTimeStart) {
+        this.payTimeStart = payTimeStart;
+    }
+
+    public String getPayTimeEnd() {
+        return payTimeEnd;
+    }
+
+    public void setPayTimeEnd(String payTimeEnd) {
+        this.payTimeEnd = payTimeEnd;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -10,90 +10,89 @@ public class HotGoodsVo {
     /**
      * 热门商品编号
      */
-    private String hotGoodsCode;
+    private String hotGoodsId;
     /**
      * 排序
      */
-    private int sortNo;
+    private int hotGoodsNum;
     /**
      * 商品编号
      */
-    private String skuNo;
-    private String skuName;
+    private String goodsId;
+    private String goodsName;
     /**
      * 售价
      */
-    private BigDecimal sellingPrice;
+    private String goodsPrice;
     /**
      * 介绍
      */
-    private String detail;
+    private String goodsDescribe;
     /**
      *
      * 展示数量
      */
-    private int displayCnt;
+    private int hotGoodsShowNum;
     /**
      * 版本号
      */
     private String version;
 
 
-
-    public int getDisplayCnt() {
-        return displayCnt;
+    public int getHotGoodsShowNum() {
+        return hotGoodsShowNum;
     }
 
-    public void setDisplayCnt(int displayCnt) {
-        this.displayCnt = displayCnt;
+    public void setHotGoodsShowNum(int hotGoodsShowNum) {
+        this.hotGoodsShowNum = hotGoodsShowNum;
     }
 
-    public String getHotGoodsCode() {
-        return hotGoodsCode;
+    public String getHotGoodsId() {
+        return hotGoodsId;
     }
 
-    public void setHotGoodsCode(String hotGoodsCode) {
-        this.hotGoodsCode = hotGoodsCode;
+    public void setHotGoodsId(String hotGoodsId) {
+        this.hotGoodsId = hotGoodsId;
     }
 
-    public int getSortNo() {
-        return sortNo;
+    public int getHotGoodsNum() {
+        return hotGoodsNum;
     }
 
-    public void setSortNo(int sortNo) {
-        this.sortNo = sortNo;
+    public void setHotGoodsNum(int hotGoodsNum) {
+        this.hotGoodsNum = hotGoodsNum;
     }
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getSkuName() {
-        return skuName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getGoodsDescribe() {
+        return goodsDescribe;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setGoodsDescribe(String goodsDescribe) {
+        this.goodsDescribe = goodsDescribe;
     }
 
     public String getVersion() {

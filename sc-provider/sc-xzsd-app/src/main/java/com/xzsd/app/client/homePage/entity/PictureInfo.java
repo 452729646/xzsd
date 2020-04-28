@@ -13,7 +13,7 @@ public class PictureInfo {
     /**
      * 图片连接
      */
-    private String imageUrl;
+    private String slideshowPath;
     /**
      * 排序
      */
@@ -21,7 +21,7 @@ public class PictureInfo {
     /**
      * 对应的skuNo
      */
-    private String skuNo;
+    private String goodsId;
 
     public String getBannerCode() {
         return bannerCode;
@@ -31,13 +31,7 @@ public class PictureInfo {
         this.bannerCode = bannerCode;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public int getSortNo() {
         return sortNo;
@@ -47,11 +41,19 @@ public class PictureInfo {
         this.sortNo = sortNo;
     }
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getSlideshowPath() {
+        return slideshowPath;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setSlideshowPath(String slideshowPath) {
+        this.slideshowPath = slideshowPath;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 }

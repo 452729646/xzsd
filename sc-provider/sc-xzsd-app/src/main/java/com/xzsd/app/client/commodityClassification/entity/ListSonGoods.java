@@ -6,49 +6,49 @@ public class ListSonGoods {
     /**
      * 商品编码
      */
-    private String skuNo;
+    private String goodsId;
     /**
      * 商品图片
      */
-    private String pictureUrl;
+    private String goodsImagePath;
     /**
      * 商品名称
      */
-    private String skuName;
+    private String goodsName;
     /**
      * 商品售价
      */
-    private BigDecimal sellingPrice;
+    private String goodsPrice;
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getGoodsImagePath() {
+        return goodsImagePath;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setGoodsImagePath(String goodsImagePath) {
+        this.goodsImagePath = goodsImagePath;
     }
 
-    public String getSkuName() {
-        return skuName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 }

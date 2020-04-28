@@ -9,15 +9,15 @@
         from t_sys_store a,
         t_sys_user b
         where a.is_deleted = 0
-        and a.user_acct = b.user_acct
+        and a.user_code = b.user_code
         and b.user_code = #{userCode}
     </select>
 
     <!--查询该门店的司机列表-->
     <select id="listDriverByPage" parameterType="com.xzsd.app.shopowner.driver.entity.DriverShopownerInfo" resultType="com.xzsd.app.shopowner.driver.entity.DriverShopownerInfo">
         SELECT
-	    c.user_name driverName,
-	    c.phone driverPhone
+	    c.user_name userName,
+	    c.phone phone
         FROM
 	    t_sys_driver a,
 	    t_sys_store b,
@@ -25,9 +25,9 @@
         WHERE
         a.is_deleted = 0
         and a.user_acct = c.user_acct
-        AND a.province = b.province
-        AND a.city = b.city
-        AND a.area = b.area
+        AND a.province_no = b.province_no
+        AND a.city_no = b.city_no
+        AND a.area_no = b.area_no
         AND b.store_no = #{storeNo}
     </select>
 </mapper>

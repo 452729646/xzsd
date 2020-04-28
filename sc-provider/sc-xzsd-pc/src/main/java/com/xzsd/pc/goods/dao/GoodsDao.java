@@ -1,11 +1,15 @@
 package com.xzsd.pc.goods.dao;
 
 
+import com.xzsd.pc.goods.entity.ClassifyInfo;
+import com.xzsd.pc.goods.entity.GoodsClassifyList;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName GoodsDao
@@ -65,7 +69,7 @@ public interface GoodsDao {
      * @param userCode 更新人
      * @return
      */
-    int goodsUpper(@Param("listSkuNo2")List<String> listSkuNo2, @Param("userCode") String userCode, @Param("version") int version);
+    int goodsUpper(List<Map> mapList);
 
     /**
      * 下架商品信息
@@ -84,13 +88,13 @@ public interface GoodsDao {
      * 查询需要下架的商品是否存在是热门商品
      *
      */
-    int countInHotGoods(@Param("listSkuNo3")List<String> listSkuNo3);
+    int countInHotGoods(@Param("listSkuNo2")List<String> listSkuNo2);
 
     /**
      * 查询需要下架的商品是否存在是轮播图 状态是启动中
      *
      */
-    int countInBanner(@Param("listSkuNo3")List<String> listSkuNo3);
+    int countInBanner(@Param("listSkuNo2")List<String> listSkuNo2);
 
     /**
      * 查询需要下架的商品是否存在上架的
@@ -98,4 +102,7 @@ public interface GoodsDao {
      */
     int countInSelling(@Param("listSkuNo") List<String> listSkuNo);
 
+    List<ClassifyInfo>listGoodsClassify(@Param("classifyId")String classifyId);
+
+    GoodsInfo getGoods(@Param("goodsId") String goodsId);
 }

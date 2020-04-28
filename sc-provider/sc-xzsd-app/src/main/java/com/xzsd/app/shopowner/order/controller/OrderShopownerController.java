@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2020-4-13
  */
 @RestController
-@RequestMapping("/orderShopowner")
+@RequestMapping("/managerOrder")
 public class OrderShopownerController {
     @Resource
     OrderShopownerService orderShopownerService;
@@ -29,11 +29,11 @@ public class OrderShopownerController {
      * @param orderShopownerInfo
      * @return
      */
-    @PostMapping("listOrder")
+    @PostMapping("listManagerOrders")
     public AppResponse listOrder(OrderShopownerInfo orderShopownerInfo){
         try {
             String userCode = SecurityUtils.getCurrentUserId();
-            orderShopownerInfo.setUserCode(userCode);
+            orderShopownerInfo.setUserId(userCode);
             return orderShopownerService.listOrder(orderShopownerInfo);
         }catch (Exception e){
             logger.error("查询该店长订单异常",e);
@@ -48,11 +48,11 @@ public class OrderShopownerController {
      * @author housum
      * @date 2020-4-14
      */
-    @PostMapping("orderDetailByOrderId")
+    @PostMapping("listManagerOrderDeepen")
     public AppResponse orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
-            orderShopownerInfo.setUserCode(userCode);
+            orderShopownerInfo.setUserId(userCode);
             return orderShopownerService.orderDetailByOrderId(orderShopownerInfo);
         }catch (Exception e){
             logger.error("查询该订单详情异常",e);
@@ -63,16 +63,17 @@ public class OrderShopownerController {
     }
 
     /**
-     * 修改订单状态（订单到货）
+     * 修改订单状态
      * @return App
      * @date 2020-4-10
      */
-    @PostMapping("orderArrival")
-    public AppResponse orderArrival (String orderId,String version){
+    @PostMapping("updateOrderState")
+    public AppResponse updateOrderState (OrderShopownerInfo orderShopownerInfo){
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return orderShopownerService.orderArrival(orderId,version,userCode);
+            orderShopownerInfo.setUserId(userCode);
+            return orderShopownerService.updateOrderState(orderShopownerInfo);
         } catch (Exception e) {
             logger.error("修改订单到货错误", e);
             System.out.println(e.toString());

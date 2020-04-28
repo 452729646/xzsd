@@ -8,6 +8,8 @@ import com.neusoft.util.StringUtil;
 
 import com.xzsd.pc.classification.dao.ClassificationDao;
 import com.xzsd.pc.classification.entity.ClassificationInfo;
+import com.xzsd.pc.classification.entity.OneClassifyInfo;
+import com.xzsd.pc.classification.entity.OneClassifyListInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +46,7 @@ public class ClassificationService {
         if(0 != countFatherCate) {
             return AppResponse.bizError("此分类已存在，请重新输入！");
         }
-        classificationInfo.setCateCode(StringUtil.getCateCode());
+        classificationInfo.setClassifyId(StringUtil.getCateCode());
         classificationInfo.setIsDeleted(0);
         classificationInfo.setIsParent(0);
         // 新增用户
@@ -71,7 +73,7 @@ public class ClassificationService {
         if (0 != countSonCate) {
             return AppResponse.bizError("此分类已存在，请重新输入！");
         }
-        classificationInfo.setCateCode(StringUtil.getCateCode());
+        classificationInfo.setClassifyId(StringUtil.getCateCode());
         classificationInfo.setCateCodeParent(cateCodeParent);
         classificationInfo.setIsDeleted(0);
         classificationInfo.setIsParent(1);
@@ -80,7 +82,7 @@ public class ClassificationService {
         if (0 == count) {
             return AppResponse.bizError("新增失败，请重试！");
         }
-        int count2 = classificationDao.saveSonCateParent(classificationInfo.getCateCode(),cateCodeParent);
+        int count2 = classificationDao.saveSonCateParent(classificationInfo.getClassifyId(),cateCodeParent);
         if (0 == count2) {
             return AppResponse.bizError("新增失败，请重试！");
         }
@@ -98,8 +100,10 @@ public class ClassificationService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse listCate(ClassificationInfo classificationInfo) {
-        List<ClassificationInfo> categories = classificationDao.listCateByPage(0);
-        return AppResponse.success("查询成功！",getPageInfo(categories));
+        List<OneClassifyInfo> categories = classificationDao.listCateByPage(0);
+        OneClassifyListInfo oneClassifyListInfo = new OneClassifyListInfo();
+        oneClassifyListInfo.setOneClassifyList(categories);
+        return AppResponse.success("查询成功！",oneClassifyListInfo);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -124,8 +128,8 @@ public class ClassificationService {
      * @Date 2020-03-21
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse getCateDetail(String cateCode) {
-        ClassificationInfo classificationInfo = classificationDao.getCateDetail(cateCode);
+    public AppResponse getCateDetail(String classifyId) {
+        ClassificationInfo classificationInfo = classificationDao.getCateDetail(classifyId);
         return AppResponse.success("查询成功！",classificationInfo);
     }
 
@@ -138,11 +142,10 @@ public class ClassificationService {
      * @Date 2020-03-21
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteCate(String cateCode,String userCode) {
-        List<String> listCateCode = Arrays.asList(cateCode.split(","));
+    public AppResponse deleteCate(String classifyId,String userCode) {
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
-        int count = classificationDao.deleteCate(listCateCode,userCode);
+        int count = classificationDao.deleteCate(classifyId,userCode);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }

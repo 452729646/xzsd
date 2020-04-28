@@ -29,7 +29,7 @@ public class StoreVO {
     /**
      * 门店编号
      */
-    private String storeNo;
+    private String storeId;
     /**
      * 门店名称
      */
@@ -37,27 +37,24 @@ public class StoreVO {
     /**
      * 门店电话
      */
-    private String storePhone;
+    private String phone;
     /**
      * 详细地址
      */
-    private String storeAddress;
+    private String address;
     /**
      * 店长名称
      */
-    private String managerName;
+    private String userName;
+    private String userAcct;
     /**
      * 邀请码
      */
-    private String invitationCode;
-    private int version;
+    private String inviteCode;
+    private String version;
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
     }
 
     /**
@@ -65,12 +62,12 @@ public class StoreVO {
      */
 //    private String storeAcct;
 
-    public String getStoreNo() {
-        return storeNo;
+    public String getStoreId() {
+        return storeId;
     }
 
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
     public String getStoreName() {
@@ -81,37 +78,50 @@ public class StoreVO {
         this.storeName = storeName;
     }
 
-    public String getStorePhone() {
-        return storePhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStorePhone(String storePhone) {
-        this.storePhone = storePhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getStoreAddress() {
-        return storeAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStoreAddress(String storeAddress) {
-        this.storeAddress = storeAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getManagerName() {
-        return managerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getInvitationCode() {
-        return invitationCode;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
+
+    public String getInviteCode() {
+        return inviteCode;
+    }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
 
 //    public String getStoreAcct() {
 ////        return storeAcct;

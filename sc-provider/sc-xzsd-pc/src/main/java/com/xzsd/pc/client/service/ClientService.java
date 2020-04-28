@@ -38,7 +38,7 @@ public class ClientService {
     public AppResponse listClient(ClientInfo clientInfo) {
         String userCode = SecurityUtils.getCurrentUserId();
         String role = clientDao.getRoleByUserCode(userCode);
-        if (1 == Integer.valueOf(role)){
+        if (2 == Integer.valueOf(role)){
             String storeNo = clientDao.getStoreNo(userCode);
             clientInfo.setStoreNo(storeNo);
         }

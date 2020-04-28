@@ -1,5 +1,7 @@
 package com.xzsd.app.shopowner.driver.entity;
 
+import java.util.List;
+
 public class DriverShopownerInfo {
     /**
      * 用户编码
@@ -12,11 +14,20 @@ public class DriverShopownerInfo {
     /**
      * 司机名称
      */
-    private String driverName;
+    private String userName;
     /**
      * 司机电话
      */
-    private String driverPhone;
+    private String phone;
+    private List<DriverShopownerInfo> list;
+
+    public List<DriverShopownerInfo> getList() {
+        return list;
+    }
+
+    public void setList(List<DriverShopownerInfo> list) {
+        this.list = list;
+    }
 
     public String getUserCode() {
         return userCode;
@@ -34,19 +45,19 @@ public class DriverShopownerInfo {
         this.storeNo = storeNo;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getDriverPhone() {
-        return driverPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDriverPhone(String driverPhone) {
-        this.driverPhone = driverPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

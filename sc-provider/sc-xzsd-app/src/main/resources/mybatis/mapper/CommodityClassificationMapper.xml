@@ -4,8 +4,8 @@
 <!--    查询父分类列表-->
     <select id="listFatherCateByPage" resultType="com.xzsd.app.client.commodityClassification.entity.CommodityClassificationInfo">
         select
-        cate_code cateCode,
-        cate_name cateName
+        cate_code classifyId,
+        cate_name classifyName
         from
         t_sys_classification
         where is_deleted = 0
@@ -14,9 +14,9 @@
 
 <!--映射-->
     <resultMap id="sonCateList" type="com.xzsd.app.client.commodityClassification.entity.ListSonCateGoodsInfo">
-        <id property="cateCodeSon" column="cate_code"></id>
-        <result property="cateNameSon" column="cate_name"></result>
-        <collection property="listSonGoods" ofType="ListSonGoods" javaType="java.util.List" column="cate_code" select="getByCateCode"></collection>
+        <id property="classifyId" column="cate_code"></id>
+        <result property="classifyName" column="cate_name"></result>
+        <collection property="goodsList" ofType="ListSonGoods" javaType="java.util.List" column="cate_code" select="getByCateCode"></collection>
     </resultMap>
 <!--    查询该分类的子分类列表-->
     <select id="listSonCateGoodsByPage" parameterType="com.xzsd.app.client.commodityClassification.entity.ListSonCateGoodsInfo" resultMap="sonCateList">
@@ -25,16 +25,16 @@
         cate_name
         from t_sys_classification
         where is_deleted = 0
-        and cate_code_parent = #{cateCode}
+        and cate_code_parent = #{classifyId}
     </select>
 
     <!--    查询该子分类商品列表-->
     <select id="getByCateCode" parameterType="java.lang.String" resultType="com.xzsd.app.client.commodityClassification.entity.ListSonGoods">
         select
-        sku_no skuNo,
-        picture_url pictureUrl,
-        sku_name skuName,
-        selling_price sellingPrice
+        sku_no goodsId,
+        picture_url goodsImagePath,
+        sku_name goodsName,
+        selling_price goodsPrice
         from t_sys_goods
         where is_deleted = 0
         and cate_code = #{cate_code}

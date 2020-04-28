@@ -6,7 +6,7 @@ public class EvaluateInfo {
     /**
      * 商品编码
      */
-    private String skuNo;
+    private String goodsId;
     /**
      * 用户编号
      */
@@ -18,11 +18,10 @@ public class EvaluateInfo {
     /**
      * 星级
      */
-    private int starLevel;
     /**
      * 评价内容
      */
-    private String appraiseInfo;
+    private String evaluateContent;
     /**
      * 评价时间
      */
@@ -30,7 +29,7 @@ public class EvaluateInfo {
     /**
      * 评价等级  1：好评 星级4~5 2：中评 星级3 3：差评 星级1~@
      */
-    private int evaluateLevel;
+    private String evaluateScore;
     /**
      * 评价列表
      */
@@ -44,21 +43,7 @@ public class EvaluateInfo {
         this.evaluateInfoList = evaluateInfoList;
     }
 
-    public int getEvaluateLevel() {
-        return evaluateLevel;
-    }
 
-    public void setEvaluateLevel(int evaluateLevel) {
-        this.evaluateLevel = evaluateLevel;
-    }
-
-    public String getSkuNo() {
-        return skuNo;
-    }
-
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
-    }
 
     public String getUserCode() {
         return userCode;
@@ -76,21 +61,7 @@ public class EvaluateInfo {
         this.userAcct = userAcct;
     }
 
-    public int getStarLevel() {
-        return starLevel;
-    }
 
-    public void setStarLevel(int starLevel) {
-        this.starLevel = starLevel;
-    }
-
-    public String getAppraiseInfo() {
-        return appraiseInfo;
-    }
-
-    public void setAppraiseInfo(String appraiseInfo) {
-        this.appraiseInfo = appraiseInfo;
-    }
 
     public String getCreateTime() {
         return createTime;
@@ -98,5 +69,29 @@ public class EvaluateInfo {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public String getEvaluateContent() {
+        return evaluateContent;
+    }
+
+    public void setEvaluateContent(String evaluateContent) {
+        this.evaluateContent = evaluateContent;
+    }
+
+    public String getEvaluateScore() {
+        return evaluateScore;
+    }
+
+    public void setEvaluateScore(String evaluateScore) {
+        this.evaluateScore = evaluateScore;
     }
 }

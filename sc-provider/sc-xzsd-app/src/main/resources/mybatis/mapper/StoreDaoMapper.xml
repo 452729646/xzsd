@@ -4,19 +4,22 @@
 <!--    查询与司机相同地区的门店信息-->
     <select id="listStoreByPage" parameterType="com.xzsd.app.driver.store.entity.StoreInfo" resultType="com.xzsd.app.driver.store.entity.StoreInfo">
         SELECT
-        a.store_no storeNo,
+        a.store_no storeId,
         a.store_name storeName,
-        CONCAT( a.province, a.city, a.area, a.store_address ) address,
-        c.user_name shopOwnerName,
+        CONCAT( (select d.rname from region d where d.id = a.province_no),
+        (select rname from region where id = a.city_no),
+        (select rname from region where id = a.area_no),
+        a.store_address ) address,
+        c.user_name userName,
         c.phone phone
         FROM t_sys_store a,
         t_sys_driver b,
         t_sys_user c
         WHERE a.is_deleted = 0
-        AND a.province = b.province
-        AND a.city = b.city
-        AND a.area = b.area
-        AND c.user_acct = a.user_acct
+        AND a.province_no = b.province_no
+        AND a.city_no = b.city_no
+        AND a.area_no = b.area_no
+        AND c.user_code = a.user_code
         AND b.user_code = #{userCode}
     </select>
 </mapper>

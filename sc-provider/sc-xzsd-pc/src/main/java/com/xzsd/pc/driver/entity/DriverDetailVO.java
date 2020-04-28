@@ -8,16 +8,17 @@ public class DriverDetailVO {
     /**
      * 司机编号
      */
-    private String driverNo;
+    private String driverId;
     /**
      * 司机名称
      *
      */
-    private String driverName;
+    private String userName;
     /**
      * 司机手机号
      */
-    private String driverPhone;
+    private String phone;
+    private String userImage;
     /**
      * 身份证
      */
@@ -33,7 +34,7 @@ public class DriverDetailVO {
     /**
      * 账号密码
      */
-    private String password;
+    private String userPassword;
     /**
      * 门店邀请码
      */
@@ -42,26 +43,23 @@ public class DriverDetailVO {
      * 省名称
      */
     private String provinceName;
+    private String provinceId;
     /**
      * 市名称
      */
     private String cityName;
+    private String cityId;
     /**
      * 区名称
      */
     private String areaName;
+    private String areaId;
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getInvitationCode() {
         return invitationCode;
@@ -95,37 +93,6 @@ public class DriverDetailVO {
         this.areaName = areaName;
     }
 
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
-    public String getDriverNo() {
-        return driverNo;
-    }
-
-    public void setDriverNo(String driverNo) {
-        this.driverNo = driverNo;
-    }
-
-    public String getDriverName() {
-        return driverName;
-    }
-
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
-    }
-
-    public String getDriverPhone() {
-        return driverPhone;
-    }
-
-    public void setDriverPhone(String driverPhone) {
-        this.driverPhone = driverPhone;
-    }
 
     public String getIdCard() {
         return idCard;
@@ -149,5 +116,77 @@ public class DriverDetailVO {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

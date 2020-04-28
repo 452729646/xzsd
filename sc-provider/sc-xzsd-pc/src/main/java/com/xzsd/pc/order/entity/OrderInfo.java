@@ -45,9 +45,9 @@ public class OrderInfo {
      */
     private Date payTime;
     /**
-     * 订单状态 0：已取消，1：已下单，2：已到货，3：已完成未评价，4：已完成已评价
+     * 订单状态 0已下单，1已取消，2已到货，3已取货,4已完成未评价，5已完成已评价
      */
-    private int orderStatus;
+    private String orderStateId;
     /**
      * 支付状态
      */
@@ -168,12 +168,12 @@ public class OrderInfo {
         this.payTime = payTime;
     }
 
-    public int getOrderStatus() {
-        return orderStatus;
+    public String getOrderStateId() {
+        return orderStateId;
     }
 
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
     }
 
     public int getPaymentStatus() {

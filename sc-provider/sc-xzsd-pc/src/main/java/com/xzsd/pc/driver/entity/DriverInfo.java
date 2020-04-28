@@ -6,16 +6,16 @@ public class DriverInfo {
     /**
      * 司机编号
      */
-    private String driverNo;
+    private String driverId;
     /**
      * 司机名称
      *
      */
-    private String driverName;
+    private String userName;
     /**
      * 司机手机号
      */
-    private String driverPhone;
+    private String phone;
     /**
      * 身份证
      */
@@ -31,7 +31,7 @@ public class DriverInfo {
     /**
      * 密码
      */
-    private String password;
+    private String userPassword;
     /**
      * 门店邀请码
      */
@@ -39,15 +39,17 @@ public class DriverInfo {
     /**
      * 省名称
      */
-    private String provinceName;
+    private String provinceId;
     /**
      * 市名称
      */
-    private String cityName;
+    private String cityId;
     /**
      * 区名称
      */
-    private String areaName;
+    private String areaId;
+    private String role;
+    private String imagePath;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -75,6 +77,15 @@ public class DriverInfo {
     private  int version;
 
     private String storeNo;
+    private String nowRole;
+
+    public String getNowRole() {
+        return nowRole;
+    }
+
+    public void setNowRole(String nowRole) {
+        this.nowRole = nowRole;
+    }
 
     public String getStoreNo() {
         return storeNo;
@@ -84,28 +95,12 @@ public class DriverInfo {
         this.storeNo = storeNo;
     }
 
-    public String getDriverNo() {
-        return driverNo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDriverNo(String driverNo) {
-        this.driverNo = driverNo;
-    }
-
-    public String getDriverName() {
-        return driverName;
-    }
-
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
-    }
-
-    public String getDriverPhone() {
-        return driverPhone;
-    }
-
-    public void setDriverPhone(String driverPhone) {
-        this.driverPhone = driverPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getIdCard() {
@@ -132,13 +127,6 @@ public class DriverInfo {
         this.userCode = userCode;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getInvitationCode() {
         return invitationCode;
@@ -148,29 +136,6 @@ public class DriverInfo {
         this.invitationCode = invitationCode;
     }
 
-    public String getProvinceName() {
-        return provinceName;
-    }
-
-    public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
 
     public int getIsDeleted() {
         return isDeleted;
@@ -218,5 +183,69 @@ public class DriverInfo {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

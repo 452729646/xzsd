@@ -5,8 +5,9 @@
     <select id="countGoods" parameterType="com.xzsd.app.client.shoppingCart.entity.ShoppingCartInfo" resultType="int">
         select count(sku_no)
         from t_sys_shoppingcart
-        where sku_no = #{skuNo}
+        where sku_no = #{goodsId}
         and create_user = #{userCode}
+        and is_deleted = 0
     </select>
 
 <!--    提取版本号-->
@@ -32,9 +33,9 @@
         update_time,
         version
         )values (
-        #{shoppingCartCode},
-        #{skuNo},
-        #{goodsCnt},
+        #{shopCartId},
+        #{goodsId},
+        #{cartGoodsCount},
         #{isDeleted},
         #{userCode},
         now(),
@@ -48,26 +49,25 @@
     <update id="updateCartInSave" parameterType="com.xzsd.app.client.shoppingCart.entity.ShoppingCartInfo">
         update t_sys_shoppingcart
         set
-        goods_cnt = goods_cnt + #{goodsCnt},
+        goods_cnt = goods_cnt + #{cartGoodsCount},
         update_user = #{userCode},
         update_time = now(),
         version = version +1
         where is_deleted = 0
         and create_user = #{userCode}
-        and sku_no = #{skuNo}
-        and version = #{version}
+        and sku_no = #{goodsId}
     </update>
 
     <!--    更新购物车在购物车页面-->
     <update id="updateCart" parameterType="com.xzsd.app.client.shoppingCart.entity.ShoppingCartInfo">
         update t_sys_shoppingcart
         set
-        goods_cnt = #{goodsCnt},
+        goods_cnt = #{cartGoodsCount},
         update_user = #{userCode},
         update_time = now(),
         version = version +1
         where is_deleted = 0
-        and shoppingcart_code = #{shoppingCartCode}
+        and shoppingcart_code = #{shopCartId}
         and version = #{version}
     </update>
 
@@ -88,18 +88,18 @@
 <!--    购物车列表-->
     <select id="listCartByPage" parameterType="com.xzsd.app.client.shoppingCart.entity.ShoppingCartInfo" resultType="com.xzsd.app.client.shoppingCart.entity.ShoppingCartInfo">
         select
-        a.shoppingcart_code shoppingCartCode,
-        b.picture_url pictureUrl,
-        b.sku_name skuName,
-        a.goods_cnt goodsCnt,
-        b.selling_price sellingPrice,
-        a.version version
+        a.shoppingcart_code shopCartId,
+        b.picture_url goodsImagePath,
+        b.sku_name goodsName,
+        a.goods_cnt cartGoodsCount,
+        b.selling_price goodsPrice,
+        a.sku_no goodsId
         from t_sys_shoppingcart a,
         t_sys_goods b
         where a.sku_no = b.sku_no
         and a.is_deleted = 0
         and a.create_user = #{userCode}
-        order by a.create_time ASC
+        order by a.create_time DESC
 
     </select>
 </mapper>

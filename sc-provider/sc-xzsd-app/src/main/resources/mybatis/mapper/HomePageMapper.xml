@@ -5,12 +5,11 @@
 <!--    查询轮播图列表-->
     <select id="listPictureByPage" resultType="com.xzsd.app.client.homePage.entity.PictureInfo">
         select
-        banner_code bannerCode,
-        image_url imageUrl,
-        sort_no sortNo,
-        sku_no skuNo
+        image_url slideshowPath,
+        sku_no goodsId
         from t_sys_picture
         where is_deleted = 0
+        and picture_state = 1
         order by sort_no ASC
     </select>
 
@@ -28,12 +27,10 @@
 <!--    查询热门商品列表-->
     <select id="listHotGoods" parameterType="java.lang.Integer" resultType="com.xzsd.app.client.homePage.entity.ListHotGoodsInfo">
         select
-        b.hotgoods_code hotGoodsCode,
-        b.sort_no sort_no,
-        b.sku_no skuNo,
-        a.picture_url pictureUrl,
-        a.sku_name skuName,
-        a.selling_price
+        b.sku_no goodsId,
+        a.picture_url goodsImagePath,
+        a.sku_name goodsName,
+        a.selling_price goodsPrice
         from t_sys_goods a,
         t_sys_hotgoods b
         where a.sku_no = b.sku_no

@@ -33,59 +33,121 @@ public class GoodsInfo implements Serializable {
     /**
      * 商品编号
      */
-    private String skuNo;
+    private String goodsId;
     /**
      *
      */
-    private String skuName;
+    private String goodsName;
     /**
      *
      */
-    private String bookNumber;
+    private String Isbn;
+    private String isbn;
+
+
     /**
      *分类编号
      */
-    private String cateCode;
+    private String oneClassifyId;
+    private String twoClassifyId;
+    private String oneClassifyName;
+    private String twoClassifyName;
+
+    public String getOneClassifyName() {
+        return oneClassifyName;
+    }
+
+    public void setOneClassifyName(String oneClassifyName) {
+        this.oneClassifyName = oneClassifyName;
+    }
+
+    public String getTwoClassifyName() {
+        return twoClassifyName;
+    }
+
+    public void setTwoClassifyName(String twoClassifyName) {
+        this.twoClassifyName = twoClassifyName;
+    }
+
     /**
      * 成本价
      */
-    private BigDecimal costPrice;
+    private String goodsOriginalCost;
     /**
      * 售价
      */
-    private BigDecimal sellingPrice;
+    private String goodsPrice;
     /**
      * 广告词
      */
-    private String advWords;
+    private String goodsAdvertise;
     /**
      * 商品介绍
      */
-    private String detail;
+    private String goodsDescribe;
     /**
      * 商家名称
      */
-    private String businessName;
+    private String supplierName;
     /**
      * 作者
      */
-    private String author;
+    private String goodsAuthor;
+    private String goodsPress;
+
     /**
      * 库存
      */
-    private int stock;
+    private int goodsInventory;
     /**
      * 销售数量
      */
-    private int saleCnt;
+    private int goodsSales;
+
+    public int getGoodsSales() {
+        return goodsSales;
+    }
+
+    public void setGoodsSales(int goodsSales) {
+        this.goodsSales = goodsSales;
+    }
+
     /**
      * 图片
      */
-    private String pictureUrl;
+    private String goodsImagePath;
+
+    private String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getGoodsImagePath() {
+        return goodsImagePath;
+    }
+
+    public void setGoodsImagePath(String goodsImagePath) {
+        this.goodsImagePath = goodsImagePath;
+    }
+
     /**
      * 商品状态  0为未售 1为在售 初始为0
      */
-    private int skuState;
+    private String goodsStateId;
+
+    public String getGoodsStateId() {
+        return goodsStateId;
+    }
+
+    public void setGoodsStateId(String goodsStateId) {
+        this.goodsStateId = goodsStateId;
+    }
+
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -114,118 +176,130 @@ public class GoodsInfo implements Serializable {
      * 版本号
      */
     private String version;
+    /**
+     * 出版社
+     */
+    private int goodsViewsNum;
+    private String userId;
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getSkuName() {
-        return skuName;
+    public int getGoodsViewsNum() {
+        return goodsViewsNum;
     }
 
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
+    public void setGoodsViewsNum(int goodsViewsNum) {
+        this.goodsViewsNum = goodsViewsNum;
     }
 
-    public String getBookNumber() {
-        return bookNumber;
+    private String goodsShelfTime;
+
+    public String getGoodsShelfTime() {
+        return goodsShelfTime;
     }
 
-    public void setBookNumber(String bookNumber) {
-        this.bookNumber = bookNumber;
+    public void setGoodsShelfTime(String goodsShelfTime) {
+        this.goodsShelfTime = goodsShelfTime;
     }
 
-    public String getCateCode() {
-        return cateCode;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setCateCode(String cateCode) {
-        this.cateCode = cateCode;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public BigDecimal getCostPrice() {
-        return costPrice;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setCostPrice(BigDecimal costPrice) {
-        this.costPrice = costPrice;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public String getIsbn() {
+        return Isbn;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setIsbn(String Isbn) {
+        this.Isbn = Isbn;
     }
 
-    public String getAdvWords() {
-        return advWords;
+    public String getTwoClassifyId() {
+        return twoClassifyId;
     }
 
-    public void setAdvWords(String advWords) {
-        this.advWords = advWords;
+    public void setTwoClassifyId(String twoClassifyId) {
+        this.twoClassifyId = twoClassifyId;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getGoodsOriginalCost() {
+        return goodsOriginalCost;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setGoodsOriginalCost(String goodsOriginalCost) {
+        this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public String getBusinessName() {
-        return businessName;
+    public String getGoodsAdvertise() {
+        return goodsAdvertise;
     }
 
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
+    public void setGoodsAdvertise(String goodsAdvertise) {
+        this.goodsAdvertise = goodsAdvertise;
     }
 
-    public int getStock() {
-        return stock;
+    public String getGoodsDescribe() {
+        return goodsDescribe;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setGoodsDescribe(String goodsDescribe) {
+        this.goodsDescribe = goodsDescribe;
     }
 
-    public int getSaleCnt() {
-        return saleCnt;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSaleCnt(int saleCnt) {
-        this.saleCnt = saleCnt;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getGoodsAuthor() {
+        return goodsAuthor;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setGoodsAuthor(String goodsAuthor) {
+        this.goodsAuthor = goodsAuthor;
     }
 
-    public int getSkuState() {
-        return skuState;
+    public int getGoodsInventory() {
+        return goodsInventory;
     }
 
-    public void setSkuState(int skuState) {
-        this.skuState = skuState;
+    public void setGoodsInventory(int goodsInventory) {
+        this.goodsInventory = goodsInventory;
     }
+
+
+
+
+
 
     public int getIsDeleted() {
         return isDeleted;
@@ -283,32 +357,19 @@ public class GoodsInfo implements Serializable {
         this.version = version;
     }
 
-    @Override
-    public String toString() {
-        return "GoodsInfo{" +
-//                "pageSize=" + pageSize +
-//                ", pageNum=" + pageNum +
-                ", skuNo='" + skuNo + '\'' +
-                ", skuName='" + skuName + '\'' +
-                ", bookNumber='" + bookNumber + '\'' +
-                ", cateCode='" + cateCode + '\'' +
-                ", costPrice=" + costPrice +
-                ", sellingPrice=" + sellingPrice +
-                ", advWords='" + advWords + '\'' +
-                ", detail='" + detail + '\'' +
-                ", businessName='" + businessName + '\'' +
-                ", author='" + author + '\'' +
-                ", stock=" + stock +
-                ", saleCnt=" + saleCnt +
-                ", pictureUrl='" + pictureUrl + '\'' +
-                ", skuState=" + skuState +
-                ", isDeleted=" + isDeleted +
-                ", sortNo=" + sortNo +
-                ", gmtCreate=" + gmtCreate +
-                ", createBy='" + createBy + '\'' +
-                ", gmtModified=" + gmtModified +
-                ", lastModifiedBy='" + lastModifiedBy + '\'' +
-                ", version='" + version + '\'' +
-                '}';
+    public String getGoodsPress() {
+        return goodsPress;
+    }
+
+    public void setGoodsPress(String goodsPress) {
+        this.goodsPress = goodsPress;
+    }
+
+    public String getOneClassifyId() {
+        return oneClassifyId;
+    }
+
+    public void setOneClassifyId(String oneClassifyId) {
+        this.oneClassifyId = oneClassifyId;
     }
 }

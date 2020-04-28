@@ -3,7 +3,8 @@ package com.xzsd.pc.store.controller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 
-import com.xzsd.pc.store.entity.RegionInfo;
+import com.xzsd.pc.selectCombox.RegionInfo;
+import com.xzsd.pc.store.entity.StoreDetailVo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.service.StoreService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class StoreController {
      * @date 2020-4-2
      */
 
-    @PostMapping("saveStore")
+    @PostMapping("addStore")
     public AppResponse saveStore(StoreInfo storeInfo){
         try{
             //获取用户id
@@ -50,7 +51,7 @@ public class StoreController {
      * @author housum
      * @Date 2020-04-2
      */
-    @RequestMapping(value = "listStore")
+    @RequestMapping(value = "listStores")
     public AppResponse listStore(StoreInfo storeInfo){
         try{
             return  storeService.listStore(storeInfo);
@@ -67,10 +68,10 @@ public class StoreController {
      * @author housum
      * @date 2020-4-3
      */
-    @RequestMapping("storeDetail")
-    public AppResponse storeDetail(String storeNo ){
+    @RequestMapping("getStore")
+    public AppResponse storeDetail(StoreDetailVo storeDetailVo){
         try{
-            return storeService.storeDetail(storeNo);
+            return storeService.storeDetail(storeDetailVo);
         }catch (Exception e) {
             logger.error("查询门店详情异常", e);
             System.out.println(e.toString());
@@ -102,10 +103,10 @@ public class StoreController {
      * @date 2020-4-7
      */
     @RequestMapping("deleteStore")
-    public AppResponse deleteStore(String storeNo){
+    public AppResponse deleteStore(String storeId,String nowRole){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
-            return storeService.deleteStore(storeNo,userCode);
+            return storeService.deleteStore(storeId,userCode,nowRole);
         }catch (Exception e){
             logger.error("删除门店信息错误", e);
             System.out.println(e.toString());
@@ -113,52 +114,52 @@ public class StoreController {
         }
     }
 
-    /**
-     * 地区 省的下拉框
-     * @author housum
-     * @date 2020-4-13
-     */
-    @RequestMapping("province")
-    public AppResponse province(RegionInfo regionInfo){
-        try{
-            return storeService.province(regionInfo);
-        }catch (Exception e){
-            logger.error("查询地区信息错误",e);
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
-
-    /**
-     *  市下拉框
-     * @author housum
-     * @date 2020-4-13
-     */
-    @RequestMapping("city")
-    public AppResponse city(RegionInfo regionInfo){
-        try{
-            return storeService.city(regionInfo);
-        }catch (Exception e){
-            logger.error("查询地区信息错误",e);
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
-    /**
-     *  区下拉框
-     * @author housum
-     * @date 2020-4-13
-     */
-    @RequestMapping("area")
-    public AppResponse area(RegionInfo regionInfo){
-        try{
-            return storeService.area(regionInfo);
-        }catch (Exception e){
-            logger.error("查询地区信息错误",e);
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
+//    /**
+//     * 地区 省的下拉框
+//     * @author housum
+//     * @date 2020-4-13
+//     */
+//    @RequestMapping("province")
+//    public AppResponse province(RegionInfo regionInfo){
+//        try{
+//            return storeService.province(regionInfo);
+//        }catch (Exception e){
+//            logger.error("查询地区信息错误",e);
+//            System.out.println(e.toString());
+//            throw e;
+//        }
+//    }
+//
+//    /**
+//     *  市下拉框
+//     * @author housum
+//     * @date 2020-4-13
+//     */
+//    @RequestMapping("city")
+//    public AppResponse city(RegionInfo regionInfo){
+//        try{
+//            return storeService.city(regionInfo);
+//        }catch (Exception e){
+//            logger.error("查询地区信息错误",e);
+//            System.out.println(e.toString());
+//            throw e;
+//        }
+//    }
+//    /**
+//     *  区下拉框
+//     * @author housum
+//     * @date 2020-4-13
+//     */
+//    @RequestMapping("area")
+//    public AppResponse area(RegionInfo regionInfo){
+//        try{
+//            return storeService.area(regionInfo);
+//        }catch (Exception e){
+//            logger.error("查询地区信息错误",e);
+//            System.out.println(e.toString());
+//            throw e;
+//        }
+//    }
 
 
 }

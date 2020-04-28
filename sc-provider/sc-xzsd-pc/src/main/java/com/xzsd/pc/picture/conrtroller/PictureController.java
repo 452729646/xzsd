@@ -5,6 +5,7 @@ package com.xzsd.pc.picture.conrtroller;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 
+import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.picture.entity.PictureInfo;
 import com.xzsd.pc.picture.service.PictureService;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-24
  */
 @RestController
-@RequestMapping("/picture")
+@RequestMapping("/slideshowHome")
 public class PictureController {
 
     private static final Logger logger = LoggerFactory.getLogger(PictureController.class);
@@ -35,7 +36,7 @@ public class PictureController {
      * @author housum
      * @Date 2020-03-25
      */
-    @PostMapping("savePicture")
+    @PostMapping("addSlideshowHome")
     public AppResponse savePicture(PictureInfo pictureInfo) {
         try {
             //获取用户id
@@ -57,12 +58,12 @@ public class PictureController {
      * @author housum
      * @Date 2020-03-25
      */
-    @PostMapping("deletePicture")
-    public AppResponse deletePicture(String bannerCode) {
+    @PostMapping("deleteSlideshowHome")
+    public AppResponse deletePicture(String slideshowId) {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return pictureService.deletePicture(bannerCode,userCode);
+            return pictureService.deletePicture(slideshowId,userCode);
         } catch (Exception e) {
             logger.error("轮播图删除错误", e);
             System.out.println(e.toString());
@@ -78,7 +79,7 @@ public class PictureController {
      * @author housum
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "listPicture")
+    @RequestMapping(value = "listSlideshowHome")
     public AppResponse listPicture(PictureInfo pictureInfo) {
         try {
             return pictureService.listPicture(pictureInfo);
@@ -96,14 +97,15 @@ public class PictureController {
      * @author housum
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "pictureUpper")
-    public AppResponse pictureUpper(String bannerCode, int version) {
+    @RequestMapping(value = "updateSlideshowHomeState")
+    public AppResponse pictureUpper(PictureInfo pictureInfo) {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return pictureService.pictureUpper(bannerCode, userCode, version);
+            pictureInfo.setUserCode(userCode);
+            return pictureService.pictureUpper(pictureInfo);
         } catch (Exception e) {
-            logger.error("轮播图启用错误", e);
+            logger.error("修改轮播图状态错误", e);
             System.out.println(e.toString());
             throw e;
         }
@@ -129,7 +131,16 @@ public class PictureController {
         }
     }
 
-
+    @RequestMapping("listGoods")
+    public AppResponse listGoods(GoodsInfo goodsInfo){
+        try {
+            return pictureService.listGoods(goodsInfo);
+        }catch (Exception e) {
+            logger.error("查询商品列表错误", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 
 
 }

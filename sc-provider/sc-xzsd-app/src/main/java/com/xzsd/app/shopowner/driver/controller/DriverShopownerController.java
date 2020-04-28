@@ -19,14 +19,14 @@ import javax.annotation.Resource;
  * @date 2020-4-20
  */
 @RestController
-@RequestMapping("/driverInShopowner")
+@RequestMapping("/managerInformation")
 public class DriverShopownerController {
     private static final Logger logger = LoggerFactory.getLogger(DriverShopownerController.class);
 
     @Resource
     DriverShopownerService driverShopownerService;
 
-    @PostMapping("listDriver")
+    @PostMapping("listManagerDrivers")
     public AppResponse listDriver(DriverShopownerInfo driverShopownerInfo){
         try{
             //获取userCode

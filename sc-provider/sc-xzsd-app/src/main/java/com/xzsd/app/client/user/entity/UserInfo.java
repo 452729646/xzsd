@@ -144,6 +144,25 @@ public class UserInfo {
 
     private int role;
 
+    private String userPassword;
+    private String userNewPaasword;
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserNewPaasword() {
+        return userNewPaasword;
+    }
+
+    public void setUserNewPaasword(String userNewPaasword) {
+        this.userNewPaasword = userNewPaasword;
+    }
+
     public int getRole() {
         return role;
     }

@@ -20,7 +20,7 @@ public interface GoodsDao {
      * @param skuNo
      * @return
      */
-    GoodsVO goodsDetail(@Param("skuNo")String skuNo);
+    GoodsVO goodsDetail(@Param("goodsId")String goodsId);
 
     /**
      * 通过userCode查出所绑定的门店名称

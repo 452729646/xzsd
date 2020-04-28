@@ -13,14 +13,12 @@ public class EvaluateInfo {
      * 用户编号
      */
     private String userCode;
+    private String goodsId;
     /**
      * 订单号
      */
     private String orderId;
-    /**
-     * 商品编号
-     */
-    private String skuNo;
+
     /**
      * 门店编码
      */
@@ -28,11 +26,11 @@ public class EvaluateInfo {
     /**
      * 评价的星级
      */
-    private String starLevel;
+    private int evaluateScore;
     /**
      * 评价的内容
      */
-    private String appraiseInfo;
+    private String evaluateContent;
     /**
      * 评价的图片
      */
@@ -68,18 +66,42 @@ public class EvaluateInfo {
     private List<String> listAppraiseInfo;
     private List<String> listPictureUrl;
     private List<Map> mapList;
+    /**
+     * 总评价数
+     */
+    private int evaluateTotal;
+    /**
+     * 总评价星级
+     */
+    private int starTotal;
+
+    public int getEvaluateTotal() {
+        return evaluateTotal;
+    }
+
+    public void setEvaluateTotal(int evaluateTotal) {
+        this.evaluateTotal = evaluateTotal;
+    }
+
+    public int getStarTotal() {
+        return starTotal;
+    }
+
+    public void setStarTotal(int starTotal) {
+        this.starTotal = starTotal;
+    }
 
     /**
      * 评价列表
      */
-    private List<EvaluateInfo> evaluateInfoList;
+    private List<EvaluateInfo> evaluateList;
 
-    public List<EvaluateInfo> getEvaluateInfoList() {
-        return evaluateInfoList;
+    public List<EvaluateInfo> getEvaluateList() {
+        return evaluateList;
     }
 
-    public void setEvaluateInfoList(List<EvaluateInfo> evaluateInfoList) {
-        this.evaluateInfoList = evaluateInfoList;
+    public void setEvaluateList(List<EvaluateInfo> evaluateList) {
+        this.evaluateList = evaluateList;
     }
 
     public List<Map> getMapList() {
@@ -146,12 +168,12 @@ public class EvaluateInfo {
         this.orderId = orderId;
     }
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getStoreNo() {
@@ -162,20 +184,20 @@ public class EvaluateInfo {
         this.storeNo = storeNo;
     }
 
-    public String getStarLevel() {
-        return starLevel;
+    public int getEvaluateScore() {
+        return evaluateScore;
     }
 
-    public void setStarLevel(String starLevel) {
-        this.starLevel = starLevel;
+    public void setEvaluateScore(int evaluateScore) {
+        this.evaluateScore = evaluateScore;
     }
 
-    public String getAppraiseInfo() {
-        return appraiseInfo;
+    public String getEvaluateContent() {
+        return evaluateContent;
     }
 
-    public void setAppraiseInfo(String appraiseInfo) {
-        this.appraiseInfo = appraiseInfo;
+    public void setEvaluateContent(String evaluateContent) {
+        this.evaluateContent = evaluateContent;
     }
 
     public String getPhotoUrl() {

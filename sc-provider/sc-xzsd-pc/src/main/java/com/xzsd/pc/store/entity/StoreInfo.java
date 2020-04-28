@@ -7,7 +7,7 @@ public class StoreInfo {
     /**
      * 门店编号
      */
-    private String storeNo;
+    private String storeId;
     /**
      * 门店名称
      */
@@ -15,40 +15,36 @@ public class StoreInfo {
     /**
      * 门店名称
      */
-    private String managerName;
+    private String userName;
 
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
 
     /**
      * 省名称
      */
     private String provinceName;
+    private String provinceId;
     /**
      * 市名称
      */
     private String cityName;
+    private String cityId;
     /**
      * 区名称
      */
     private String areaName;
+    private String areaId;
     /**
      * 详细地址
      */
-    private String storeAddress;
+    private String address;
     /**
      * 门店电话
      */
-    private String storePhone;
+    private String phone;
     /**
      * 店长用户编号
      */
-    private String userAcct;
+    private String userId;
     /**
      * 邀请码
      */
@@ -56,7 +52,7 @@ public class StoreInfo {
     /**
      * 营业执照
      */
-    private String businessLicense;
+    private String businessCode;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -83,14 +79,14 @@ public class StoreInfo {
      */
     private  int version;
 
+    private String nowRole;
 
-
-    public String getStoreNo() {
-        return storeNo;
+    public String getNowRole() {
+        return nowRole;
     }
 
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setNowRole(String nowRole) {
+        this.nowRole = nowRole;
     }
 
     public String getStoreName() {
@@ -125,29 +121,6 @@ public class StoreInfo {
         this.areaName = areaName;
     }
 
-    public String getStoreAddress() {
-        return storeAddress;
-    }
-
-    public void setStoreAddress(String storeAddress) {
-        this.storeAddress = storeAddress;
-    }
-
-    public String getStorePhone() {
-        return storePhone;
-    }
-
-    public void setStorePhone(String storePhone) {
-        this.storePhone = storePhone;
-    }
-
-    public String getUserAcct() {
-        return userAcct;
-    }
-
-    public void setUserAcct(String useCode) {
-        this.userAcct = useCode;
-    }
 
     public String getInvitationCode() {
         return invitationCode;
@@ -157,13 +130,7 @@ public class StoreInfo {
         this.invitationCode = invitationCode;
     }
 
-    public String getBusinessLicense() {
-        return businessLicense;
-    }
 
-    public void setBusinessLicense(String businessLicense) {
-        this.businessLicense = businessLicense;
-    }
 
     public int getIsDeleted() {
         return isDeleted;
@@ -211,5 +178,77 @@ public class StoreInfo {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBusinessCode() {
+        return businessCode;
+    }
+
+    public void setBusinessCode(String businessCode) {
+        this.businessCode = businessCode;
     }
 }

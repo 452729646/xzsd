@@ -1,10 +1,12 @@
 package com.xzsd.app.driver.store.entity;
 
+import java.util.List;
+
 public class StoreInfo {
     /**
      * 门店编码
      */
-    private String storeNo;
+    private String storeId;
     /**
      * 门店名称
      */
@@ -16,7 +18,7 @@ public class StoreInfo {
     /**
      * 店长名称
      */
-    private String shopOwnerName;
+    private String userName;
     /**
      *
      */
@@ -26,12 +28,30 @@ public class StoreInfo {
      */
     private String userCode;
 
-    public String getStoreNo() {
-        return storeNo;
+    private List<StoreInfo> list;
+
+    public List<StoreInfo> getList() {
+        return list;
     }
 
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setList(List<StoreInfo> list) {
+        this.list = list;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getStoreName() {
@@ -50,13 +70,6 @@ public class StoreInfo {
         this.address = address;
     }
 
-    public String getShopOwnerName() {
-        return shopOwnerName;
-    }
-
-    public void setShopOwnerName(String shopOwnerName) {
-        this.shopOwnerName = shopOwnerName;
-    }
 
     public String getPhone() {
         return phone;

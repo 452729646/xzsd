@@ -7,14 +7,14 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 
+import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.picture.dao.PictureDao;
 import com.xzsd.pc.picture.entity.PictureInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.neusoft.core.page.PageUtils.getPageInfo;
 
@@ -44,9 +44,9 @@ public class PictureService {
         if(0 != countSortNo) {
             return AppResponse.bizError("序号已存在，请重新输入！");
         }
-        pictureInfo.setBannerCode(StringUtil.getBannerCode(4));
+        pictureInfo.setSlideshowId(StringUtil.getBannerCode(4));
         pictureInfo.setIsDeleted(0);
-        pictureInfo.setPictureState(0);
+        pictureInfo.setSlideshowStateId("0");
         // 新增轮播图
         int count = pictureDao.savePicture(pictureInfo);
         if(0 == count) {
@@ -64,11 +64,11 @@ public class PictureService {
      * @Date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deletePicture(String bannerCode,String userCode) {
-        List<String> listBannerCode = Arrays.asList(bannerCode.split(","));
+    public AppResponse deletePicture(String slideshowId,String userCode) {
+        List<String> listSlideshowId = Arrays.asList(slideshowId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
         // 删除用户
-        int count = pictureDao.deletePicture(listBannerCode,userCode);
+        int count = pictureDao.deletePicture(listSlideshowId,userCode);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");
         }
@@ -90,21 +90,32 @@ public class PictureService {
 
     /**
      * demo 启用轮播图
-     * @param bannerCode
-     * @param userCode
+     * @param
+     * @param
      * @return
      * @Author housum
      * @Date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse pictureUpper(String bannerCode,String userCode,int version) {
-        //选择的bannerCode放进一个list
-        List<String> listBannerCode = Arrays.asList(bannerCode.split(","));
-        AppResponse appResponse = AppResponse.success("启用成功！");
-        // 修改为上架状态
-        int count = pictureDao.pictureUpper(listBannerCode,userCode,version);
+    public AppResponse pictureUpper(PictureInfo pictureInfo) {
+        //选择的SlideshowId放进一个list
+        List<String> listSlideshowId = Arrays.asList(pictureInfo.getSlideshowId().split(","));
+        List<String> listVersion = Arrays.asList(pictureInfo.getVersion().split(","));
+        List<Map> mapList = new ArrayList<>();
+        //把slideshowId对应的version 放进map  然后在mybaits用foreacn遍历
+        for(int i =0 ;i<listSlideshowId.size(); i++){
+            Map map = new HashMap();
+            map.put("slideshowId",listSlideshowId.get(i));
+            map.put("slideshowStateId",pictureInfo.getSlideshowStateId());
+            map.put("version",listVersion.get(i));
+            map.put("userCode",pictureInfo.getUserCode());
+            mapList.add(map);
+        }
+        AppResponse appResponse = AppResponse.success("修改成功！");
+        // 修改为状态
+        int count = pictureDao.pictureUpper(mapList);
         if(0 == count) {
-            appResponse = AppResponse.bizError("上架失败，请重试！");
+            appResponse = AppResponse.bizError("修改失败，请重试！");
         }
         return appResponse;
     }
@@ -128,6 +139,11 @@ public class PictureService {
             appResponse = AppResponse.bizError("禁用失败，请重试！");
         }
         return appResponse;
+    }
+
+    public AppResponse listGoods(GoodsInfo goodsInfo){
+        List<GoodsInfo> goodsInfos = pictureDao.listGoodsByPage(goodsInfo);
+        return AppResponse.success("查询成功",getPageInfo(goodsInfos));
     }
 
 }

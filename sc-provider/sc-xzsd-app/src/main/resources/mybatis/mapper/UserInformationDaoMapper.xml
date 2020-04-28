@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.userInformation.UserInformationDao">
+<!--    获取店长登录信息-->
+    <select id="getUserManager" parameterType="com.xzsd.app.userInformation.UserInformationInfo" resultType="com.xzsd.app.userInformation.UserInformationInfo">
+        select
+        a.user_name userName,
+        a.headpicture_url userImage,
+        a.role role,
+        b.store_no storeId,
+        b.store_name storeName,
+        b.invitation_code inviteCode,
+        b.store_address address,
+        a.version version
+        from t_sys_user a,t_sys_store b
+        where a.user_code = b.user_code
+        and a.is_deleted = 0 and b.is_deleted = 0
+        and a.user_code = #{userCode}
+    </select>
+    <!--    获取司机登录信息-->
+    <select id="getUserDriver" parameterType="com.xzsd.app.userInformation.UserInformationInfo" resultType="com.xzsd.app.userInformation.UserInformationInfo">
+        select
+        a.user_name userName,
+        a.headpicture_url userImage,
+        a.role role,
+        a.phone phone,
+        a.user_name driverName,
+        a.version version
+        from t_sys_user a,t_sys_driver b
+        where a.user_code = b.user_code
+        and a.is_deleted = 0 and b.is_deleted = 0
+        and a.user_code = #{userCode}
+    </select>
+    <!--    获取客户登录信息-->
+    <select id="getUserClient" parameterType="com.xzsd.app.userInformation.UserInformationInfo" resultType="com.xzsd.app.userInformation.UserInformationInfo">
+        select
+        a.user_name userName,
+        a.headpicture_url userImage,
+        a.role role,
+        c.store_no storeId,
+        c.store_name storeName,
+        c.store_address storeAddress
+        from t_sys_user a,t_client_info b
+        LEFT JOIN t_sys_store c
+        on b.invite_code = c.invitation_code
+        where a.user_code = b.client_user_code
+        and a.is_deleted = 0 and b.is_deleted = 0
+        and a.user_code = #{userCode}
+    </select>
+
+    <!--修改密码-->
+    <update id="updateUserPwd" parameterType="com.xzsd.app.userInformation.UserInformationInfo">
+        update t_sys_user
+           set user_pwd     = #{userNewPassword},
+               gmt_modified = now(),
+               last_modified_by   = #{userCode},
+               version      = version + 1
+         where user_code = #{userCode}
+    </update>
+</mapper>

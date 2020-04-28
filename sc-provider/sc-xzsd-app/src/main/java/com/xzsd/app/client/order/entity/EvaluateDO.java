@@ -20,7 +20,7 @@ public class EvaluateDO {
     /**
      * 星级评价
      */
-    private String starLevel;
+    private int starLevel;
     /**
      * 订单编号
      */
@@ -71,11 +71,11 @@ public class EvaluateDO {
         this.image = image;
     }
 
-    public String getStarLevel() {
+    public int getStarLevel() {
         return starLevel;
     }
 
-    public void setStarLevel(String starLevel) {
+    public void setStarLevel(int starLevel) {
         this.starLevel = starLevel;
     }
 

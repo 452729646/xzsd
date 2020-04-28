@@ -3,6 +3,7 @@ package com.xzsd.app.client.order.dao;
 import com.xzsd.app.client.order.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,12 +19,12 @@ public interface OrderDao {
 
     /**
      * 新增主表订单
-     * @param orderInfo
+     * @param
      * @param orderId 订单编号
      * @param sum 总价
      * @param total
      */
-    int saveOrderFather(@Param("orderInfo") OrderInfo orderInfo, @Param("orderId")String orderId, @Param("sum")BigDecimal sum, @Param("userCode") String userCode,@Param("total") BigDecimal total,@Param("storeNo") String storeNo);
+    int saveOrderFather( @Param("orderId")String orderId, @Param("sum")String sum, @Param("userCode") String userCode,@Param("total") int total,@Param("storeId") String storeId);
 
 
     /**
@@ -39,7 +40,7 @@ public interface OrderDao {
      * @param mapList
      * @return
      */
-    List<String> countCheckStock(List<Map> mapList);
+    List<String> countCheckStock(@Param("listSkuNo") List<String>listSkuNo);
 
     /**
      * 查询该用户的订单
@@ -75,12 +76,12 @@ public interface OrderDao {
      */
     String selectStoreNo(@Param("userCode") String userCode);
     /**
-     * 修改订单状态 订单已取货
+     * 修改订单状态
      * @param
      * @param
      * @author housum
      */
-    int orderTake (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
+    int updateOrderState (StateInfo stateInfo);
 
     /**
      * 修改订单状态 取消订单
@@ -91,4 +92,36 @@ public interface OrderDao {
     int orderCancel (@Param("orderId")String orderId,@Param("version")String version,@Param("userCode")String userCode);
 
     List<GoodsListVO> goodsList(@Param("orderId") String orderId);
+
+    int deletedShoppingCart(@Param("listShopCartId")List<String> listShopCartId,@Param("userCode")String userCode);
+
+    List<EvaluateInfo> evaluateTotal(@Param("goodsIdList") List<String> goodsIdList);
+
+    /**
+     * 更新商品评分
+     * @param mapList
+     * @return
+     */
+    int UpdateStar(List<Map> mapList);
+
+    /**
+     * 更新状态为售罄
+     * @param goodsId
+     * @return
+     */
+    int updateSellout(@Param("goodsId") String goodsId);
+
+    /**
+     * 更新库存
+     * @param mapGoodsList
+     * @return
+     */
+    int updateStock(List<Map> mapGoodsList);
+
+    /**
+     * 更新销量
+     * @param mapGoodsSaleList
+     * @return
+     */
+    int updateSaleCnt(List<Map> mapGoodsSaleList);
 }

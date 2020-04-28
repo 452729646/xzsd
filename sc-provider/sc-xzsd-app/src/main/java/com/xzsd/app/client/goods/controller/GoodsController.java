@@ -2,6 +2,7 @@ package com.xzsd.app.client.goods.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
+import com.xzsd.app.client.commodityClassification.entity.ListSonCateGoodsInfo;
 import com.xzsd.app.client.goods.dao.GoodsDao;
 import com.xzsd.app.client.goods.entity.EvaluateInfo;
 import com.xzsd.app.client.goods.service.GoodsService;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
  * @Date 2020-4-16
  */
 @RestController
-@RequestMapping("/goods")
+@RequestMapping("/clientGoods")
 public class GoodsController {
     private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
     @Resource GoodsService goodsService;
@@ -31,10 +32,10 @@ public class GoodsController {
      * @author housum
      * @date 2020-4-16
      */
-    @PostMapping("goodsDetail")
-    public AppResponse goodsDetail(String skuNo){
+    @PostMapping("getGoods")
+    public AppResponse goodsDetail(String goodsId){
         try{
-            return goodsService.goodsDetail(skuNo);
+            return goodsService.goodsDetail(goodsId);
         }catch (Exception e){
             logger.error("查询商品信息失败",e);
             System.out.println(e.toString());
@@ -47,7 +48,7 @@ public class GoodsController {
      * @param evaluateInfo
      * @return
      */
-    @PostMapping("listEvaluateBySkuNo")
+    @PostMapping("listGoodsEvaluates")
     public AppResponse listEvaluateBySkuNo(EvaluateInfo evaluateInfo){
         try{
             return goodsService.listEvaluateBySkuNo(evaluateInfo);
@@ -56,5 +57,41 @@ public class GoodsController {
             System.out.println(e.toString());
             throw e;
         }
+    }
+
+    /**
+     * 查询商品父分类
+     * @param
+     * @retrun
+     * @author housum
+     * @date 2020-4-13
+     */
+    @RequestMapping("listOneGoodsClassify")
+    public AppResponse listFatherCate (){
+        try {
+            return goodsService.listFatherCate();
+        } catch (Exception e) {
+            logger.error("查询父分类列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * 查询子分类的商品
+     * @param
+     * @author housum
+     * @date 2020-4-14
+     */
+    @RequestMapping("listGetClassGoods")
+    public AppResponse listSonCateGoods(ListSonCateGoodsInfo listSonCateGoodsInfo){
+        try{
+            return goodsService.listSonCateGoods(listSonCateGoodsInfo);
+        }catch (Exception e){
+            logger.error("查询子分类商品异常",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.xzsd.pc.classification.dao;
 
 
 import com.xzsd.pc.classification.entity.ClassificationInfo;
+import com.xzsd.pc.classification.entity.OneClassifyInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -62,7 +63,7 @@ public interface ClassificationDao {
     //查看所有类别（id=0）（或指定类别下所有子类别）
 
 
-     List<ClassificationInfo> listCateByPage(@Param("isParent") int isParent);
+     List<OneClassifyInfo> listCateByPage(@Param("isParent") int isParent);
 
 
 
@@ -71,7 +72,7 @@ public interface ClassificationDao {
      * @param cateCode 用户编号
      * @return 修改结果
      */
-    ClassificationInfo getCateDetail(@Param("cateCode") String cateCode);
+    ClassificationInfo getCateDetail(@Param("classifyId") String classifyId);
 
 
     /**
@@ -80,7 +81,7 @@ public interface ClassificationDao {
      * @param userCode 更新人
      * @return
      */
-    int deleteCate(@Param("listCateCode")List<String> listCateCode, @Param("userCode") String userCode);
+    int deleteCate(@Param("classifyId")String classifyId, @Param("userCode") String userCode);
 
     /**
      * 查看是否有重名

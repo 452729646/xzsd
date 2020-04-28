@@ -8,9 +8,9 @@
         select count(sort_no)
         from t_sys_hotgoods
         where is_deleted = 0
-        and sort_no = #{sortNo}
-        <if test="hotGoodsCode != null and hotGoodsCode != ''">
-            and hotgoods_code != #{hotGoodsCode}
+        and sort_no = #{hotGoodsNum}
+        <if test="hotGoodsId != null and hotGoodsId != ''">
+            and hotgoods_code != #{hotGoodsId}
         </if>
     </select>
 
@@ -27,9 +27,9 @@
          update_user,
          version)
         values
-        (#{hotGoodsCode},
-         #{sortNo},
-         #{skuNo},
+        (#{hotGoodsId},
+         #{hotGoodsNum},
+         #{goodsId},
          #{isDeleted},
          now(),
          #{createBy},
@@ -62,22 +62,23 @@
     </select>
 
     <!--热门商品列表信息-->
-    <select id="hotGoodsListByPage" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo">
+    <select id="hotGoodsListByPage" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo">
         select
-        a.hotgoods_code hotGoodsCode,
-        a.sort_no sortNo,
-        a.sku_no skuNo,
-        b.sku_name skuName,
-        b.selling_price sellingPrice,
-        b.detail detail
+        a.hotgoods_code hotGoodsId,
+        a.sort_no hotGoodsNum,
+        a.sku_no goodsId,
+        b.sku_name goodsName,
+        b.selling_price goodsPrice,
+        b.detail goodsDescribe,
+        a.version version
         from t_sys_hotgoods a,t_sys_goods b
         where a.sku_no = b.sku_no
         and a.is_deleted = 0
-        <if test="skuName != null and skuName != ''">
-            and b.sku_name like concat('%', #{skuName}, '%')
+        <if test="goodsName != null and goodsName != ''">
+            and b.sku_name like concat('%', #{goodsName}, '%')
         </if>
-        <if test="skuNo != null and skuNo != ''">
-            and a.sku_no like concat('%', #{skuNo}, '%')
+        <if test="hotGoodsId != null and hotGoodsId != ''">
+            and a.sku_no like concat('%', #{hotGoodsId}, '%')
         </if>
         order by a.sort_no ASC
 
@@ -88,12 +89,12 @@
     <update id="updateHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
         update t_sys_hotgoods
         set
-            sort_no = #{sortNo},
-            sku_no = #{skuNo},
+            sort_no = #{hotGoodsNum},
+            sku_no = #{goodsId},
             update_time = now(),
             update_user   = #{lastModifiedBy},
             version      = version + 1
-        where hotgoods_code = #{hotGoodsCode}
+        where hotgoods_code = #{hotGoodsId}
         and version = #{version}
     </update>
 
@@ -115,7 +116,7 @@
     <update id="setDisplayCnt" >
         update t_dicitonary
         set
-        dict_value = #{displayCnt},
+        dict_value = #{hotGoodsShowNum},
         update_time = now(),
         update_user = #{userCode},
         version = version + 1
@@ -126,7 +127,7 @@
     <!--    查询热门商品展示数量-->
     <select id="selectDisplayCnt" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" >
         select
-        dict_value displayCnt,
+        dict_value hotGoodsShowNum,
         version version
         from
         t_dicitonary
@@ -135,5 +136,16 @@
         and is_deleted = 0
     </select>
 
-
+<!--    热门位商品详情-->
+    <select id="getHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsVo" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVo">
+        select
+        a.hotgoods_code hotGoodsId,
+        a.sort_no hotGoodsNum,
+        a.sku_no goodsId,
+        b.sku_name goodsName,
+        a.version version
+        from t_sys_hotgoods a, t_sys_goods b
+        where a.sku_no = b.sku_no
+        and a.hotgoods_code = #{hotGoodsId}
+    </select>
 </mapper>

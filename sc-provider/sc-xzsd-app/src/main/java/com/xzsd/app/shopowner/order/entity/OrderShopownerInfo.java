@@ -2,6 +2,7 @@ package com.xzsd.app.shopowner.order.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 45272
@@ -14,15 +15,43 @@ public class OrderShopownerInfo {
     /**
      * 用户编号
      */
-    private String userCode;
+    private String userId;
     /**
      * 用户姓名
      */
     private String userName;
+    private String phone;
     /**
      * 门店编码
      */
     private String storeNo;
+    private String storeName;
+    private String address;
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCrateTime() {
+        return crateTime;
+    }
+
+    public void setCrateTime(String crateTime) {
+        this.crateTime = crateTime;
+    }
+
     /**
      * 商品编号
      */
@@ -30,11 +59,11 @@ public class OrderShopownerInfo {
     /**
      * 订单总价
      */
-    private BigDecimal orderMoney;
+    private String orderAllCost;
     /**
      * 商品数量
      */
-    private int goodsNumber;
+    private int orderAllGoodsCount;
     /**
      * 商品售价
      */
@@ -50,23 +79,16 @@ public class OrderShopownerInfo {
     /**
      * 订单状态 0：已取消，1：已下单，2：已到货，3：已完成未评价，4：已完成已评价
      */
-    private int orderStatus;
+    private String orderStateId;
+    private String crateTime;
     /**
      * 支付状态
      */
     private int paymentStatus;
     /**
-     * id
-     */
-    private int id;
-    /**
      * 作废标记 0为存在，1为作废
      */
     private int isDeleted;
-    /**
-     * 序号
-     */
-    private int sortNo;
     /**
      * 创建时间
      */
@@ -87,6 +109,55 @@ public class OrderShopownerInfo {
      * 版本号
      */
     private String version;
+    private List<GoodsListShopownerVO> goodsList;
+
+    public List<GoodsListShopownerVO> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsListShopownerVO> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getOrderAllCost() {
+        return orderAllCost;
+    }
+
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
+    }
+
+    public int getOrderAllGoodsCount() {
+        return orderAllGoodsCount;
+    }
+
+    public void setOrderAllGoodsCount(int orderAllGoodsCount) {
+        this.orderAllGoodsCount = orderAllGoodsCount;
+    }
+
+    public String getOrderStateId() {
+        return orderStateId;
+    }
+
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -96,13 +167,6 @@ public class OrderShopownerInfo {
         this.orderId = orderId;
     }
 
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
 
     public String getUserName() {
         return userName;
@@ -128,22 +192,6 @@ public class OrderShopownerInfo {
         this.skuNo = skuNo;
     }
 
-    public BigDecimal getOrderMoney() {
-        return orderMoney;
-    }
-
-    public void setOrderMoney(BigDecimal orderMoney) {
-        this.orderMoney = orderMoney;
-    }
-
-
-    public int getGoodsNumber() {
-        return goodsNumber;
-    }
-
-    public void setGoodsNumber(int goodsNumber) {
-        this.goodsNumber = goodsNumber;
-    }
 
     public BigDecimal getSellingPrice() {
         return sellingPrice;
@@ -169,13 +217,6 @@ public class OrderShopownerInfo {
         this.payTime = payTime;
     }
 
-    public int getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     public int getPaymentStatus() {
         return paymentStatus;
@@ -185,13 +226,6 @@ public class OrderShopownerInfo {
         this.paymentStatus = paymentStatus;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getIsDeleted() {
         return isDeleted;
@@ -201,13 +235,6 @@ public class OrderShopownerInfo {
         this.isDeleted = isDeleted;
     }
 
-    public int getSortNo() {
-        return sortNo;
-    }
-
-    public void setSortNo(int sortNo) {
-        this.sortNo = sortNo;
-    }
 
     public Date getGmtCreate() {
         return gmtCreate;

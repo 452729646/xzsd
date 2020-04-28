@@ -2,11 +2,13 @@ package com.xzsd.pc.picture.dao;
 
 
 
+import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.picture.entity.PictureInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PictureDao {
@@ -30,7 +32,7 @@ public interface PictureDao {
      * @param userCode 更新人
      * @return
      */
-    int deletePicture(@Param("listBannerCode")List<String> listBannerCode, @Param("userCode") String userCode);
+    int deletePicture(@Param("listSlideshowId")List<String> listSlideshowId, @Param("userCode") String userCode);
 
 
     /**
@@ -46,7 +48,7 @@ public interface PictureDao {
      * @param userCode 更新人
      * @return
      */
-    int pictureUpper(@Param("listBannerCode")List<String> listBannerCode, @Param("userCode") String userCode, @Param("version") int version);
+    int pictureUpper(List<Map> mapList);
 
     /**
      * 禁用轮播图
@@ -55,4 +57,6 @@ public interface PictureDao {
      * @return
      */
     int pictureLower(@Param("listBannerCode2")List<String> listBannerCode2, @Param("userCode") String userCode, @Param("version") int version);
+
+    List<GoodsInfo> listGoodsByPage(GoodsInfo goodsInfo);
 }

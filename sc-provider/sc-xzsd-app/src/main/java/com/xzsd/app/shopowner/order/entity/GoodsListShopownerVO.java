@@ -6,73 +6,73 @@ public class GoodsListShopownerVO {
     /**
      * 商品编号
      */
-    private String skuNo;
+    private String goodsId;
     /**
      * 图片url
      */
-    private String pictureUr;
+    private String goodsImagePath;
     /**
      * 商品名称
      */
-    private String skuName;
+    private String goodsName;
     /**
      * 介绍
      */
-    private String detail;
+    private String goodsDescribe;
     /**
      * 售价
      */
-    private BigDecimal sellingPrice;
+    private String goodsPrice;
     /**
      * 购买数量
      */
-    private int goodsCnt;
+    private int cartGoodsCount;
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getPictureUr() {
-        return pictureUr;
+    public String getGoodsImagePath() {
+        return goodsImagePath;
     }
 
-    public void setPictureUr(String pictureUr) {
-        this.pictureUr = pictureUr;
+    public void setGoodsImagePath(String goodsImagePath) {
+        this.goodsImagePath = goodsImagePath;
     }
 
-    public String getSkuName() {
-        return skuName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getGoodsDescribe() {
+        return goodsDescribe;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setGoodsDescribe(String goodsDescribe) {
+        this.goodsDescribe = goodsDescribe;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public int getGoodsCnt() {
-        return goodsCnt;
+    public int getCartGoodsCount() {
+        return cartGoodsCount;
     }
 
-    public void setGoodsCnt(int goodsCnt) {
-        this.goodsCnt = goodsCnt;
+    public void setCartGoodsCount(int cartGoodsCount) {
+        this.cartGoodsCount = cartGoodsCount;
     }
 }

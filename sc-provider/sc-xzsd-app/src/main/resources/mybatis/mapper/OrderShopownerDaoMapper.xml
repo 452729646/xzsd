@@ -6,19 +6,21 @@
         select a.store_no
         from t_sys_store a,
         t_sys_user b
-        where a.user_acct = b.user_acct
+        where a.user_code = b.user_code
         and a.is_deleted = 0
-        and b.user_code = #{userCode}
+        and b.user_code = #{userId}
     </select>
 
-    <resultMap id="orderList" type="com.xzsd.app.shopowner.order.entity.OrderShopownerVO">
+    <resultMap id="orderList" type="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo">
         <id property="orderId" column="order_id"></id>
-        <result property="orderStatus" column="order_status"></result>
-        <result property="goodsTotal" column="goods_total"></result>
-        <result property="paymentMoney" column="payment_money"></result>
+        <result property="orderStateId" column="order_status"></result>
+        <result property="orderAllGoodsCount" column="goods_total"></result>
+        <result property="orderAllCost" column="payment_money"></result>
+        <result property="userId" column="user_code"></result>
         <result property="userName" column="user_name"></result>
-        <result property="userPhone" column="phone"></result>
-        <collection property="goodsListShopownerVOList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+        <result property="phone" column="phone"></result>
+        <result property="version" column="version"></result>
+        <collection property="goodsList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
         </collection>
     </resultMap>
 
@@ -30,34 +32,36 @@
         a.order_status ,
         a.goods_total ,
         a.payment_money,
+        b.user_code,
         b.user_name,
-        b.phone
+        b.phone,
+        a.version
         from t_sys_orderfather a,
         t_sys_user b
         where a.user_code = b.user_code
         and a.is_deleted = 0
         and a.store_no = #{storeNo}
-        <if test="orderStatus == 1">
-            and a.order_status = #{orderStatus}
+        <if test="'1'.toString == orderStateId">
+            and a.order_status = #{orderStateId}
         </if>
-        <if test="orderStatus == 2">
-            and a.order_status = #{orderStatus}
+        <if test="'3'.toString == orderStateId">
+            and a.order_status = #{orderStateId}
         </if>
-        <if test="orderStatus == 3">
-            and a.order_status in (3,4)
+        <if test="'4'.toString == orderStateId or '5'.toString == orderStateId">
+            and a.order_status in (4,5)
         </if>
-
+        order by a.create_time DESC , a.order_status ASC
     </select>
 
     <!--    查询该订单的所有商品-->
     <select id="getByOrderId" parameterType="java.lang.String" resultType="com.xzsd.app.shopowner.order.entity.GoodsListShopownerVO">
         select
-        a.sku_no skuNo,
-        b.picture_url pictureUrl,
-        b.sku_name skuName,
-        b.detail detail,
-        a.selling_money sellingPrice,
-        a.goods_cnt goodsCnt
+        a.sku_no goodsId,
+        b.picture_url goodsImagePath,
+        b.sku_name goodsName,
+        b.detail goodsDescribe,
+        a.selling_money goodsPrice,
+        a.goods_cnt cartGoodsCount
         from t_sys_orderson a,
         t_sys_goods b
         where a.sku_no = b.sku_no
@@ -66,17 +70,17 @@
     </select>
 
 
-    <resultMap id="detail" type="com.xzsd.app.shopowner.order.entity.OrderShopownerVO">
+    <resultMap id="detail" type="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo">
         <id property="orderId" column="order_id"></id>
-        <result property="createTime" column="create_time"></result>
-        <result property="orderStatus" column="order_status"></result>
-        <result property="goodsTotal" column="goods_total"></result>
-        <result property="paymentMoney" column="payment_money"></result>
+        <result property="crateTime" column="create_time"></result>
+        <result property="orderStateId" column="order_status"></result>
+        <result property="orderAllGoodsCount" column="goods_total"></result>
+        <result property="orderAllCost" column="payment_money"></result>
         <result property="userName" column="user_name"></result>
-        <result property="userPhone" column="phone"></result>
+        <result property="phone" column="phone"></result>
         <result property="storeName" column="store_name"></result>
-        <result property="storeAddress" column="address"></result>
-        <collection property="goodsListShopownerVOList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+        <result property="address" column="address"></result>
+        <collection property="goodsList" ofType="GoodsListShopownerVO" javaType="java.util.List" column="order_id" select="getByOrderId">
         </collection>
 
     </resultMap>
@@ -99,16 +103,17 @@
     <!--    通过orderId查询订单详情-->
     <select id="orderDetailByOrderId" parameterType="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo" resultMap="detail">
         select
-        a.order_id order_id,
-        a.create_time create_time,
-        a.order_status order_status,
-        a.goods_total goods_total,
-        a.payment_money payment_money,
-        b.user_name user_name,
-        b.phone phone,
-        c.store_name store_name,
-        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address,
-        a.version version
+        a.order_id ,
+        a.create_time ,
+        a.order_status ,
+        a.goods_total ,
+        a.payment_money ,
+        b.user_name ,
+        b.phone ,
+        c.store_name ,
+        CONCAT((select d.rname from region d where d.id = c.province_no),
+        (select d.rname from region d where d.id = c.city_no),
+        (select d.rname from region d where d.id = c.area_no),c.store_address) address
         from t_sys_orderfather a,
         t_sys_store c,
         t_sys_user b
@@ -119,16 +124,15 @@
     </select>
 
     <!--修改订单状态（订单到货）-->
-    <update id="orderArrival" >
+    <update id="updateOrderState" parameterType="com.xzsd.app.shopowner.order.entity.OrderShopownerInfo">
             update t_sys_orderfather
             set
-            order_status = 2,
+            order_status = #{orderStateId},
             update_time = now(),
-            update_user = #{userCode},
+            update_user = #{userId},
             version = version + 1
             where order_id = #{orderId}
             and version = #{version}
-            and order_status = 1
     </update>
 
     <!--修改订单状态（订单到货）-->

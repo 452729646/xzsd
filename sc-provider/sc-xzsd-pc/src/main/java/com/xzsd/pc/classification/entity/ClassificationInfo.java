@@ -31,11 +31,13 @@ public class ClassificationInfo  {
     /**
      * 分类编号
      */
-    private String cateCode;
+    private String classifyId;
+    private String classifyComment;
+    private String classifyParent;
     /**
      * 分类名称
      */
-    private String cateName;
+    private String classifyName;
     /**
      * 父类编号
      */
@@ -84,23 +86,36 @@ public class ClassificationInfo  {
     private  int version;
 
 
-
-
-
-    public String getCateCode() {
-        return cateCode;
+    public String getClassifyId() {
+        return classifyId;
     }
 
-    public void setCateCode(String cateCode) {
-        this.cateCode = cateCode;
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
     }
 
-    public String getCateName() {
-        return cateName;
+    public String getClassifyComment() {
+        return classifyComment;
     }
 
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
+    public void setClassifyComment(String classifyComment) {
+        this.classifyComment = classifyComment;
+    }
+
+    public String getClassifyParent() {
+        return classifyParent;
+    }
+
+    public void setClassifyParent(String classifyParent) {
+        this.classifyParent = classifyParent;
+    }
+
+    public String getClassifyName() {
+        return classifyName;
+    }
+
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
     }
 
     public String getCateCodeParent() {

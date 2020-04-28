@@ -7,12 +7,13 @@
     <select id="listOrderByPage" parameterType="com.xzsd.pc.order.entity.OrderVO" resultType="com.xzsd.pc.order.entity.OrderVO">
         select
         a.order_id orderId,
-        a.payment_money paymentMoney,
-        a.order_status orderStatus,
-        a.store_no storeNo,
+        a.payment_money orderAllCost,
+        a.order_status orderStateId,
+        a.store_no storeId,
         c.user_name userName,
-        c.phone userPhone,
-        a.create_time createTime
+        c.phone phone,
+        a.create_time payTime,
+        a.version version
         from t_sys_orderfather a,
         t_client_info b,
         t_sys_user c
@@ -25,19 +26,19 @@
         <if test="orderId != null and orderId != ''">
             and a.order_id like concat('%', #{orderId}, '%')
         </if>
-        <if test="userPhone != null and userPhone != ''">
-            and c.phone like concat('%', #{userPhone}, '%')
+        <if test="phone != null and phone != ''">
+            and c.phone like concat('%', #{phone}, '%')
         </if>
-        <if test="orderStatus != null and orderStatus != ''">
-            and a.order_status =#{orderStatus}
+        <if test="orderStateId != null and orderStateId != ''">
+            and a.order_status =#{orderStateId}
         </if>
-        <if test="startTime!=null and startTime != ''">
-            AND a.pay_time &gt;= #{startTime}
+        <if test="payTimeStart!=null and payTimeStart != ''">
+            AND a.create_time &gt;= #{payTimeStart}
         </if>
-        <if test="endTime!=null and endTime != ''">
-            AND a.pay_time &lt;= #{endTime}
+        <if test="payTimeEnd!=null and payTimeEnd != ''">
+            AND a.create_time &lt;= #{payTimeEnd}
         </if>
-        <if test="role == 1 and storeNo2 != ''and storeNo2 !=null">
+        <if test=" storeNo2 != ''and storeNo2 !=null">
             AND a.store_no = #{storeNo2}
         </if>
     </select>
@@ -46,30 +47,32 @@
     <select id="listOrderDetailByPage" parameterType="com.xzsd.pc.order.entity.OrderDetailVO" resultType="com.xzsd.pc.order.entity.OrderDetailVO">
         select
         a.order_id orderId,
-        a.sku_no skuNo,
-        b.sku_name skuName,
-        a.goods_cnt goodsCnt,
-        a.order_money orderMoney,
-        a.selling_money sellingMoney
+        a.sku_no goodsId,
+        b.sku_name goodsName,
+        a.goods_cnt goodsCount,
+        a.order_money theGoodsAllPrice,
+        a.selling_money goodsPrice,
+        b.cost_price goodsShelfCost,
+        c.user_code userId
         from t_sys_orderson a,
-        t_sys_goods b
-        where a.sku_no = b.sku_no
+        t_sys_goods b,
+        t_sys_orderfather c
+        where a.sku_no = b.sku_no and a.order_id = c.order_id
         and a.is_deleted = 0
         and a.order_id = #{orderId}
     </select>
 
     <!--修改订单状态（订单到货）-->
-    <update id="orderArrival" parameterType="java.util.List">
+    <update id="updateOrderState" parameterType="java.util.List">
         <foreach collection="list" item="mapList" index="index"  separator=";">
         update t_sys_orderfather
         set
-            order_status = 2,
+            order_status = #{mapList.orderStateId},
             update_time = now(),
             update_user = #{mapList.userCode},
             version = version + 1
         where order_id = #{mapList.orderId}
         and version = #{mapList.version}
-        and order_status = 1
         </foreach>
     </update>
 
@@ -145,9 +148,61 @@
         from t_sys_store a,
         t_sys_user b
         where
-        a.user_acct = b.user_acct
+        a.user_code = b.user_code
         and b.user_code = #{userCode}
     </select>
 
+<!-- 查询是否存在下单或者取货状态-->
+    <select id="countPlaceOrTake" parameterType="java.util.List" resultType="int">
+        select  COUNT(order_id)
+        FROM t_sys_orderfather
+        where (order_status = 0 or order_status = 3) and is_deleted = 0
+        AND order_id IN
+        <foreach collection="listOrderId" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
+    <!-- 查询是否存在已到货或者已完成未评价状态-->
+    <select id="countArrivalOr" parameterType="java.util.List" resultType="int">
+        select  COUNT(order_id)
+        FROM t_sys_orderfather
+        where (order_status = 2 or order_status = 4) and is_deleted = 0
+        AND order_id IN
+        <foreach collection="listOrderId" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 查询是否存在已到货-->
+    <select id="countArrival" parameterType="java.util.List" resultType="int">
+        select  COUNT(order_id)
+        FROM t_sys_orderfather
+        where (order_status = 2) and is_deleted = 0
+        AND order_id IN
+        <foreach collection="listOrderId" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+<!--获取订单的商品编码和数量-->
+    <select id="goodsList" parameterType="java.util.List" resultType="com.xzsd.pc.order.entity.GoodsListInfo">
+
+            select
+            sku_no goodsId,
+            goods_cnt goodsCnt
+            from t_sys_orderson
+            where order_id in
+        <foreach collection="list" item="mapList" index="index" open="(" separator="," close=")">
+            #{mapList.orderId}
+        </foreach>
+    </select>
+
+    <update id="updateStock" parameterType="java.util.List">
+        <foreach collection="list" item="mapGoodsList" index="index"  separator=";">
+            update t_sys_goods
+            set
+                stock = stock + #{mapGoodsList.goodsCnt}
+            where sku_no = #{mapGoodsList.goodsId}
+        </foreach>
+    </update>
 </mapper>

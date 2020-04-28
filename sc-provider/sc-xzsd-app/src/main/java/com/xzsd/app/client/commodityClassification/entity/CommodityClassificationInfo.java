@@ -5,25 +5,25 @@ public class CommodityClassificationInfo {
     /**
      * 分类编码
      */
-    private String cateCode;
+    private String classifyId;
     /**
      * 分类名称
      */
-    private String cateName;
+    private String classifyName;
 
-    public String getCateCode() {
-        return cateCode;
+    public String getClassifyId() {
+        return classifyId;
     }
 
-    public void setCateCode(String cateCode) {
-        this.cateCode = cateCode;
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
     }
 
-    public String getCateName() {
-        return cateName;
+    public String getClassifyName() {
+        return classifyName;
     }
 
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
     }
 }

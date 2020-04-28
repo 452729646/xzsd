@@ -47,7 +47,7 @@ public class HotGoodsService {
         if(0 != countSortNo) {
             return AppResponse.bizError("热门排序号已存在，请重新输入！");
         }
-        hotGoodsInfo.setHotGoodsCode(StringUtil.getHotGoodsCode());
+        hotGoodsInfo.setHotGoodsId(StringUtil.getHotGoodsCode());
         hotGoodsInfo.setIsDeleted(0);
         // 新增热门商品
         int count = hotGoodsDao.saveHotGoods(hotGoodsInfo);
@@ -108,8 +108,8 @@ public class HotGoodsService {
      * @date 2020-3-27
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteHotGoods(String hotGoodsCode,String userCode){
-        List<String> hotGoodsCodeList = Arrays.asList(hotGoodsCode.split(","));
+    public AppResponse deleteHotGoods(String hotGoodsId,String userCode){
+        List<String> hotGoodsCodeList = Arrays.asList(hotGoodsId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功");
         int count = hotGoodsDao.deleteHotGoods(hotGoodsCodeList,userCode);
         if (0 == count){
@@ -125,8 +125,8 @@ public class HotGoodsService {
      * @date 2020-4-13
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse setDisplayCnt(int displayCnt,String userCode,int version){
-        int count = hotGoodsDao.setDisplayCnt(displayCnt,userCode,version);
+    public AppResponse setDisplayCnt(int hotGoodsShowNum,String userCode,int version){
+        int count = hotGoodsDao.setDisplayCnt(hotGoodsShowNum,userCode,version);
         if (0 == count){
             return AppResponse.bizError("设置失败,请重试");
         }
@@ -144,6 +144,9 @@ public class HotGoodsService {
         return AppResponse.success("查询成功",data);
     }
 
-
+    public AppResponse getHotGoods(HotGoodsVo hotGoodsVo){
+        HotGoodsVo data = hotGoodsDao.getHotGoods(hotGoodsVo);
+        return AppResponse.success("查询成功",data);
+    }
 
 }

@@ -11,7 +11,7 @@ public enum AppResponseStatus {
     /**
      * 操作成功
      */
-    SUCCESS(1),
+    SUCCESS(0),
 
     /**
      * 服务繁忙
@@ -26,7 +26,7 @@ public enum AppResponseStatus {
     /**
      * 操作失败
      */
-    ERROR(0),
+    ERROR(-1),
 
     ERROR2(-2),
 

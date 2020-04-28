@@ -4,18 +4,19 @@
     <!--客户列表信息-->
     <select id="listClientByPage" parameterType="com.xzsd.pc.client.entity.ClientInfo" resultType="com.xzsd.pc.client.entity.ClientInfo">
         select
+        a.user_code userId,
         a.user_acct userAcct,
         a.user_name userName,
         a.sex sex,
         a.phone phone,
-        a.email email,
+        a.email mail,
         a.id_card idCard
         from
             t_sys_user a,
             t_client_info b
         where a.user_code = b.client_user_code
         and a.is_deleted = 0
-        and a.role = 3
+        and a.role = 4
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
         </if>
@@ -35,7 +36,7 @@
         from t_sys_store a,
         t_sys_user b
         where a.is_deleted = 0
-        and a.user_acct = b.user_acct
+        and a.user_code = b.user_code
         and b.user_code = #{userCode}
     </select>
 

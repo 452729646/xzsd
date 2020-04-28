@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-25
  */
 @RestController
-@RequestMapping("/classification")
+@RequestMapping("/goodsClassify")
 public class ClassificationController {
 
     private static final Logger logger = LoggerFactory.getLogger(ClassificationController.class);
@@ -38,7 +38,7 @@ public class ClassificationController {
      * @Date 2020-03-24
      */
 
-    @PostMapping("saveFatherCate")
+    @PostMapping("addGoodsClassify")
     public AppResponse saveFatherCate(ClassificationInfo classificationInfo) {
         try {
             //获取用户id
@@ -82,7 +82,7 @@ public class ClassificationController {
      * @author housum
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "listCate")
+    @RequestMapping(value = "listAllGoodsClassify")
     public AppResponse listCate(ClassificationInfo classificationInfo) {
         try {
             return classificationService.listCate(classificationInfo);
@@ -167,12 +167,12 @@ public class ClassificationController {
      * @author housum
      * @Date 2020-03-26
      */
-    @RequestMapping(value = "getCateDetail")
-    public AppResponse getCateDetail(String cateCode) {
+    @RequestMapping(value = "getGoodsClassify")
+    public AppResponse getCateDetail(String classifyId) {
         try {
-            return classificationService.getCateDetail(cateCode);
+            return classificationService.getCateDetail(classifyId);
         } catch (Exception e) {
-            logger.error("用户查询错误", e);
+            logger.error("查询错误", e);
             System.out.println(e.toString());
             throw e;
         }
@@ -185,12 +185,12 @@ public class ClassificationController {
      * @author housum
      * @Date 2020-03-26
      */
-    @PostMapping("deleteCate")
-    public AppResponse deleteCate(String cateCode) {
+    @PostMapping("deleteGoodsClassify")
+    public AppResponse deleteCate(String classifyId) {
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return classificationService.deleteCate(cateCode,userCode);
+            return classificationService.deleteCate(classifyId,userCode);
         } catch (Exception e) {
             logger.error("分类删除错误", e);
             System.out.println(e.toString());
@@ -206,7 +206,7 @@ public class ClassificationController {
      * @author housum
      * @Date 2020-03-26
      */
-    @PostMapping("updateCate")
+    @PostMapping("updateGoodsClassify")
     public AppResponse update(ClassificationInfo classificationInfo) {
         try {
             //获取用户id

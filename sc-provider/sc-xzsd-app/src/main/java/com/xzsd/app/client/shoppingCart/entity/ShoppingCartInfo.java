@@ -6,37 +6,31 @@ public class ShoppingCartInfo {
     /**
      * 购物车编码
      */
-    private String shoppingCartCode;
+    private String shopCartId;
     /**
      * 商品编码
      */
-    private String skuNo;
+    private String goodsId;
     /**
      * 商品名称
      */
-    private String skuName;
+    private String goodsName;
 
-    public String getSkuName() {
-        return skuName;
-    }
 
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
-    }
 
     /**
      * 商品图片
      */
-    private String pictureUrl;
+    private String goodsImagePath;
     /**
      * 商品数量
      */
-    private int goodsCnt;
+    private int cartGoodsCount;
 
     /**
      * 售价
      */
-    private BigDecimal sellingPrice;
+    private String goodsPrice;
     /**
      * 用户编码
      */
@@ -47,44 +41,52 @@ public class ShoppingCartInfo {
      */
     private int version;
 
-    public String getShoppingCartCode() {
-        return shoppingCartCode;
+    public String getShopCartId() {
+        return shopCartId;
     }
 
-    public void setShoppingCartCode(String shoppingCartCode) {
-        this.shoppingCartCode = shoppingCartCode;
+    public void setShopCartId(String shopCartId) {
+        this.shopCartId = shopCartId;
     }
 
-    public String getSkuNo() {
-        return skuNo;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public int getGoodsCnt() {
-        return goodsCnt;
+    public String getGoodsImagePath() {
+        return goodsImagePath;
     }
 
-    public void setGoodsCnt(int goodsCnt) {
-        this.goodsCnt = goodsCnt;
+    public void setGoodsImagePath(String goodsImagePath) {
+        this.goodsImagePath = goodsImagePath;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public int getCartGoodsCount() {
+        return cartGoodsCount;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setCartGoodsCount(int cartGoodsCount) {
+        this.cartGoodsCount = cartGoodsCount;
+    }
+
+    public String getGoodsPrice() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
     public String getUserCode() {

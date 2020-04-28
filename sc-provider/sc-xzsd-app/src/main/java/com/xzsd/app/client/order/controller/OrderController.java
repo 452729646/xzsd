@@ -2,9 +2,7 @@ package com.xzsd.app.client.order.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.app.client.order.entity.EvaluateInfo;
-import com.xzsd.app.client.order.entity.OrderInfo;
-import com.xzsd.app.client.order.entity.OrderVO;
+import com.xzsd.app.client.order.entity.*;
 import com.xzsd.app.client.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/orderClient")
+@RequestMapping("/clientOrder")
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -29,15 +27,13 @@ public class OrderController {
      * @author housum
      * @date 2020-4-9
      */
-    @PostMapping("saveOrder")
-    public AppResponse saveOrder(OrderInfo orderInfo, String skuNo2, String goodsCnt, String sellingMoney){
+    @PostMapping("addOrder")
+    public AppResponse saveOrder(ShopInfo shopInfo){
         try{
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            orderInfo.setCreateBy(userCode);
-            orderInfo.setUserCode(userCode);
-            orderInfo.setIsDeleted(0);
-            AppResponse appResponse = orderService.saveOrder(orderInfo,skuNo2,goodsCnt,sellingMoney);
+            shopInfo.setUserCode(userCode);
+            AppResponse appResponse = orderService.saveOrder(shopInfo);
             return appResponse;
         }catch (Exception e){
             logger.error("新增订单失败",e);
@@ -72,7 +68,7 @@ public class OrderController {
      * @author housum
      * @date 2020-4-14
      */
-    @PostMapping("orderDetailByOrderId")
+    @PostMapping("listOrderDeepen")
     public AppResponse orderDetailByOrderId(OrderInfo orderInfo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
@@ -91,7 +87,7 @@ public class OrderController {
      * @param orderId
      * @return
      */
-    @PostMapping("appraiseGoodsList")
+    @PostMapping("listGoodsForEvaluate")
     public AppResponse appraiseGoodsList(String orderId){
         try{
             return orderService.appraiseGoodsList(orderId);
@@ -107,7 +103,7 @@ public class OrderController {
      * @author housum
      * @date 2020-4-14
      */
-    @PostMapping("appraiseByOrderId")
+    @PostMapping("addGoodsEvaluate")
     public AppResponse appraiseByOrderId(@RequestBody EvaluateInfo evaluateInfo){
         try{
             String userCode = SecurityUtils.getCurrentUserId();
@@ -122,18 +118,19 @@ public class OrderController {
     }
 
     /**
-     * 修改订单状态（订单已取货）
+     * 修改订单状态（
      * @return App
      * @date 2020-4-10
      */
-    @PostMapping("orderTake")
-    public AppResponse orderTake (String orderId,String version){
+    @PostMapping("updateOrderState")
+    public AppResponse updateOrderState (StateInfo stateInfo){
         try {
             //获取用户id
             String userCode = SecurityUtils.getCurrentUserId();
-            return orderService.orderTake(orderId,version,userCode);
+            stateInfo.setUserCode(userCode);
+            return orderService.updateOrderState(stateInfo);
         } catch (Exception e) {
-            logger.error("修改订单已取货错误", e);
+            logger.error("修改订单错误", e);
             System.out.println(e.toString());
             throw e;
         }

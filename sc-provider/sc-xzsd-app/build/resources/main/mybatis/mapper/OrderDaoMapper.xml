@@ -3,7 +3,7 @@
 <mapper namespace="com.xzsd.app.client.order.dao.OrderDao">
     
     <!--新增父订单列表-->
-    <insert id="saveOrderFather" parameterType="com.xzsd.app.client.order.entity.OrderInfo">
+    <insert id="saveOrderFather" >
         insert into t_sys_orderfather
         (
         order_id,
@@ -23,8 +23,8 @@
         #{orderId},
         #{sum},
         #{total},
-        #{storeNo},
-        1,
+        #{storeId},
+        0,
         0,
         #{userCode},
         now(),
@@ -66,10 +66,11 @@
 
     <resultMap id="orderList" type="com.xzsd.app.client.order.entity.OrderVO">
         <id property="orderId" column="order_id"></id>
-        <result property="orderStatus" column="order_status"></result>
-        <result property="goodsTotal" column="goods_total"></result>
-        <result property="paymentMoney" column="payment_money"></result>
-        <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId">
+        <result property="orderStateId" column="order_status"></result>
+        <result property="orderAllGoodsCount" column="goods_total"></result>
+        <result property="orderAllCost" column="payment_money"></result>
+        <result property="version" column="version"></result>
+        <collection property="goodsList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId">
         </collection>
     </resultMap>
 
@@ -80,30 +81,33 @@
         order_id ,
         order_status ,
         goods_total ,
-        payment_money
+        payment_money,
+        version
         from t_sys_orderfather
         where is_deleted = 0
         and user_code = #{userCode}
-        <if test="orderStatus == 1">
-            and order_status = #{orderStatus}
+        <if test="'0'.toString == orderStateId">
+            and order_status = #{orderStateId}
         </if>
-        <if test="orderStatus == 2">
-            and order_status = #{orderStatus}
+
+        <if test="'2'.toString == orderStateId">
+            and order_status = #{orderStateId}
         </if>
-        <if test="orderStatus == 3">
-            and order_status in (3,4)
+        <if test="'4'.toString == orderStateId or '5'.toString == orderStateId">
+            and order_status in(4,5)
         </if>
+        ORDER by create_time DESC
     </select>
 
 <!--    查询该订单的所有商品-->
     <select id="getByOrderId" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
         select
-        a.sku_no skuNo,
-        b.picture_url pictureUrl,
-        b.sku_name skuName,
-        b.detail detail,
-        a.selling_money sellingPrice,
-        a.goods_cnt goodsCnt
+        a.sku_no goodsId,
+        b.picture_url goodsImagePath,
+        b.sku_name goodsName,
+        b.detail goodsDescribe,
+        a.selling_money goodsPrice,
+        a.goods_cnt cartGoodsCount
         from t_sys_orderson a,
         t_sys_goods b
         where a.sku_no = b.sku_no
@@ -115,13 +119,13 @@
 
     <resultMap id="detail" type="com.xzsd.app.client.order.entity.OrderVO">
         <id property="orderId" column="order_id"></id>
-        <result property="createTime" column="create_time"></result>
-        <result property="orderStatus" column="order_status"></result>
-        <result property="goodsTotal" column="goods_total"></result>
-        <result property="paymentMoney" column="payment_money"></result>
+        <result property="crateTime" column="create_time"></result>
+        <result property="orderStateId" column="order_status"></result>
+        <result property="orderAllGoodsCount" column="goods_total"></result>
+        <result property="orderAllCost" column="payment_money"></result>
         <result property="storeName" column="store_name"></result>
-        <result property="storeAddress" column="address"></result>
-        <collection property="goodsListVOList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId2">
+        <result property="address" column="address"></result>
+        <collection property="goodsList" ofType="GoodsListVO" javaType="java.util.List" column="order_id" select="getByOrderId2">
 
         </collection>
 
@@ -130,12 +134,12 @@
     <!--    查询该订单的所有商品-->
     <select id="getByOrderId2" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
         select
-        a.sku_no skuNo,
-        b.picture_url pictureUrl,
-        b.sku_name skuName,
-        b.detail detail,
-        a.selling_money sellingPrice,
-        a.goods_cnt goodsCnt
+        a.sku_no goodsId,
+        b.picture_url goodsImagePath,
+        b.sku_name goodsName,
+        b.detail goodsDescribe,
+        a.selling_money goodsPrice,
+        a.goods_cnt cartGoodsCount
         from t_sys_orderson a,
         t_sys_goods b
         where a.sku_no = b.sku_no
@@ -145,13 +149,17 @@
 <!--    通过orderId查询订单详情-->
     <select id="orderDetailByOrderId" parameterType="com.xzsd.app.client.order.entity.OrderInfo" resultMap="detail">
         select
-        a.order_id order_id,
-        a.create_time create_time,
-        a.order_status order_status,
-        a.goods_total goods_total,
-        a.payment_money payment_money,
-        c.store_name store_name,
-        GROUP_CONCAT(c.province,c.city,c.area,c.store_address) address
+        a.order_id ,
+        a.create_time ,
+        a.order_status ,
+        a.goods_total ,
+        a.payment_money ,
+        c.store_name ,
+        CONCAT((select d.rname from region d where d.id = c.province_no),
+        (select d.rname from region d where d.id = c.city_no),
+        (select d.rname from region d where d.id = c.area_no),
+		c.store_address) address,
+        a.create_time
         from t_sys_orderfather a,
         t_sys_store c
         where a.store_no = c.store_no
@@ -169,7 +177,6 @@
         store_no,
         star_level,
         appraise_info,
-        photo_url,
         is_deleted,
         create_user,
         create_time,
@@ -182,7 +189,6 @@
         (select invite_code from t_client_info where is_deleted =0 and client_user_code = #{userCode}),
         #{mapList.starLevel},
         #{mapList.appraiseInfo},
-        #{mapList.photoUrl},
         #{isDeleted},
         #{userCode},
         now(),
@@ -196,13 +202,12 @@
     <update id="updateOrderComplete" parameterType="com.xzsd.app.client.order.entity.EvaluateInfo">
         update  t_sys_orderfather
         set
-        order_status = 4,
+        order_status = 5,
         update_time = now(),
         update_user = #{userCode},
         version = version + 1
         where order_id = #{orderId}
-        and version = #{version}
-        and order_status = 3
+        and order_status = 4
     </update>
 
 <!--    通过userCode查出storeNo-->
@@ -230,22 +235,21 @@
             from t_sys_goods
             where is_deleted = 0
             and sku_no in
-        <foreach collection="list" item="mapList" index="index" open="(" separator="," close=")">
-            #{mapList.skuNo}
+        <foreach collection="listSkuNo" item="item" index="index" open="(" separator="," close=")">
+            #{item}
         </foreach>
     </select>
 
     <!--修改订单状态（订单到货）-->
-    <update id="orderTake" >
+    <update id="updateOrderState" parameterType="com.xzsd.app.client.order.entity.StateInfo">
             update t_sys_orderfather
             set
-            order_status = 3,
+            order_status = #{orderStateId},
             update_time = now(),
             update_user = #{userCode},
             version = version + 1
             where order_id = #{orderId}
             and version = #{version}
-            and order_status = 2
     </update>
 
     <!--修改订单状态（订单取消）-->
@@ -264,8 +268,9 @@
     <!--    查询该订单的所有商品-->
     <select id="goodsList" parameterType="java.lang.String" resultType="com.xzsd.app.client.order.entity.GoodsListVO">
         select
-        a.sku_no skuNo,
-        b.picture_url pictureUrl
+        a.sku_no goodsId,
+        b.picture_url goodsImagePath,
+        a.goods_cnt cartGoodsCount
         from t_sys_orderson a,
         t_sys_goods b
         where a.sku_no = b.sku_no
@@ -308,6 +313,70 @@
             )
         </foreach >
     </insert>
+
+    <update id="deletedShoppingCart" >
+        update t_sys_shoppingcart
+        set
+        is_deleted = 1,
+        update_user = #{userCode},
+        update_time = now(),
+        version = version +1
+        where shoppingcart_code in
+        <foreach collection="listShopCartId" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+<!--    拿出商品的总评价星级和总评价数-->
+    <select id="evaluateTotal" parameterType="java.util.List" resultType="com.xzsd.app.client.order.entity.EvaluateInfo">
+        select
+        star_total starTotal,
+        evaluate_total evaluateTotal
+        from t_sys_goods
+        where is_deleted = 0
+        and sku_no in
+        <foreach collection="goodsIdList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+<!--    修改商品评分-->
+    <update id="UpdateStar" parameterType="java.util.List" >
+        <foreach collection="list" item="mapList" index="index" separator=";">
+        update t_sys_goods
+        set
+            star_level = #{mapList.starLevel},
+            star_total = #{mapList.starTotal},
+            evaluate_total = #{mapList.evaluateTotal}
+        where sku_no = #{mapList.goodsId}
+        </foreach>
+    </update>
+
+<!--    修改商品状态：售罄-->
+    <update id="updateSellout" parameterType="java.lang.String">
+        update t_sys_goods
+        set
+            sku_state = 0
+        where sku_no = #{goodsId}
+    </update>
+
+    <update id="updateStock" parameterType="java.util.List">
+        <foreach collection="list" item="mapGoodsList" index="index"  separator=";">
+            update t_sys_goods
+            set
+            stock = stock + #{mapGoodsList.goodsCnt}
+            where sku_no = #{mapGoodsList.goodsId}
+        </foreach>
+    </update>
+
+    <update id="updateSaleCnt" parameterType="java.util.List">
+        <foreach collection="list" item="mapGoodsSaleList" index="index"  separator=";">
+            update t_sys_goods
+            set
+            sale_cnt = sale_cnt + #{mapGoodsSaleList.goodsCnt}
+            where sku_no = #{mapGoodsSaleList.goodsId}
+        </foreach>
+    </update>
+
 </mapper>
 
 

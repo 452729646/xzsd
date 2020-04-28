@@ -27,7 +27,7 @@ public class OrderInfo {
     /**
      * 订单总价
      */
-    private BigDecimal orderMoney;
+    private String orderMoney;
     /**
      * 商品数量
      */
@@ -35,7 +35,7 @@ public class OrderInfo {
     /**
      * 商品售价
      */
-    private BigDecimal sellingPrice;
+    private String sellingPrice;
     /**
      * 下单时间
      */
@@ -125,13 +125,6 @@ public class OrderInfo {
         this.skuNo = skuNo;
     }
 
-    public BigDecimal getOrderMoney() {
-        return orderMoney;
-    }
-
-    public void setOrderMoney(BigDecimal orderMoney) {
-        this.orderMoney = orderMoney;
-    }
 
 
     public int getGoodsNumber() {
@@ -142,13 +135,6 @@ public class OrderInfo {
         this.goodsNumber = goodsNumber;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
 
     public Date getShoppingTime() {
         return shoppingTime;
@@ -244,5 +230,21 @@ public class OrderInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getOrderMoney() {
+        return orderMoney;
+    }
+
+    public void setOrderMoney(String orderMoney) {
+        this.orderMoney = orderMoney;
+    }
+
+    public String getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(String sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 }

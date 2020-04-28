@@ -7,7 +7,7 @@ public class ClientInfo {
 
 
 
-    private String userCode;
+    private String userId;
     /**
      * 用户名称
      */
@@ -27,7 +27,7 @@ public class ClientInfo {
     /**
      * 性别 0 男 1 女
      */
-    private int sex;
+    private String sex;
     /**
      * 手机号码
      */
@@ -35,7 +35,7 @@ public class ClientInfo {
     /**
      * 电子邮件
      */
-    private String email;
+    private String mail;
     /**
      * 0管理管 1店长 2司机 3客户
      */
@@ -81,12 +81,12 @@ public class ClientInfo {
         this.storeNo = storeNo;
     }
 
-    public String getUserCode() {
-        return userCode;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -121,11 +121,11 @@ public class ClientInfo {
         this.idCard = idCard;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -137,12 +137,12 @@ public class ClientInfo {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public int getRole() {

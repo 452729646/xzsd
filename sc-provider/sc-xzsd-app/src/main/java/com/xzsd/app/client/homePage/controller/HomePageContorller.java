@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-24
  */
 @RestController
-@RequestMapping("/homePage")
+@RequestMapping("/clientHome")
 public class HomePageContorller {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePageContorller.class);
@@ -30,7 +30,7 @@ public class HomePageContorller {
      * @author housum
      * @Date 2020-04-13
      */
-    @RequestMapping(value = "listPicture")
+    @RequestMapping(value = "listRotationCharHome")
     public AppResponse listPicture(PictureInfo pictureInfo) {
         try {
             return homePageService.listPicture(pictureInfo);

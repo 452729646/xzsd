@@ -3,9 +3,7 @@ package com.xzsd.pc.order.service;
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.order.dao.OrderDao;
-import com.xzsd.pc.order.entity.OrderDetailVO;
-import com.xzsd.pc.order.entity.OrderInfo;
-import com.xzsd.pc.order.entity.OrderVO;
+import com.xzsd.pc.order.entity.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +29,8 @@ public class OrderService {
     public AppResponse listOrder(OrderVO orderVO){
         //没有登录 获取的userCode是测试用户  会报错
         String userCode = SecurityUtils.getCurrentUserId();
-//        String userCode = "2020032512003900484";
-        //通过userCode查询role
-        int role = orderDao.roleByUserCode(userCode);
-        orderVO.setRole(role);
-        if (1 == role){
+        String role = orderVO.getRole();
+        if ("2".equals(role)){
             //拿出该店长的门店编号
             String storeNo = orderDao.storeNoByUserCode(userCode);
             orderVO.setStoreNo2(storeNo);
@@ -55,38 +50,75 @@ public class OrderService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse orderDetail(OrderDetailVO orderDetailVO,String orderId){
         List<OrderDetailVO> listOrderDetail = orderDao.listOrderDetailByPage(orderDetailVO,orderId);
-        return AppResponse.success("查询成功",getPageInfo(listOrderDetail));
+        OrderDeepenList orderDeepenList = new OrderDeepenList();
+        orderDeepenList.setOrderDeepenList(listOrderDetail);
+        return AppResponse.success("查询成功",orderDeepenList);
 
     }
 
 
     /**
      * 修改订单状态（订单到货）
-     * @param orderId
-     * @param version
-     * @param userCode
+     * @param
+     * @param
+     * @param
      * @author housum
      * @date 2020-4-10
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse orderArrival(String orderId,String version,String userCode){
-        List<String> listOrderId = Arrays.asList(orderId.split(","));
-        List<String> listVersion = Arrays.asList(version.split(","));
+    public AppResponse updateOrderState(OrderInfo orderInfo){
+        List<String> listOrderId = Arrays.asList(orderInfo.getOrderId().split(","));
+        List<String> listVersion = Arrays.asList(orderInfo.getVersion().split(","));
         List<Map> mapList = new ArrayList<>();
         //把orderId对应的version 放进map  然后在mybaits用foreacn遍历
         for(int i =0 ;i<listOrderId.size(); i++){
             Map map = new HashMap();
             map.put("orderId",listOrderId.get(i));
-            map.put("version",Integer.parseInt(listVersion.get(i)));
-            map.put("userCode",userCode);
+            map.put("version",listVersion.get(i));
+            map.put("orderStateId",orderInfo.getOrderStateId());
+            map.put("userCode",orderInfo.getUserCode());
             mapList.add(map);
         }
-        AppResponse appResponse = AppResponse.success("修改订单到货成功！");
-        int count = orderDao.orderArrival(mapList);
-        if (0 == count){
-            appResponse = AppResponse.bizError("数据有更新，请重试！");
+        String orderStateId = orderInfo.getOrderStateId();
+        if ("2".equals(orderStateId)){
+            int count = orderDao.countPlaceOrTake(listOrderId);
+            if (listOrderId.size() != count ){
+                return AppResponse.bizError("订单状态未处于已下单或者已取货");
+            }
         }
-        return appResponse;
+        if ("3".equals(orderStateId)){
+            int count = orderDao.countArrivalOr(listOrderId);
+            if (listOrderId.size() != count){
+                return AppResponse.bizError("订单状态未处于已到货或者已完成未评价");
+            }
+        }
+        if("0".equals(orderStateId)){
+            int count = orderDao.countArrival(listOrderId);
+            if (listOrderId.size() != count){
+                return AppResponse.bizError("订单状态未处于已到货");
+            }
+
+        }
+        if ("1".equals(orderStateId)){
+            //订单取消时 商品数量返回库存
+            List<GoodsListInfo> goodsListInfos = orderDao.goodsList(mapList);
+            List<Map> mapGoodsList = new ArrayList<>();
+                for (int i = 0;i < goodsListInfos.size();i++ ){
+                    Map mapGoods = new HashMap();
+                    mapGoods.put("goodsId",goodsListInfos.get(i).getGoodsId());
+                    mapGoods.put("goodsCnt",goodsListInfos.get(i).getGoodsCnt());
+                    mapGoodsList.add(mapGoods);
+                }
+            int countUpdateStock = orderDao.updateStock(mapGoodsList);
+            if (0 == countUpdateStock){
+                return AppResponse.bizError("返回库存失败");
+            }
+        }
+        int count = orderDao.updateOrderState(mapList);
+        if (0 == count){
+            return AppResponse.bizError("数据有更新，请重试！");
+        }
+        return AppResponse.success("修改订单状态成功！");
     }
 
 

@@ -14,19 +14,39 @@ public class PictureInfo {
     /**
      * 轮播图编号
      */
-    private String bannerCode;
+    private String slideshowId;
+
+    public String getSlideshowId() {
+        return slideshowId;
+    }
+
+    public void setSlideshowId(String slideshowId) {
+        this.slideshowId = slideshowId;
+    }
+
     /**
      * 图片url
      */
-    private String imageUrl;
+    private String slideshowPath;
+
+    private String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     /**
      * 排序
      */
-    private int sortNo;
+    private int slideshowNum;
     /**
      * 对应商品的sku 可空
      */
-    private String skuNo;
+    private String goodsId;
     /**
      * 标题
      */
@@ -34,7 +54,7 @@ public class PictureInfo {
     /**
      * 图片状态 0为禁用 1为启动  初始值为0
      */
-    private int pictureState;
+    private String slideshowStateId;
     /**
      * 开始时间
      */
@@ -69,8 +89,16 @@ public class PictureInfo {
      * 版本号
      */
     private String version;
+    private String userCode;
 
-//    public int getPageSize() {
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+    //    public int getPageSize() {
 //        return pageSize;
 //    }
 //
@@ -86,36 +114,13 @@ public class PictureInfo {
 //        this.pageNum = pageNum;
 //    }
 
-    public String getBannerCode() {
-        return bannerCode;
+
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setBannerCode(String bannerCode) {
-        this.bannerCode = bannerCode;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public int getSortNo() {
-        return sortNo;
-    }
-
-    public void setSortNo(int sortNo) {
-        this.sortNo = sortNo;
-    }
-
-    public String getSkuNo() {
-        return skuNo;
-    }
-
-    public void setSkuNo(String skuNo) {
-        this.skuNo = skuNo;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getTitle() {
@@ -126,12 +131,28 @@ public class PictureInfo {
         this.title = title;
     }
 
-    public int getPictureState() {
-        return pictureState;
+    public String getSlideshowPath() {
+        return slideshowPath;
     }
 
-    public void setPictureState(int pictureState) {
-        this.pictureState = pictureState;
+    public void setSlideshowPath(String slideshowPath) {
+        this.slideshowPath = slideshowPath;
+    }
+
+    public int getSlideshowNum() {
+        return slideshowNum;
+    }
+
+    public void setSlideshowNum(int slideshowNum) {
+        this.slideshowNum = slideshowNum;
+    }
+
+    public String getSlideshowStateId() {
+        return slideshowStateId;
+    }
+
+    public void setSlideshowStateId(String slideshowStateId) {
+        this.slideshowStateId = slideshowStateId;
     }
 
     public String getStartTime() {

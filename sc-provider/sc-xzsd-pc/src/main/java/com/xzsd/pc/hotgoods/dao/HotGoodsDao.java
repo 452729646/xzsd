@@ -66,7 +66,7 @@ public interface HotGoodsDao {
      * @param userCode
      * @param displayCnt
      */
-    int setDisplayCnt(@Param("displayCnt")int displayCnt,@Param("userCode")String userCode,@Param("version")int version);
+    int setDisplayCnt(@Param("hotGoodsShowNum")int hotGoodsShowNum,@Param("userCode")String userCode,@Param("version")int version);
 
     /**
      * 查询展示数量
@@ -75,4 +75,5 @@ public interface HotGoodsDao {
      */
     HotGoodsVo selectDisplayCnt(HotGoodsVo hotGoodsVo);
 
+    HotGoodsVo getHotGoods(HotGoodsVo hotGoodsVo);
 }

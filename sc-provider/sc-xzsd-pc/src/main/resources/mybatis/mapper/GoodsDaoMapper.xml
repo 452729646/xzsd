@@ -7,9 +7,9 @@
         select count(book_number)
         from t_sys_goods
         where is_deleted = 0
-        and book_number = #{bookNumber}
-        <if test="skuNo != null and skuNo != ''">
-            and sku_no != #{skuNo}
+        and book_number = #{Isbn}
+        <if test="goodsId != null and goodsId != ''">
+            and sku_no != #{goodsId}
         </if>
     </select>
 
@@ -19,6 +19,7 @@
         (sku_no,
          sku_name,
          book_number,
+         first_cate_code,
          cate_code,
          adv_words,
          detail,
@@ -28,34 +29,37 @@
          cost_price,
          selling_price,
          picture_url,
-         sale_cnt,
          sku_state,
          is_deleted,
          create_time,
          create_user,
          update_time,
          update_user,
-         version)
+         publish,
+         version,
+         sale_cnt)
         values
-           (#{skuNo},
-            #{skuName},
-            #{bookNumber},
-            #{cateCode},
-            #{advWords},
-            #{detail},
-            #{businessName},
-            #{author},
-            #{stock},
-            #{costPrice},
-            #{sellingPrice},
-            #{pictureUrl},
-            #{saleCnt},
-            #{skuState},
+           (#{goodsId},
+            #{goodsName},
+            #{Isbn},
+            #{oneClassifyId},
+            #{twoClassifyId},
+            #{goodsAdvertise},
+            #{goodsDescribe},
+            #{supplierName},
+            #{goodsAuthor},
+            #{goodsInventory},
+            #{goodsOriginalCost},
+            #{goodsPrice},
+            #{imagePath},
+            #{goodsStateId},
             #{isDeleted},
             now(),
             #{createBy},
             now(),
             #{lastModifiedBy},
+            #{goodsPress},
+            0,
             0)
     </insert>
 
@@ -67,7 +71,7 @@
             update_time = now(),
             update_user = #{userCode},
             version = version + 1
-        where sku_state = 0
+        where sku_state = 2
         and sku_no in
         <foreach item='item' index='index' collection="listSkuNo" open="(" separator="," close=")">
             #{item}
@@ -78,81 +82,83 @@
     <update id="updateGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
         update t_sys_goods
         set
-            sku_name    = #{skuName},
-            book_number    = #{bookNumber},
-            cate_code      = #{cateCode},
-            adv_words          = #{advWords},
-            detail        = #{detail},
-            business_name    = #{businessName},
-            author  = #{author},
-            stock       = #{stock},
-            cost_price = #{costPrice},
-            selling_price = #{sellingPrice},
-            picture_url =#{pictureUrl},
+            sku_name    = #{goodsName},
+            book_number    = #{isbn},
+            first_cate_code = #{oneClassifyId},
+            cate_code      = #{twoClassifyId},
+            adv_words          = #{goodsAdvertise},
+            detail        = #{goodsDescribe},
+            business_name    = #{supplierName},
+            author  = #{goodsAuthor},
+            stock       = #{goodsInventory},
+            cost_price = #{goodsOriginalCost},
+            selling_price = #{goodsPrice},
+            picture_url =#{imagePath},
             update_time = now(),
             update_user   = #{lastModifiedBy},
             version      = version + 1
-        where sku_no = #{skuNo}
+        where sku_no = #{goodsId}
           and version = #{version}
     </update>
 
     <!--商品列表信息-->
     <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
         select
-        a.sku_name skuName,
-        a.selling_price sellingPrice,
-        a.cost_price costPrice,
-        a.sale_cnt saleCnt,
-        a.cate_code cateCode,
-        a.adv_words advWords,
-        a.detail,
-        a.sku_state skuState,
-        a.business_name businessName,
-        a.author author,
-        a.stock,
-        a.book_number,
-        a.picture_url pictureUrl,
-        a.is_deleted,
-        a.create_time,
-        a.create_user,
-        a.update_time,
-        a.update_user,
-        a.version
-        from t_sys_goods a
-        where a.is_deleted = 0
-        <if test="skuName != null and skuName != ''">
-            and a.sku_name like concat('%', #{skuName}, '%')
+        a.sku_no goodsId,
+        a.sku_name goodsName,
+        a.selling_price goodsPrice,
+        a.cost_price goodsOriginalCost,
+        a.sale_cnt goodsSales,
+        b.cate_name_parent oneClassifyName,
+        b.cate_name twoClassifyName,
+        a.adv_words goodsAdvertise,
+        a.detail goodsDescribe,
+        a.sku_state goodsStateId,
+        a.business_name supplierName,
+        a.stock goodsInventory,
+        a.book_number isbn,
+        a.picture_url goodsImagePath,
+        a.upper_time goodsShelfTime,
+        a.goodsViews_num goodsViewsNum,
+        a.version version,
+        a.author goodsAuthor,
+        a.publish goodsPress
+        from t_sys_goods a,t_sys_classification b
+        where a.is_deleted = 0 and a.cate_code = b.cate_code
+        <if test="goodsName != null and goodsName != ''">
+            and a.sku_name like concat('%', #{goodsName}, '%')
         </if>
-        <if test="advWords != null and advWords != ''">
-            and a.adv_words like concat('%', #{advWords}, '%')
+        <if test="goodsAdvertise != null and goodsAdvertise != ''">
+            and a.adv_words like concat('%', #{goodsAdvertise}, '%')
         </if>
-        <if test="businessName != null and businessName != ''">
-            and a.business_name like concat('%', #{businessName}, '%')
+        <if test="supplierName != null and supplierName != ''">
+            and a.business_name like concat('%', #{supplierName}, '%')
         </if>
-        <if test="author != null and author != ''">
-            and a.author like concat('%', #{author}, '%')
+        <if test="goodsAuthor != null and goodsAuthor != ''">
+            and a.author like concat('%', #{goodsAuthor}, '%')
         </if>
-        <if test="skuState != null and skuState != ''">
-            and a.sku_state like concat('%', #{skuState}, '%')
+        <if test="goodsStateId != null and goodsStateId != ''">
+            and a.sku_state like concat('%', #{goodsStateId}, '%')
         </if>
-        order by create_time ASC
+        order by a.create_time ASC
     </select>
 
 
     <!--上架商品-->
-    <update id='goodsUpper' parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+    <update id='goodsUpper' parameterType="java.util.List">
+        <foreach item='mapList' index='index' collection="list" separator=";" >
         update t_sys_goods a
         set
-        a.sku_state = 1,
+        a.sku_state = #{mapList.goodsStateId},
         a.update_time = now(),
-        a.update_user = #{userCode},
+        a.update_user = #{mapList.userCode},
+        <if test="'1'.toString == mapList.goodsStateId">
+            a.upper_time = now(),
+        </if>
         a.version = a.version + 1
-        where sku_no in
-        <foreach item='item' index='index' collection="listSkuNo2" open="(" separator="," close=")">
-            #{item}
+        where sku_no = #{mapList.goodsId}
+        and a.version = #{mapList.version}
         </foreach>
-        and a.version = #{version}
-        and sku_state = 0
     </update>
 
     <!--下架商品-->
@@ -190,7 +196,7 @@
         from t_sys_hotgoods
         where is_deleted = 0
         and sku_no in
-        <foreach item='item' index='index' collection="listSkuNo3" open="(" separator="," close=")">
+        <foreach item='item' index='index' collection="listSkuNo2" open="(" separator="," close=")">
         #{item}
         </foreach>
     </select>
@@ -202,7 +208,7 @@
         where is_deleted = 0
         and picture_state = 1
         and sku_no in
-        <foreach item='item' index='index' collection="listSkuNo3" open="(" separator="," close=")">
+        <foreach item='item' index='index' collection="listSkuNo2" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
@@ -212,10 +218,45 @@
         SELECT count(sku_no)
         from t_sys_goods
         where is_deleted = 0
-        and sku_state = 1
+        and sku_state in(0,1,3)
         and sku_no in
         <foreach item='item' index='index' collection="listSkuNo" open="(" separator="," close=")">
             #{item}
         </foreach>
+    </select>
+
+<!--    分类下拉框-->
+    <select id="listGoodsClassify" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.ClassifyInfo">
+        select
+        cate_code classifyId,
+        cate_name classifyName
+        from t_sys_classification
+        where is_deleted = 0
+        and cate_code_parent = #{classifyId}
+    </select>
+
+<!--    商品详情-->
+    <select id="getGoods" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
+        select
+        a.sku_no goodsId,
+        a.sku_name goodsName,
+        a.selling_price goodsPrice,
+        a.cost_price goodsOriginalCost,
+        a.sale_cnt goodsSales,
+        b.cate_code_parent oneClassifyId,
+        b.cate_name_parent oneClassifyName,
+        b.cate_code twoClassifyId,
+        b.cate_name twoClassifyName,
+        a.adv_words goodsAdvertise,
+        a.detail goodsDescribe,
+        a.business_name supplierName,
+        a.stock goodsInventory,
+        a.book_number isbn,
+        a.picture_url goodsImagePath,
+        a.author goodsAuthor,
+        a.publish goodsPress,
+        a.version version
+        from t_sys_goods a,t_sys_classification b
+        where a.is_deleted = 0 and a.cate_code = b.cate_code and a.sku_no = #{goodsId}
     </select>
 </mapper>

@@ -31,7 +31,7 @@ public class ClientController {
      * @author housum
      * @Date 2020-03-25
      */
-    @RequestMapping(value = "listClient")
+    @RequestMapping(value = "listClients")
     public AppResponse listClient(ClientInfo clientInfo) {
         try {
             return clientService.listClient(clientInfo);

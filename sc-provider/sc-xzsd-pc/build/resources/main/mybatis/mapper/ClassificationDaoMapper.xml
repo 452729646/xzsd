@@ -8,10 +8,10 @@
         select count(cate_name)
         from t_sys_classification
         where is_deleted = 0
-        and cate_name = #{cateName}
-        and is_parent = 0
-        <if test="cateCode != null and cateCode != ''">
-            and cate_code != #{cateCode}
+        and cate_name = #{classifyName}
+        and cate_code_parent = "0"
+        <if test="classifyId != null and classifyId != ''">
+            and cate_code != #{classifyId}
         </if>
     </select>
 
@@ -32,9 +32,9 @@
         select count(cate_name)
         from t_sys_classification
         where is_deleted = 0
-        and cate_name = #{cateName}
-        <if test="cateCode != null and cateCode != ''">
-            and cate_code != #{cateCode}
+        and cate_name = #{classifyName}
+        <if test="classifyId != null and classifyId != ''">
+            and cate_code != #{classifyId}
         </if>
     </select>
 
@@ -45,7 +45,7 @@
         (cate_code,
          cate_name,
          remark,
-         is_parent,
+         cate_code_parent,
          is_deleted,
          create_time,
          create_user,
@@ -53,10 +53,10 @@
          update_user,
          version)
         values
-           (#{cateCode},
-            #{cateName},
-            #{remark},
-            #{isParent},
+           (#{classifyId},
+            #{classifyName},
+            #{classifyComment},
+            #{classifyParent},
             #{isDeleted},
             now(),
             #{createBy},
@@ -120,23 +120,23 @@
         order by a.create_time desc
     </select>
 
-    <resultMap id="cateMap1" type="com.xzsd.pc.classification.entity.CateListInfo">
-        <id property="cateCode" column="cate_code"></id>
-        <result property="cateName" column="cate_name"></result>
+    <resultMap id="cateMap1" type="com.xzsd.pc.classification.entity.OneClassifyInfo">
+        <id property="classifyId" column="cate_code"></id>
+        <result property="classifyName" column="cate_name"></result>
         <result property="version" column="version"></result>
-        <collection property="classificationSonList" ofType="CateListInfo" javaType="java.util.List" column="cate_code" select="getByCateCode">
+        <collection property="twoClassifyList" ofType="CateListInfo" javaType="java.util.List" column="cate_code" select="getByCateCode">
         </collection>
     </resultMap>
     <!--根据父类cateCode查找其子类别-->
-    <select id="getByCateCode" resultMap="cateMap1" parameterType="String">
+    <select id="getByCateCode" resultType="com.xzsd.pc.classification.entity.TwoClassifyListInfo" parameterType="String">
         SELECT
-        a.cate_code cate_code,
-        a.cate_name cate_name,
-        version
+        a.cate_code classifyId ,
+        a.cate_name classifyName,
+        a.version version
         FROM t_sys_classification a
         WHERE a.cate_code_parent = #{cate_code}
-        and is_deleted = 0
-        order by create_time asc
+        and a.is_deleted = 0
+        order by a.create_time asc
     </select>
 
 
@@ -151,7 +151,7 @@
         WHERE is_deleted = 0
         <choose>
         <when test="isParent ==0">
-            AND t_sys_classification.cate_code_parent IS NULL
+            AND t_sys_classification.cate_code_parent = "0"
         </when>
         <otherwise>
             AND cate_code_parent = #{cate_code_parent}
@@ -165,12 +165,13 @@
     <!--获取用户信息-->
     <select id="getCateDetail" parameterType="java.lang.String" resultType="com.xzsd.pc.classification.entity.ClassificationInfo">
         select
-            cate_name cateName,
-            remark remark,
-            is_parent isParent,
+            cate_code classifyId,
+            cate_name classifyName,
+            remark classifyComment,
+            cate_code_parent classifyParent,
             version version
         from t_sys_classification
-        where cate_code = #{cateCode}
+        where cate_code = #{classifyId}
         and is_deleted = 0
     </select>
 
@@ -182,26 +183,21 @@
         update_time = now(),
         update_user = #{userCode},
         version = version + 1
-        where cate_code in
-        <foreach item='item' index='index' collection="listCateCode" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        or cate_code_parent in
-        <foreach item='item' index='index' collection="listCateCode" open="(" separator="," close=")">
-            #{item}
-        </foreach>
+        where cate_code = #{classifyId}
+        or cate_code_parent = #{classifyId}
     </update>
 
     <!--    修改分类信息-->
     <update id="updateCate" parameterType="com.xzsd.pc.classification.entity.ClassificationInfo">
         update t_sys_classification
         set
-        cate_name = #{cateName},
-        remark = #{remark},
+        cate_name = #{classifyName},
+        cate_code_parent = #{classifyParent},
+        remark = #{classifyComment},
         update_user = #{lastModifiedBy},
         update_time = now(),
         version = version + 1
-        where cate_code = #{cateCode}
+        where cate_code = #{classifyId}
         and version = #{version}
     </update>
 

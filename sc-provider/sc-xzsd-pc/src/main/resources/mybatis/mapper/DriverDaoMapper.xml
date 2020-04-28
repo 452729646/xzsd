@@ -4,12 +4,12 @@
 
     <!--统计用户账号数量-->
     <select id="countUserAcct" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(user_acct)
-        from t_sys_user
-        where is_deleted = 0
-        and user_acct = #{userAcct}
-        <if test="userCode != null and userCode != ''">
-            and user_code != #{userCode}
+        select count(a.user_acct)
+        from t_sys_user a,t_sys_driver b
+        where a.is_deleted = 0
+        and a.user_acct = #{userAcct}
+        <if test="driverId != null and driverId != ''">
+            and a.user_code != (select user_code from t_sys_driver where driver_no = #{driverId})
         </if>
     </select>
 
@@ -21,9 +21,9 @@
         driver_name,
         user_acct,
         user_code,
-        province,
-        city,
-        area,
+        province_no,
+        city_no,
+        area_no,
         is_deleted,
         create_time,
         create_user,
@@ -32,13 +32,13 @@
         version
         )values
         (
-        #{driverNo},
-        #{driverName},
+        #{driverId},
+        #{userName},
         #{userAcct},
         #{userCode},
-        #{provinceName},
-        #{cityName},
-        #{areaName},
+        #{provinceId},
+        #{cityId},
+        #{areaId},
         #{isDeleted},
         now(),
         #{createBy},
@@ -64,108 +64,110 @@
     create_by,
     gmt_modified,
     last_modified_by,
-    version
+    version,
+    headpicture_url
     )values
     (
     #{userCode},
-    #{driverName},
+    #{userName},
     #{userAcct},
-    #{password},
+    #{userPassword},
     #{idCard},
-    #{driverPhone},
-    2,
+    #{phone},
+    3,
     #{isDeleted},
     now(),
     #{createBy},
     now(),
     #{lastModifiedBy},
-    0
+    0,
+    #{imagePath}
     )
     </insert>
 
     <!--司机列表分页查询-->
     <select id="listDriverByPage" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverVO">
         select
-        b.driver_no driverNo,
-        b.driver_name driverName,
-        a.phone driverPhone,
+        b.driver_no driverId,
+        b.driver_name userName,
+        a.phone phone,
         a.id_card idCard,
         b.user_acct userAcct,
-        b.user_code userCode,
         b.version version
         from
         t_sys_user a,
         t_sys_driver b
-        where a.user_code=b.user_code
-        <if test="driverNo != null and driverNo != ''">
-            and b.driver_no like concat('%', #{driverNo}, '%')
+        where a.user_code = b.user_code
+        <if test="driverId != null and driverId != ''">
+            and b.driver_no like concat('%', #{driverId}, '%')
         </if>
-        <if test="driverName != null and driverName != ''">
-            and a.user_name like concat('%', #{driverName}, '%')
+        <if test="userName != null and userName != ''">
+            and a.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="provinceName != null and provinceName != ''">
-            and b.province like concat('%', #{provinceName}, '%')
+        <if test="provinceId != null and provinceId != ''">
+            and b.province_no like concat('%', #{provinceId}, '%')
         </if>
-        <if test="cityName != null and cityName != ''">
-            and b.city like concat('%', #{cityName}, '%')
+        <if test="cityId != null and cityId != ''">
+            and b.city_no like concat('%', #{cityId}, '%')
         </if>
-        <if test="areaName != null and areaName != ''">
-            and b.area like concat('%', #{areaName}, '%')
+        <if test="areaId != null and areaId != ''">
+            and b.area_no like concat('%', #{areaId}, '%')
         </if>
+        order by b.create_time ASC
         </select>
 
     <!--司机列表分页查询-->
     <select id="listDriverByShopownerByPage" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverVO">
         select
-        b.driver_no driverNo,
-        b.driver_name driverName,
-        a.phone driverPhone,
+        b.driver_no driverId,
+        b.driver_name userName,
+        a.phone phone,
         a.id_card idCard,
         b.user_acct userAcct,
-        b.user_code userCode,
         b.version version
         from
         t_sys_user a,
         t_sys_driver b,
         t_sys_store c
         where a.user_code=b.user_code  and c.store_no = #{storeNo} AND c.province = b.province AND c.city = b.city AND c.area = b.area
-        <if test="driverNo != null and driverNo != ''">
-            and b.driver_no like concat('%', #{driverNo}, '%')
+        <if test="driverId != null and driverId != ''">
+            and b.driver_no like concat('%', #{driverId}, '%')
         </if>
-        <if test="driverName != null and driverName != ''">
-            and a.user_name like concat('%', #{driverName}, '%')
+        <if test="userName != null and userName != ''">
+            and a.user_name like concat('%', #{userrName}, '%')
         </if>
-        <if test="provinceName != null and provinceName != ''">
-            and b.province like concat('%', #{provinceName}, '%')
+        <if test="provinceId != null and provinceId != ''">
+            and b.province_no like concat('%', #{provinceId}, '%')
         </if>
-        <if test="cityName != null and cityName != ''">
-            and b.city like concat('%', #{cityName}, '%')
+        <if test="cityId != null and cityId != ''">
+            and b.city_no like concat('%', #{cityId}, '%')
         </if>
-        <if test="areaName != null and areaName != ''">
-            and b.area like concat('%', #{areaName}, '%')
+        <if test="areaId != null and areaId != ''">
+            and b.area_no like concat('%', #{areaId}, '%')
         </if>
     </select>
 
     <!--查询该司机的详情信息-->
     <select id="driverDetail" resultType="com.xzsd.pc.driver.entity.DriverDetailVO">
         select
-        b.driver_no driverNo,
-        b.driver_name driverName,
-        a.phone driverPhone,
+        b.driver_no driverId,
+        b.driver_name userName,
+        a.phone phone,
         a.id_card idCard,
-        b.user_code userCode,
         b.user_acct userAcct,
-        a.user_pwd password,
-        b.invitation_code invitationCode,
-        b.province provinceName,
-        b.city cityName,
-        b.area areaName,
+        a.user_pwd userPassword,
+        a.headpicture_url userImage,
+        (select rname from region where id = (select province_no from t_sys_driver where driver_no = #{driverId})) provinceName,
+        (select rname from region where id = (select city_no from t_sys_driver where driver_no = #{driverId})) cityName,
+        (select rname from region where id = (select area_no from t_sys_driver where driver_no = #{driverId})) areaName,
+        b.province_no provinceId,
+        b.city_no cityId,
+        b.area_no areaId,
         b.version version
         from t_sys_user a,
         t_sys_driver b
         where a.user_code = b.user_code
-        and b.driver_no = #{driverNo}
-
+        and b.driver_no = #{driverId}
     </select>
 
     <!--修改司机信息-->
@@ -173,14 +175,16 @@
         update
         t_sys_user a,t_sys_driver b
         set
-        a.user_name = #{driverName},
-        b.driver_name = #{driverName},
+        a.user_acct = #{userAcct},
+        b.user_acct = #{userAcct},
+        a.user_name = #{userName},
+        b.driver_name = #{userName},
         a.id_card = #{idCard},
-        a.user_pwd = #{password},
-        a.phone = #{driverPhone},
-        b.province = #{provinceName},
-        b.city = #{cityName},
-        b.area = #{areaName},
+        a.user_pwd = #{userPassword},
+        a.phone = #{phone},
+        b.province_no = #{provinceId},
+        b.city_no = #{cityId},
+        b.area_no = #{areaId},
         a.gmt_modified = now(),
         a.last_modified_by   = #{lastModifiedBy},
         a.version  = a.version + 1,
@@ -188,7 +192,7 @@
         b.update_user   = #{lastModifiedBy},
         b.version     = b.version + 1
         where a.user_code = b.user_code
-        and b.driver_no = #{driverNo}
+        and b.driver_no = #{driverId}
         and b.version = #{version}
     </update>
 

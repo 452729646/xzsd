@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.selectCombox.ComboxDao">
+    <select id="listArea" parameterType="com.xzsd.pc.selectCombox.RegionInfo" resultType="com.xzsd.pc.selectCombox.RegionInfo">
+        select
+        id areaId,
+        rname areaName
+        from
+        region
+        where pid = #{areaId}
+    </select>
+</mapper>

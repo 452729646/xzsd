@@ -1,7 +1,7 @@
 package com.xzsd.pc.store.dao;
 
 
-import com.xzsd.pc.store.entity.RegionInfo;
+import com.xzsd.pc.selectCombox.RegionInfo;
 import com.xzsd.pc.store.entity.StoreDetailVo;
 import com.xzsd.pc.store.entity.StoreInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -47,7 +47,7 @@ public interface StoreDao {
     /**
      * 查询门店详情
      */
-    StoreDetailVo storeDetail(@Param("storeNo") String storeNo);
+    StoreDetailVo storeDetail(StoreDetailVo storeDetailVo);
 
     /**
      * 修改门店信息

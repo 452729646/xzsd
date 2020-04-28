@@ -32,9 +32,10 @@ public class OrderShopownerService {
      */
     public AppResponse listOrder(OrderShopownerInfo orderShopownerInfo){
         //通过店长userCode 查询到storeNo
-        String storeNo = orderShopownerDao.selectStoreNo(orderShopownerInfo.getUserCode());
+        String storeNo = orderShopownerDao.selectStoreNo(orderShopownerInfo.getUserId());
+//        return AppResponse.success("sda",storeNo);
         orderShopownerInfo.setStoreNo(storeNo);
-        List<OrderShopownerVO> listInfoOrder = orderShopownerDao.listOrderByStoreNoByPage(orderShopownerInfo);
+        List<OrderShopownerInfo> listInfoOrder = orderShopownerDao.listOrderByStoreNoByPage(orderShopownerInfo);
         return AppResponse.success("查询成功", getPageInfo(listInfoOrder));
     }
 
@@ -45,22 +46,20 @@ public class OrderShopownerService {
      * @date 2020-4-20
      */
     public AppResponse orderDetailByOrderId(OrderShopownerInfo orderShopownerInfo){
-        OrderShopownerVO orderDetail = orderShopownerDao.orderDetailByOrderId(orderShopownerInfo);
+        OrderShopownerInfo orderDetail = orderShopownerDao.orderDetailByOrderId(orderShopownerInfo);
         return AppResponse.success("查询成功",orderDetail);
     }
 
     /**
-     * 修改订单状态（订单到货）
-     * @param orderId
-     * @param version
-     * @param userCode
+     * 修改订单状态
+     * @param orderShopownerInfo
      * @author housum
      * @date 2020-4-10
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse orderArrival(String orderId,String version,String userCode){
-        AppResponse appResponse = AppResponse.success("修改订单到货成功！");
-        int count = orderShopownerDao.orderArrival(orderId,version,userCode);
+    public AppResponse updateOrderState(OrderShopownerInfo orderShopownerInfo){
+        AppResponse appResponse = AppResponse.success("修改订单状态成功！");
+        int count = orderShopownerDao.updateOrderState(orderShopownerInfo);
         if (0 == count){
             appResponse = AppResponse.bizError("数据有更新，请重试！");
         }

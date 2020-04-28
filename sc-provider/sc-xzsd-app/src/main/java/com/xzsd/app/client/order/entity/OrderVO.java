@@ -9,40 +9,38 @@ public class OrderVO {
      * 订单id
      */
     private String orderId;
+    private String orderStateId;
+
+    public String getOrderStateId() {
+        return orderStateId;
+    }
+
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
+    }
 
     /**
      * 商品列表
      */
-    List<GoodsListVO> goodsListVOList;
+    List<GoodsListVO> goodsList;
 
-    public List<GoodsListVO> getGoodsListVOList() {
-        return goodsListVOList;
+    public List<GoodsListVO> getGoodsList() {
+        return goodsList;
     }
 
-    public void setGoodsListVOList(List<GoodsListVO> goodsListVOList) {
-        this.goodsListVOList = goodsListVOList;
-    }
-
-    public int getGoodsTotal() {
-        return goodsTotal;
-    }
-
-    public void setGoodsTotal(int goodsTotal) {
-        this.goodsTotal = goodsTotal;
+    public void setGoodsList(List<GoodsListVO> goodsList) {
+        this.goodsList = goodsList;
     }
 
     /**
      * 订单物品总数
      */
-    private int goodsTotal;
+    private int orderAllGoodsCount;
     /**
      * 订单总价
      */
-    private BigDecimal paymentMoney;
-    /**
-     * 订单状态
-     */
-    private int orderStatus;
+    private String orderAllCost;
+
 //    /**
 ////     * 支付状态
 ////     */
@@ -58,7 +56,7 @@ public class OrderVO {
     /**
      * 门店地址
      */
-    private String storeAddress;
+    private String address;
 
     public String getStoreName() {
         return storeName;
@@ -68,12 +66,12 @@ public class OrderVO {
         this.storeName = storeName;
     }
 
-    public String getStoreAddress() {
-        return storeAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStoreAddress(String storeAddress) {
-        this.storeAddress = storeAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     /**
@@ -88,21 +86,20 @@ public class OrderVO {
      * 付款时间
      */
 
-    private String createTime;
+    private String crateTime;
     private String payTime;
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
 
-
-    public String getCreateTime() {
-        return createTime;
+    public String getCrateTime() {
+        return crateTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setCrateTime(String crateTime) {
+        this.crateTime = crateTime;
     }
 
     public String getOrderId() {
@@ -113,21 +110,6 @@ public class OrderVO {
         this.orderId = orderId;
     }
 
-    public BigDecimal getPaymentMoney() {
-        return paymentMoney;
-    }
-
-    public void setPaymentMoney(BigDecimal paymentMoney) {
-        this.paymentMoney = paymentMoney;
-    }
-
-    public int getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
 //    public int getPayStatus() {
 //        return payStatus;
@@ -169,11 +151,27 @@ public class OrderVO {
         this.payTime = payTime;
     }
 
-    public int getVersion() {
+    public int getOrderAllGoodsCount() {
+        return orderAllGoodsCount;
+    }
+
+    public void setOrderAllGoodsCount(int orderAllGoodsCount) {
+        this.orderAllGoodsCount = orderAllGoodsCount;
+    }
+
+    public String getOrderAllCost() {
+        return orderAllCost;
+    }
+
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
+    }
+
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

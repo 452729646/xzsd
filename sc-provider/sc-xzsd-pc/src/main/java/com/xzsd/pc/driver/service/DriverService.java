@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.neusoft.core.page.PageUtils.getPageInfo;
+
 /**
  * @DescriptionDemo 实现类
  * @Author housum
@@ -49,14 +51,17 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse saveDriver(DriverInfo driverInfo){
+        if ("2".equals(driverInfo.getNowRole())){
+            return AppResponse.bizError("店长无权限");
+        }
         //检验账号是否存在
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct) {
             return AppResponse.success("用户账号已存在，请重新输入！");
         }
-        driverInfo.setPassword(generatePassword(driverInfo.getPassword()));
+        driverInfo.setUserPassword((generatePassword(driverInfo.getUserPassword())));
         String userCode = StringUtil.getCommonCode(4);
-        driverInfo.setDriverNo(StringUtil.getDriverNo(4));
+        driverInfo.setDriverId(StringUtil.getDriverNo(4));
         driverInfo.setUserCode(userCode);
         driverInfo.setIsDeleted(0);
         //在司机表添加司机
@@ -83,19 +88,19 @@ public class DriverService {
         String userCode = SecurityUtils.getCurrentUserId();
         String role = driverDao.getRoleByUserCode(userCode);
         //店家 查询相同地区的司机
-        if (1 == Integer.valueOf(role)){
+        if (2 == Integer.valueOf(role)){
             String storeNo = orderDao.storeNoByUserCode(userCode);
             driverInfo.setStoreNo(storeNo);
             List<DriverInfo> driverInfoList = driverDao.listDriverByShopownerByPage(driverInfo);
-            return AppResponse.success("查询成功",driverInfoList);
+            return AppResponse.success("查询成功",getPageInfo(driverInfoList));
         }
         //司机本人查询
-        if (2 == Integer.valueOf(role)){
+        if (3 == Integer.valueOf(role)){
             String driverNo = driverDao.getDriverNo(userCode);
-            driverInfo.setDriverNo(driverNo);
+            driverInfo.setDriverId(driverNo);
         }
         List<DriverInfo> driverInfoList = driverDao.listDriverByPage(driverInfo);
-        return AppResponse.success("查询成功",driverInfoList);
+        return AppResponse.success("查询成功",getPageInfo(driverInfoList));
     }
 
     /**
@@ -104,8 +109,8 @@ public class DriverService {
      * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse driverDetail(String driverNo ){
-        DriverDetailVO data = driverDao.driverDetail(driverNo );
+    public AppResponse driverDetail(String driverId ){
+        DriverDetailVO data = driverDao.driverDetail(driverId );
         if (data == null || "".equals(data)){
             return AppResponse.bizError("查询失败，请重试");
         }
@@ -119,12 +124,16 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver (DriverInfo driverInfo){
+        if ("2".equals(driverInfo.getNowRole())){
+            return AppResponse.bizError("店长无权限");
+        }
         AppResponse appResponse = AppResponse.success("修改成功");
         //检验账号是否存在
         int countUserAcct = driverDao.countUserAcct(driverInfo);
         if (0 != countUserAcct) {
             return AppResponse.success("用户账号已存在，请重新输入！");
         }
+        driverInfo.setUserPassword((generatePassword(driverInfo.getUserPassword())));
         //修改司机信息
         int count = driverDao.updateDriver(driverInfo);
         if (0 == count){
@@ -139,8 +148,11 @@ public class DriverService {
      * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteDriver(String driverNo , String userCode){
-        List<String> listDriverNo = Arrays.asList(driverNo.split(","));
+    public AppResponse deleteDriver(String driverId , String userCode,String nowRole){
+        if ("2".equals(nowRole)){
+            return AppResponse.bizError("店长无权限");
+        }
+        List<String> listDriverNo = Arrays.asList(driverId.split(","));
         AppResponse appResponse = AppResponse.success("删除成功");
         int count = driverDao.deleteDriver(listDriverNo,userCode);
         if (0 == count ){
