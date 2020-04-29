@@ -37,10 +37,10 @@ public interface OrderDao {
 
     /**
      * 检查是否库存充足
-     * @param mapList
+     * @param
      * @return
      */
-    List<String> countCheckStock(@Param("listSkuNo") List<String>listSkuNo);
+    List<StockInfo> countCheckStock(@Param("listSkuNo") List<String>listSkuNo);
 
     /**
      * 查询该用户的订单

@@ -229,8 +229,9 @@
 
 
 <!--    检查是否库存充足-->
-    <select id="countCheckStock" parameterType="java.util.List" resultType="java.lang.String">
+    <select id="countCheckStock" parameterType="java.util.List" resultType="com.xzsd.app.client.order.entity.StockInfo">
          select
+            sku_name goodsName,
             stock stock
             from t_sys_goods
             where is_deleted = 0

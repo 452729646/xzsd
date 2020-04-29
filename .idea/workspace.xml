@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="修改代码规范">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/StockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/entity/StockInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/client/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/resources/mybatis/mapper/OrderDaoMapper.xml" afterDir="false" />
     </list>
     <list id="da0a0863-e504-4295-a57e-70741577ee32" name="修改完app注册" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,7 +114,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ScXzsdPcApplication (1)">
+  <component name="RunManager" selected="Spring Boot.ScXzsdAppApplication (1)">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -340,10 +344,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ScXzsdPcApplication (1)" />
+        <item itemvalue="Spring Boot.ScXzsdAppApplication (1)" />
         <item itemvalue="Spring Boot.ScSecurityUaaApplication (1)" />
         <item itemvalue="Spring Boot.ScEurekaApplication (1)" />
-        <item itemvalue="Spring Boot.ScXzsdAppApplication (1)" />
+        <item itemvalue="Spring Boot.ScXzsdPcApplication (1)" />
         <item itemvalue="Spring Boot.ScWebAuthApplication (1)" />
       </list>
     </recent_temporary>
@@ -395,7 +399,8 @@
       <workItem from="1587861538093" duration="38568000" />
       <workItem from="1587947996671" duration="36216000" />
       <workItem from="1588034951203" duration="14233000" />
-      <workItem from="1588087462490" duration="986000" />
+      <workItem from="1588087462490" duration="1256000" />
+      <workItem from="1588127674096" duration="4177000" />
     </task>
     <task id="LOCAL-00001" summary="新增订单模块">
       <created>1586521163145</created>
@@ -698,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588087154948</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="修改代码规范">
+      <created>1588089074590</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1588089074590</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

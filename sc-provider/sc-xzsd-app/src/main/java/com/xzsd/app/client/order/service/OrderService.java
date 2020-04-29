@@ -74,12 +74,12 @@ public class OrderService {
             }
             System.out.println(mapList);
             //检查查询库存充足
-            List<String> countCheckStock = orderDao.countCheckStock(listSkuNo);
+            List<StockInfo> countCheckStock = orderDao.countCheckStock(listSkuNo);
             for (int i = 0; i < listSkuNo.size(); i++) {
-                if (0 > Integer.valueOf(countCheckStock.get(i)) - Integer.valueOf(listGoodsCnt.get(i))) {
-                    return AppResponse.bizError("库存不足");
+                if (0 > Integer.valueOf(countCheckStock.get(i).getStock()) - Integer.valueOf(listGoodsCnt.get(i))) {
+                    return AppResponse.bizError("名称为《"+countCheckStock.get(i).getGoodsName()+"》的商品库存不足");
                 }
-                if (0 == Integer.valueOf(countCheckStock.get(i)) - Integer.valueOf(listGoodsCnt.get(i))){
+                if (0 == Integer.valueOf(countCheckStock.get(i).getStock()) - Integer.valueOf(listGoodsCnt.get(i))){
                     //修改商品状态 售罄
                     int countUpdateSellOut = orderDao.updateSellout(listSkuNo.get(i));
                     if (0 == countUpdateSellOut){
